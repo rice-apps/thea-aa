@@ -37,12 +37,12 @@ python manage.py runserver
 6. Install dependencies in the frontend
 ```bash
 cd ../frontend-thea-aa
-bun install
+bun install (or npm install)
 ```
 
 7. Run the frontend server
 ```bash
-bun run dev
+bun run dev (or npm run dev)
 ```
 
 8. Note that this project is using Svelte 5
