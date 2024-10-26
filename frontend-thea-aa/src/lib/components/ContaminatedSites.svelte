@@ -21,7 +21,7 @@
         {#each props.items.slice(0, amountToShow) as item}
         <tr>
             <td>{item.status}</td>
-            <td>{item.location}</td>
+            <td>{item.name}</td>
             <td>{item.hazardScore}</td>
         </tr>
         {/each}

@@ -1,4 +1,4 @@
-type LatLong = {
+export type LatLong = {
     lat: number
     long: number
 }

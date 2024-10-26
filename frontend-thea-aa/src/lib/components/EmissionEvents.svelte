@@ -7,7 +7,7 @@ import LoadMore from './LoadMore.svelte'
   let amountToShow = $state(3)
 </script>
 
-<h3>Air Quality Ranking</h3>
+<h3>Emission Events</h3>
 
 <table>
   <thead>
