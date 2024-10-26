@@ -9,7 +9,7 @@
 
 	let mapElement: HTMLDivElement | null = $state(null)
 
-	let props: {contaminatedSite: ContaminatedSite[], emissionEvent: EmissionEvent[]} = $props()
+	let props: {contaminatedSite: ContaminatedSite[] | null, emissionEvent: EmissionEvent[]|null} = $props()
 
 	onMount(async () => {
 		const L = (await import('leaflet')).default
@@ -27,14 +27,18 @@
 			// 		'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 			// }).addTo(map)
 			
-			props.emissionEvent.forEach((event) => {
-				const marker = L.marker([event.location.lat, event.location.long]).addTo(map)
-				// marker.bindPopup('').openPopup()
-			})
-			props.contaminatedSite.forEach((event) => {
-				const marker = L.marker([event.location.lat, event.location.long]).addTo(map)
-				// marker.bindPopup('').openPopup()
-			})
+			if (props.emissionEvent){
+				props.emissionEvent.forEach((event) => {
+					const marker = L.marker([event.location.lat, event.location.long]).addTo(map)
+					marker.bindPopup(`Emission Event: ${event.site}`).openPopup()
+				})
+			}
+			if (props.contaminatedSite) {
+				props.contaminatedSite.forEach((event) => {
+					const marker = L.marker([event.location.lat, event.location.long]).addTo(map)
+					marker.bindPopup(`Contaminated site: ${event.name}`).openPopup()
+				})
+			}
 		}
 	})
 </script>

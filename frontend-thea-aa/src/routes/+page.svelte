@@ -5,23 +5,30 @@
 	import Map from '$lib/components/Map.svelte'
 	import { Button } from '$lib/components/ui/button'
 
-    export let data
+  let { data } = $props()
+
+	let showContaminated= $state(true)
+	let showEmissionEvents= $state(true)
 </script>
 
 <main class="flex">
 	<aside>
 		<input placeholder="search" />
 		<div>
-			<Button>Filter 1</Button>
-			<Button>Filter 2</Button>
-			<Button>Filter 3</Button>
+			<Button on:click={()=>{showContaminated=!showContaminated}}>Contaminated Sites</Button>
+			<Button on:click={()=>{showEmissionEvents=!showEmissionEvents}}>Emission Events</Button>
 		</div>
 
 		<!-- <AirQualityRanking items={data.airQualitySites} /> -->
-        <ContaminatedSites items={data.contaminatedSites}/>
-		<EmissionEvents items={data.emissionEvents}/>
+		{#if showContaminated}
+    		<ContaminatedSites items={data.contaminatedSites}/>
+		{/if}
+		
+		{#if showEmissionEvents}
+			<EmissionEvents items={data.emissionEvents}/>
+		{/if}
 	</aside>
 	<div>
-		<Map />
+		<Map contaminatedSite={showContaminated ? data.contaminatedSites : null} emissionEvent={showEmissionEvents ? data.emissionEvents : null}/>
 	</div>
 </main>

@@ -29,18 +29,16 @@ export function load() {
         { location: { lat: 45.5231, long: -122.6765 }, number: 50, site: "Lakefront" },
     ];
     const contaminatedSites: ContaminatedSite[] = [
-        { status: "active", name: "Old Factory Site", location: { lat: 51.5074, long: -0.1278 }, hazardScore: 75 },
-        { status: "remediated", name: "Abandoned Warehouse", location: { lat: 40.7128, long: -74.0060 }, hazardScore: 40 },
-        { status: "active", name: "Chemical Spill Area", location: { lat: 34.0522, long: -118.2437 }, hazardScore: 80 },
-        { status: "active", name: "Landfill Site", location: { lat: 34.0522, long: -118.2437 }, hazardScore: 60 },
-        { status: "remediated", name: "Old Mining Site", location: { lat: 41.8781, long: -87.6298 }, hazardScore: 30 },
-        { status: "active", name: "Toxic Waste Dump", location: { lat: 36.7783, long: -119.4179 }, hazardScore: 90 },
-        { status: "active", name: "Contaminated River Bank", location: { lat: 39.7392, long: -104.9903 }, hazardScore: 70 },
-        { status: "remediated", name: "Industrial Park", location: { lat: 51.1657, long: 10.4515 }, hazardScore: 20 },
-        { status: "active", name: "Polluted Lake", location: { lat: 45.5231, long: -122.6765 }, hazardScore: 85 },
+        { status: "active", name: "Old Factory Site", location: { lat: 52.5074, long: -0.1278 }, hazardScore: 75 },
+        { status: "remediated", name: "Abandoned Warehouse", location: { lat: 41.7128, long: -74.0060 }, hazardScore: 40 },
+        { status: "active", name: "Chemical Spill Area", location: { lat: 86.0522, long: -117.2437 }, hazardScore: 80 },
+        { status: "active", name: "Landfill Site", location: { lat: 35.0522, long: -119.2437 }, hazardScore: 60 },
+        { status: "remediated", name: "Old Mining Site", location: { lat: 40.8781, long: -88.6298 }, hazardScore: 30 },
+        { status: "active", name: "Toxic Waste Dump", location: { lat: 37.7783, long: -119.4179 }, hazardScore: 90 },
+        { status: "active", name: "Contaminated River Bank", location: { lat: 39.7392, long: -105.9903 }, hazardScore: 70 },
+        { status: "remediated", name: "Industrial Park", location: { lat: 51.1657, long: 11.4515 }, hazardScore: 20 },
+        { status: "active", name: "Polluted Lake", location: { lat: 45.5231, long: -123.6765 }, hazardScore: 85 },
     ];
-
-
 
     return {
         airQualitySites: airQualitySites,

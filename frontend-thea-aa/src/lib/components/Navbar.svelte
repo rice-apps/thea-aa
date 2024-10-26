@@ -4,12 +4,12 @@
     
 </script>
 
-<nav class="flex mb-4">
+<nav class="flex">
     <div class="grow">
-        <a class="bg-gray-400 px-6 py-3" href="/">LOGO</a>
+        <a class="bg-gray-400 px-6 py-3 inline-block" href="/">LOGO</a>
     </div>
     <div class="flex">
-        <a href="/about">About</a>
+        <a href="/about inline-block">About</a>
 
         <DropdownMenu.Root>
         <DropdownMenu.Trigger><Bell /></DropdownMenu.Trigger>
