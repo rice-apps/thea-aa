@@ -4,12 +4,12 @@
 
 <script lang="ts">
 	import { onMount } from 'svelte'
-    import type { ContaminatedSite, EmissionEvent } from '$lib/types';
+	import type { ContaminatedSite, EmissionEvent } from '$lib/types';
 
 
 	let mapElement: HTMLDivElement | null = $state(null)
 
-	let props: {contaminatedSite: ContaminatedSite[] | null, emissionEvent: EmissionEvent[]|null} = $props()
+	let props: {contaminatedSite: ContaminatedSite[] | null, emissionEvent: EmissionEvent[]|null, update: (site?: ContaminatedSite)=>void} = $props()
 
 	onMount(async () => {
 		const L = (await import('leaflet')).default
@@ -37,6 +37,9 @@
 				props.contaminatedSite.forEach((event) => {
 					const marker = L.marker([event.location.lat, event.location.long]).addTo(map)
 					marker.bindPopup(`Contaminated site: ${event.name}`).openPopup()
+					marker.on("click", () => {
+						props.update(event);
+					});
 				})
 			}
 		}

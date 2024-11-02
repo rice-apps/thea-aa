@@ -1,22 +1,25 @@
 <script lang="ts">
-  type SuperfundInfo = {
+  type Props = {
     name: string
     hazardLevel: number
     regionId: number
     status: string
     location: string
     background: string
+    update: ()=>void,
   }
 
   import { ChevronRight } from "lucide-svelte"
   import { ChevronLeft } from "lucide-svelte"
 
-  let props: { superFundInfo: SuperfundInfo } = $props()
+  let props: { superFundInfo: Props } = $props()
 </script>
 
 <article class="w-[30rem] rounded-lg flex flex-col h-[30rem] gap-3 p-5 bg-white">
   <h3 class="flex">
-    <a href="#"><ChevronLeft/></a> 
+    <btn onclick={()=>{props.superFundInfo.update()}} href="#" class="cursor-pointer">
+      <ChevronLeft/>
+    </btn> 
     <div class="ml-10">{props.superFundInfo.name}</div>
   </h3>
 
