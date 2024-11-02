@@ -1,6 +1,6 @@
 <script lang="ts">
     import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
-    import Bell from "lucide-svelte/icons/Bell"
+    import Bell from "lucide-svelte/icons/bell"
     
 </script>
 
