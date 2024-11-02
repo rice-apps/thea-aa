@@ -9,10 +9,12 @@ to .xlxs extension.
 
 .xls - the file extension for Microsoft Excel spreadsheets created between 1997 and 2003
 .xlxs - Based on XML, the XLSX format launched with Office 2007
+
+Requirement: 
 """
 
 # relative paths to the stored .xls file
-xls_file_path = "backend-thea-aa/downloads/cqry10262024163510.xls"
+xls_file_path = "backend-thea-aa/downloads/cqry.xls"
 xlsx_file_path = "backend-thea-aa/downloads/converted/file.xlsx"
 
 # convert
@@ -26,7 +28,6 @@ os.makedirs('folder/subfolder', exist_ok=True)
 df.to_csv('folder/subfolder/out.csv')  
 
 # display
-# print(data.head(15))  
 print(df.head(15))
 print(df.shape)
 print(df.columns)
