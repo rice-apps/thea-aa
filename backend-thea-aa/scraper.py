@@ -70,7 +70,7 @@ def rename_file(download_path):
     if files:
         old_name = files[0]  # Assume there's only one matching file
         filename, ext = os.path.splitext(os.path.basename(old_name)) 
-        new_name = filename[:-6] + ext  # Remove last 6 digits
+        new_name = filename[:-13] + ext  # Remove last 6 digits
         new_path = os.path.join(download_path, new_name)
 
         try:
