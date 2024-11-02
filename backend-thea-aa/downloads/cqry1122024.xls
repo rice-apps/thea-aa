@@ -1,57 +1,3 @@
-
-
-<table width="100%" border="1" cellspacing="1" cellpadding="1">
-	<tr width="100%">
-		<td align="left" width="100%">
-			SEMS Public User Database - Site Search Results
-		</td>
-	</tr>
-    <tr width="100%">
-		<td align="center" width = "100%">&nbsp;</td>
-	</tr>
-	<tr>
-		<td align="left">
-			
-			Results as of: November 2, 2024 - 02:58:38 PM 
-		</td>
-	</tr>
-	<tr><td>&nbsp;</td></tr>
-	<tr>
-		<td align="left" valign="top"><br />Found <strong>473</strong> site(s) that match below search criteria:</td>
-	</tr>
-	<tr>
-		<td></td>
-	</tr>
-	<tr>
-		<TD VALIGN="TOP">
-		
-			  <strong>Search Criteria:</strong>
-			 <table width="100%" border="0" summary="">
-			<tr>
-				<td align="left" width="37%" valign="top" scope="row" >
-					Active, Archived, or All :
-				</td>
-				<td width="63%" valign="top">
-					<strong><em>Active</em></strong>&nbsp;
-					<!--<em><a href="JavaScript: PopupGlossary2('ActiveArchive')">
-						What are active and archived sites?</a></em>-->
-				</td>
-			</tr>
-
-	
-  		<tr><td valign="top" align="left" width="37%" scope="row" >State:</td>
-    	<td valign="top" align="left" width="63%"><em>Texas</em></td></tr>
-	
-</table>
-    	
-
-		</td></tr>
-	<tr>
-		<td>
-		</td>
-	</tr>
-	<tr>
-		<td>
 			<table border="1" cellspacing="1" cellpadding="1">
 				<tr >
 			      <th>EPA ID</th>
@@ -607,7 +553,7 @@
 					<td valign="top" ></td>
 					<td valign="top" >39.92</td>
 					<td valign="top" >Yes</td>
-					<td valign="top" >AIR FORCE PLANT #4 (GEN DYNAMICS), PLANT #4 (GENERAL DYNAMICS), AIR FORCE PLANT #4 (GENERAL DYNAMICS)</td>
+					<td valign="top" >PLANT #4 (GENERAL DYNAMICS), AIR FORCE PLANT #4 (GEN DYNAMICS), AIR FORCE PLANT #4 (GENERAL DYNAMICS)</td>
 					<td valign="top" >11/01/1982</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="air-force-plan-4"'>
 					www.epa.gov/superfund/air-force-plan-4
@@ -1135,7 +1081,7 @@
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
-					<td valign="top" >ASARCO INC, AMERICAN SMELTING CO-EL PASO SMELTING WK</td>
+					<td valign="top" >AMERICAN SMELTING CO-EL PASO SMELTING WK, ASARCO INC</td>
 					<td valign="top" >08/23/1994</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location=""'>
 					
@@ -1575,7 +1521,7 @@
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
-					<td valign="top" >GULF ST UTIL/BAILEYS SABINE LAKE BRIDGE, GULF ST UTIL/BAILEYS SABINE LAKE BRIDGE, BAILEY WASTE DISPOSAL</td>
+					<td valign="top" >GULF ST UTIL/BAILEYS SABINE LAKE BRIDGE, BAILEY WASTE DISPOSAL, GULF ST UTIL/BAILEYS SABINE LAKE BRIDGE</td>
 					<td valign="top" >11/01/1979</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="bailey-waste-disposal"'>
 					www.epa.gov/superfund/bailey-waste-disposal
@@ -1619,7 +1565,7 @@
 					<td valign="top" ></td>
 					<td valign="top" >50.0</td>
 					<td valign="top" >No </td>
-					<td valign="top" >BANDERA ROAD GROUNDWATER PLUME, BANDERA ROAD GROUNDWATER PLUM, BANDERA ROAD GROUND WATER PLUME</td>
+					<td valign="top" >BANDERA ROAD GROUND WATER PLUME, BANDERA ROAD GROUNDWATER PLUME, BANDERA ROAD GROUNDWATER PLUM</td>
 					<td valign="top" >06/15/2004</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="bandera-road"'>
 					www.epa.gov/superfund/bandera-road
@@ -2015,7 +1961,7 @@
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
-					<td valign="top" >BIO-ECOLOGY SYSTEMS, INC., BIO-ECOLOGY SYSTEMS, INC, BIO-ECOLOGY SYSTEMS INC, BIOECOLOGY, BIO-ECOLOGY SYSTEMS, INC.</td>
+					<td valign="top" >BIO-ECOLOGY SYSTEMS, INC., BIO-ECOLOGY SYSTEMS, INC, BIO-ECOLOGY SYSTEMS, INC., BIO-ECOLOGY SYSTEMS INC, BIOECOLOGY</td>
 					<td valign="top" >01/01/1979</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="bio-ecology-systems"'>
 					www.epa.gov/superfund/bio-ecology-systems
@@ -2712,14 +2658,14 @@
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >Active</td>
-					<td valign="top" >Recycling, Recycling, Manufacturing/Processing/Maintenance, Recycling, Multiple</td>
-					<td valign="top" >Waste/used oil, Multiple, Multiple, Oil and gas refining, Chemicals/chemical waste (e.g., solvent recovery)</td>
+					<td valign="top" >Multiple, Manufacturing/Processing/Maintenance, Recycling, Recycling, Recycling</td>
+					<td valign="top" >Oil and gas refining, Chemicals/chemical waste (e.g., solvent recovery), Multiple, Waste/used oil, Multiple</td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
-					<td valign="top" >BRIO REFINING, INC, BRIO REFINERY CO., INC., JOC OIL AROMATICS, INC., LOWE CHEMICAL COMPANY, BRIO REFINING INC, BRIO REFINING, INC.</td>
+					<td valign="top" >LOWE CHEMICAL COMPANY, BRIO REFINING, INC, JOC OIL AROMATICS, INC., BRIO REFINERY CO., INC., BRIO REFINING INC, BRIO REFINING, INC.</td>
 					<td valign="top" >[Blank Date]</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="brio-refining"'>
 					www.epa.gov/superfund/brio-refining
@@ -3152,8 +3098,8 @@
 					<td valign="top" ></td>
 					<td valign="top" >NFRAP-Site does not qualify for the NPL based on existing information</td>
 					<td valign="top" >Active</td>
-					<td valign="top" >Waste Management, Other, Other</td>
-					<td valign="top" >Military/Other Ordinance, Product storage/distribution, Other</td>
+					<td valign="top" >Other, Waste Management, Other</td>
+					<td valign="top" >Other, Military/Other Ordinance, Product storage/distribution</td>
 					<td valign="top" >Department of Defense</td>
 					<td valign="top" >No </td>
 					<td valign="top" ></td>
@@ -3731,7 +3677,7 @@
 					<td valign="top" ></td>
 					<td valign="top" >50.0</td>
 					<td valign="top" >No </td>
-					<td valign="top" >CIRCLE COURT GROUND WATER, CIRCLE COURT GROUND WATER PLUME</td>
+					<td valign="top" >CIRCLE COURT GROUND WATER PLUME, CIRCLE COURT GROUND WATER</td>
 					<td valign="top" >05/04/2007</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="circle-court"'>
 					www.epa.gov/superfund/circle-court
@@ -4655,7 +4601,7 @@
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
-					<td valign="top" >CRYSTAL CITY AIRPORT, CRYSTAL CITY AIRPORT, FRANKS CROPDUSTING SERVICES</td>
+					<td valign="top" >CRYSTAL CITY AIRPORT, FRANKS CROPDUSTING SERVICES, CRYSTAL CITY AIRPORT</td>
 					<td valign="top" >[Blank Date]</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="crystal-city-airport"'>
 					www.epa.gov/superfund/crystal-city-airport
@@ -5397,13 +5343,13 @@
 					<td valign="top" ></td>
 					<td valign="top" >Active</td>
 					<td valign="top" >Recycling, Recycling, Recycling, Recycling</td>
-					<td valign="top" >Waste/used oil, Multiple, Chemicals/chemical waste (e.g., solvent recovery), Batteries/scrap metals/secondary smelting/precious metal recovery</td>
+					<td valign="top" >Chemicals/chemical waste (e.g., solvent recovery), Waste/used oil, Batteries/scrap metals/secondary smelting/precious metal recovery, Multiple</td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
-					<td valign="top" >DIXIE OIL PROCESSORS, INC, DIXIE OIL PROCESSORS INC, DIXIE OIL PROCESSORS, INC., DIXIE OIL PROCESSORS, INC.</td>
+					<td valign="top" >DIXIE OIL PROCESSORS, INC., DIXIE OIL PROCESSORS, INC., DIXIE OIL PROCESSORS, INC, DIXIE OIL PROCESSORS INC</td>
 					<td valign="top" >[Blank Date]</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="dixie-oil"'>
 					www.epa.gov/superfund/dixie-oil
@@ -5881,13 +5827,13 @@
 					<td valign="top" ></td>
 					<td valign="top" >Active</td>
 					<td valign="top" >Other, Other, Other</td>
-					<td valign="top" >Product storage/distribution, Spill or other one-time event, Ground water plume site with no identifiable source</td>
+					<td valign="top" >Ground water plume site with no identifiable source, Spill or other one-time event, Product storage/distribution</td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
 					<td valign="top" ></td>
 					<td valign="top" >50.0</td>
 					<td valign="top" >No </td>
-					<td valign="top" >EAST 67TH STREET GROUND WATER PLUME, EAST 67TH STREET GROUNDWATER PLUME</td>
+					<td valign="top" >EAST 67TH STREET GROUNDWATER PLUME, EAST 67TH STREET GROUND WATER PLUME</td>
 					<td valign="top" >04/18/2005</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="east-67-street"'>
 					www.epa.gov/superfund/east-67-street
@@ -7377,7 +7323,7 @@
 					<td valign="top" >Removal Only Site (No Site Assessment Work Needed)</td>
 					<td valign="top" >Active</td>
 					<td valign="top" >Other, Other</td>
-					<td valign="top" >Other, Spill or other one-time event</td>
+					<td valign="top" >Spill or other one-time event, Other</td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
 					<td valign="top" ></td>
@@ -7515,7 +7461,7 @@
 					<td valign="top" ></td>
 					<td valign="top" >49.1</td>
 					<td valign="top" >No </td>
-					<td valign="top" >GARLAND CREOSOTING, GARLAND CREOSOTING CO.</td>
+					<td valign="top" >GARLAND CREOSOTING CO., GARLAND CREOSOTING</td>
 					<td valign="top" >[Blank Date]</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="garland-creosoting"'>
 					www.epa.gov/superfund/garland-creosoting
@@ -7552,8 +7498,8 @@
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >Active</td>
-					<td valign="top" >Manufacturing/Processing/Maintenance, Recycling, Recycling, Recycling, Multiple</td>
-					<td valign="top" >Chemicals and allied products, Waste/used oil, Multiple, Multiple, Chemicals/chemical waste (e.g., solvent recovery)</td>
+					<td valign="top" >Multiple, Recycling, Recycling, Recycling, Manufacturing/Processing/Maintenance</td>
+					<td valign="top" >Chemicals and allied products, Multiple, Chemicals/chemical waste (e.g., solvent recovery), Waste/used oil, Multiple</td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
 					<td valign="top" ></td>
@@ -8653,7 +8599,7 @@
 					<td valign="top" >Removal Only Site (No Site Assessment Work Needed)</td>
 					<td valign="top" >Active</td>
 					<td valign="top" >Other, Other</td>
-					<td valign="top" >Other, Spill or other one-time event</td>
+					<td valign="top" >Spill or other one-time event, Other</td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
 					<td valign="top" ></td>
@@ -8873,7 +8819,7 @@
 					<td valign="top" ></td>
 					<td valign="top" >Active</td>
 					<td valign="top" >Other, Other</td>
-					<td valign="top" >Other, Ground water plume site with no identifiable source</td>
+					<td valign="top" >Ground water plume site with no identifiable source, Other</td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
 					<td valign="top" ></td>
@@ -10368,7 +10314,7 @@
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >Active</td>
-					<td valign="top" >Manufacturing/Processing/Maintenance, Other</td>
+					<td valign="top" >Other, Manufacturing/Processing/Maintenance</td>
 					<td valign="top" >Metal fabrication/finishing/coating and allied industries, Other</td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
@@ -11336,14 +11282,14 @@
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >Active</td>
-					<td valign="top" >Recycling, Manufacturing/Processing/Maintenance, Multiple</td>
-					<td valign="top" >Multiple, Other, Metal fabrication/finishing/coating and allied industries</td>
+					<td valign="top" >Multiple, Manufacturing/Processing/Maintenance, Recycling</td>
+					<td valign="top" >Multiple, Metal fabrication/finishing/coating and allied industries, Other</td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
-					<td valign="top" >MANY DIVERSIFIED INTEREST, INC., MANY DIVERSIFIED INTERESTS, SAN JACINTO FOUNDRY, MDI, MANY DIVERSIFIED INTERESTS, INC., MANY DIVERSIFIED INTERESTS INC.</td>
+					<td valign="top" >MANY DIVERSIFIED INTERESTS INC., MDI, MANY DIVERSIFIED INTERESTS, INC., MANY DIVERSIFIED INTEREST, INC., MANY DIVERSIFIED INTERESTS, SAN JACINTO FOUNDRY</td>
 					<td valign="top" >[Blank Date]</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="mdi"'>
 					www.epa.gov/superfund/mdi
@@ -11783,7 +11729,7 @@
 					<td valign="top" ></td>
 					<td valign="top" >50.0</td>
 					<td valign="top" >No </td>
-					<td valign="top" >MIDESSA OILPATCH RV PARK, Midessa GroundWater Plume</td>
+					<td valign="top" >Midessa GroundWater Plume, MIDESSA OILPATCH RV PARK</td>
 					<td valign="top" >07/03/2006</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="midessa"'>
 					www.epa.gov/superfund/midessa
@@ -12216,8 +12162,8 @@
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >Active</td>
-					<td valign="top" >Multiple, Recycling, Waste Management</td>
-					<td valign="top" >Waste/used oil, Multiple, Industrial waste facility (non-generator)</td>
+					<td valign="top" >Waste Management, Multiple, Recycling</td>
+					<td valign="top" >Multiple, Waste/used oil, Industrial waste facility (non-generator)</td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
 					<td valign="top" ></td>
@@ -13009,7 +12955,7 @@
 					<td valign="top" >NFRAP-Site does not qualify for the NPL based on existing information</td>
 					<td valign="top" >Active</td>
 					<td valign="top" >Manufacturing/Processing/Maintenance, Other</td>
-					<td valign="top" >Metal fabrication/finishing/coating and allied industries, Spill or other one-time event</td>
+					<td valign="top" >Spill or other one-time event, Metal fabrication/finishing/coating and allied industries</td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
 					<td valign="top" ></td>
@@ -13103,7 +13049,7 @@
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
-					<td valign="top" >NORTH TEXAS MUNICIPAL WATER DISTRICT, WYLIE ANHYDROUS AMMONIA, WYLIE ACID SPILL</td>
+					<td valign="top" >WYLIE ACID SPILL, NORTH TEXAS MUNICIPAL WATER DISTRICT, WYLIE ANHYDROUS AMMONIA</td>
 					<td valign="top" >01/04/2015</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location=""'>
 					
@@ -13455,7 +13401,7 @@
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
-					<td valign="top" >ODESSA CHROMIUM #2 (ANDREWS HIGHWAY), ANDREWS HIGHWAY, ODESSA CHROMIUM #2 (ANDREWS HGWY)</td>
+					<td valign="top" >ODESSA CHROMIUM #2 (ANDREWS HGWY), ANDREWS HIGHWAY, ODESSA CHROMIUM #2 (ANDREWS HIGHWAY)</td>
 					<td valign="top" >10/15/1984</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="odessa-chromium-2"'>
 					www.epa.gov/superfund/odessa-chromium-2
@@ -13851,7 +13797,7 @@
 					<td valign="top" ></td>
 					<td valign="top" >51.22</td>
 					<td valign="top" >Yes</td>
-					<td valign="top" >PANTEX PLANT (USDOE), PANTEX PLANT, PANTEX PLANT (USDOE)</td>
+					<td valign="top" >PANTEX PLANT, PANTEX PLANT (USDOE), PANTEX PLANT (USDOE)</td>
 					<td valign="top" >10/01/1980</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="pantex-plant"'>
 					www.epa.gov/superfund/pantex-plant
@@ -14197,7 +14143,7 @@
 					<td valign="top" ></td>
 					<td valign="top" >Active</td>
 					<td valign="top" >Recycling, Recycling, Recycling</td>
-					<td valign="top" >Chemicals/chemical waste (e.g., solvent recovery), Multiple, Batteries/scrap metals/secondary smelting/precious metal recovery</td>
+					<td valign="top" >Batteries/scrap metals/secondary smelting/precious metal recovery, Chemicals/chemical waste (e.g., solvent recovery), Multiple</td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
 					<td valign="top" ></td>
@@ -14291,7 +14237,7 @@
 					<td valign="top" ></td>
 					<td valign="top" >29.94</td>
 					<td valign="top" >No </td>
-					<td valign="top" >PETRO-CHEMICAL SYSTEMS INC (TURTLE BAYOU, PETRO-CHEMICAL SYSTEMS, (TURTLE BAYOU), TURTLE BAYOU, PETRO-CHEMICAL SYSTEMS, INC. (TURTLE BAYOU), PETRO-CHEMICAL, INC. (TURLE BAYOU)</td>
+					<td valign="top" >PETRO-CHEMICAL, INC. (TURLE BAYOU), PETRO-CHEMICAL SYSTEMS, INC. (TURTLE BAYOU), PETRO-CHEMICAL SYSTEMS INC (TURTLE BAYOU, PETRO-CHEMICAL SYSTEMS, (TURTLE BAYOU), TURTLE BAYOU</td>
 					<td valign="top" >05/01/1984</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="petro-chem"'>
 					www.epa.gov/superfund/petro-chem
@@ -14856,8 +14802,8 @@
 					<td valign="top" >Submitted to or Addressed by Superfund Removal Program</td>
 					<td valign="top" >Removal Only Site (No Site Assessment Work Needed)</td>
 					<td valign="top" >Active</td>
-					<td valign="top" >Manufacturing/Processing/Maintenance, Other</td>
-					<td valign="top" >Other, Oil and gas refining</td>
+					<td valign="top" >Other, Manufacturing/Processing/Maintenance</td>
+					<td valign="top" >Oil and gas refining, Other</td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
 					<td valign="top" ></td>
@@ -15032,14 +14978,14 @@
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >Active</td>
-					<td valign="top" >Multiple, Recycling, Manufacturing/Processing/Maintenance</td>
-					<td valign="top" >Waste/used oil, Multiple, Oil and gas refining</td>
+					<td valign="top" >Manufacturing/Processing/Maintenance, Multiple, Recycling</td>
+					<td valign="top" >Multiple, Waste/used oil, Oil and gas refining</td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
 					<td valign="top" ></td>
 					<td valign="top" >50.0</td>
 					<td valign="top" >No </td>
-					<td valign="top" >R & H OIL CO., R & H OIL/TROPICANA, R & H OIL/TROPICANA, R&H OIL COMPANY</td>
+					<td valign="top" >R & H OIL CO., R & H OIL/TROPICANA, R&H OIL COMPANY, R & H OIL/TROPICANA</td>
 					<td valign="top" >04/21/1998</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="r-h-oil"'>
 					www.epa.gov/superfund/r-h-oil
@@ -15347,7 +15293,7 @@
 					<td valign="top" ></td>
 					<td valign="top" >48.0</td>
 					<td valign="top" >No </td>
-					<td valign="top" >ROCKWOOL INDUSTRIES INC., ROCKWOOL INDUSTRIES, ROCKWOOL INDUSTRIES INC</td>
+					<td valign="top" >ROCKWOOL INDUSTRIES, ROCKWOOL INDUSTRIES INC., ROCKWOOL INDUSTRIES INC</td>
 					<td valign="top" >12/08/1995</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="rockwool"'>
 					www.epa.gov/superfund/rockwool
@@ -15435,7 +15381,7 @@
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
-					<td valign="top" >RSR CORP., MURPH METALS (FINDS), RSR CORPORATION</td>
+					<td valign="top" >RSR CORPORATION, RSR CORP., MURPH METALS (FINDS)</td>
 					<td valign="top" >04/01/1981</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="rsr-corporation"'>
 					www.epa.gov/superfund/rsr-corporation
@@ -16352,8 +16298,8 @@
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >Active</td>
-					<td valign="top" >Other, Multiple, Recycling</td>
-					<td valign="top" >Product storage/distribution, Batteries/scrap metals/secondary smelting/precious metal recovery, Multiple</td>
+					<td valign="top" >Recycling, Multiple, Other</td>
+					<td valign="top" >Multiple, Product storage/distribution, Batteries/scrap metals/secondary smelting/precious metal recovery</td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
 					<td valign="top" ></td>
@@ -16535,7 +16481,7 @@
 					<td valign="top" ></td>
 					<td valign="top" >38.69</td>
 					<td valign="top" >No </td>
-					<td valign="top" >KOPPERS CO, INC., SOUTH CAVALCADE STREET, SOUTH CAVALCADE STREET</td>
+					<td valign="top" >SOUTH CAVALCADE STREET, SOUTH CAVALCADE STREET, KOPPERS CO, INC.</td>
 					<td valign="top" >07/01/1983</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="south-cavalcade"'>
 					www.epa.gov/superfund/south-cavalcade
@@ -16843,7 +16789,7 @@
 					<td valign="top" ></td>
 					<td valign="top" >50.0</td>
 					<td valign="top" >No </td>
-					<td valign="top" >STAR LAKE CANAL SITE - PORT NECHES, STAR LAKE CANAL SITE, STAR LAKE CANAL</td>
+					<td valign="top" >STAR LAKE CANAL SITE, STAR LAKE CANAL SITE - PORT NECHES, STAR LAKE CANAL</td>
 					<td valign="top" >07/23/1996</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="star-lake-canal"'>
 					www.epa.gov/superfund/star-lake-canal
@@ -16975,7 +16921,7 @@
 					<td valign="top" ></td>
 					<td valign="top" >42.41</td>
 					<td valign="top" >No </td>
-					<td valign="top" >STATE ROAD 114 GROUNDWATER PLUME, STATE ROAD 114 GROUND WATER PLUME, STATE ROAD 114 GROUND WATER PLUME, STATE HIGHWAY 114 GROUNDWATER PLUME</td>
+					<td valign="top" >STATE HIGHWAY 114 GROUNDWATER PLUME, STATE ROAD 114 GROUNDWATER PLUME, STATE ROAD 114 GROUND WATER PLUME, STATE ROAD 114 GROUND WATER PLUME</td>
 					<td valign="top" >04/12/1999</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="state-road-114"'>
 					www.epa.gov/superfund/state-road-114
@@ -17019,7 +16965,7 @@
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
-					<td valign="top" >STEWCO, INC, STEWCO, INC.</td>
+					<td valign="top" >STEWCO, INC., STEWCO, INC</td>
 					<td valign="top" >[Blank Date]</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="stewco"'>
 					www.epa.gov/superfund/stewco
@@ -17459,7 +17405,7 @@
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
-					<td valign="top" >TEX-TIN CORP., GULF CHEMICAL & METALLURAGICAL, TEX-TIN CORP, TEX-TIN CORP.</td>
+					<td valign="top" >TEX-TIN CORP., TEX-TIN CORP, TEX-TIN CORP., GULF CHEMICAL & METALLURAGICAL</td>
 					<td valign="top" >11/01/1979</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="tex-tin"'>
 					www.epa.gov/superfund/tex-tin
@@ -17547,7 +17493,7 @@
 					<td valign="top" ></td>
 					<td valign="top" >40.19</td>
 					<td valign="top" >No </td>
-					<td valign="top" >TEXARKANA WOOD PRESERVING CO., TEXARKANA WOOD PRESERVING CO, TEXARKANA WOOD PRESERVING COMPANY</td>
+					<td valign="top" >TEXARKANA WOOD PRESERVING CO., TEXARKANA WOOD PRESERVING COMPANY, TEXARKANA WOOD PRESERVING CO</td>
 					<td valign="top" >12/01/1984</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="texarkana-wood"'>
 					www.epa.gov/superfund/texarkana-wood
@@ -18559,7 +18505,7 @@
 					<td valign="top" ></td>
 					<td valign="top" >37.29</td>
 					<td valign="top" >No </td>
-					<td valign="top" >UNITED CREOSOTING CO, UNITED CREOSOTING CO.</td>
+					<td valign="top" >UNITED CREOSOTING CO., UNITED CREOSOTING CO</td>
 					<td valign="top" >[Blank Date]</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location="united-creosoting"'>
 					www.epa.gov/superfund/united-creosoting
@@ -18779,7 +18725,7 @@
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
-					<td valign="top" >UP DERAILMENT DENISON, DENISON UP DERAILMENT, UP DERAILMENT DENISON</td>
+					<td valign="top" >UP DERAILMENT DENISON, UP DERAILMENT DENISON, DENISON UP DERAILMENT</td>
 					<td valign="top" >06/11/2012</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location=""'>
 					
@@ -18911,7 +18857,7 @@
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
-					<td valign="top" >FIFTH WARD KASHMERE GARDENS UPRR SITE, SOUTHERN PACIFIC TRANSPORTATION CO/UPPR, SOUTHERN PACIFIC TRANSPORTATION CO., UNION PACIFIC RAILROAD HOUSTON WOOD PRESERVING WORKS, UPRR</td>
+					<td valign="top" >UNION PACIFIC RAILROAD HOUSTON WOOD PRESERVING WORKS, UPRR, SOUTHERN PACIFIC TRANSPORTATION CO., FIFTH WARD KASHMERE GARDENS UPRR SITE, SOUTHERN PACIFIC TRANSPORTATION CO/UPPR</td>
 					<td valign="top" >03/01/1987</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location=""'>
 					
@@ -20092,7 +20038,7 @@
 					<td valign="top" >Submitted to or Addressed by Superfund Removal Program</td>
 					<td valign="top" >Removal Only Site (No Site Assessment Work Needed)</td>
 					<td valign="top" >Active</td>
-					<td valign="top" >Other, Manufacturing/Processing/Maintenance</td>
+					<td valign="top" >Manufacturing/Processing/Maintenance, Other</td>
 					<td valign="top" >Other, Other</td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
@@ -20187,7 +20133,7 @@
 					<td valign="top" ></td>
 					<td valign="top" ></td>
 					<td valign="top" >No </td>
-					<td valign="top" >BLUDWORTH MARINE ORANGE, NORTH YARD, JOS. A WEAVER & SON SHIP YARD</td>
+					<td valign="top" >JOS. A WEAVER & SON SHIP YARD, BLUDWORTH MARINE ORANGE, NORTH YARD</td>
 					<td valign="top" >10/30/2023</td>
 					<td valign="top" style="cursor:pointer" onclick='window.location=""'>
 					

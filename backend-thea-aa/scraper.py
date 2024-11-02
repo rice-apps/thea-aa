@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 import time
 from selenium.webdriver.support.ui import Select
+import xlsxwriter
 
 
 # Set up Selenium WebDriver with Chrome options
@@ -81,6 +82,23 @@ def rename_file(download_path):
     else:
         print("No matching file found to rename.")
 
+def remove_lines_and_rename(download_path):
+    files = glob.glob(os.path.join(download_path, 'cqry*.xls')) # Downloaded file
+    old_name = files[0]  # Assume there's only one matching file
+    filename, ext = os.path.splitext(os.path.basename(old_name))
+    new_name = filename[:-6] + ext
+    print(" Created " + new_name)
+    new_path = os.path.join(download_path, new_name)
+
+    with open(old_name, "r") as file:
+        lines = file.readlines()
+
+    with open(new_path, "w") as file:
+        for line in lines[54:]:
+            file.write(line)
+
+    os.remove(old_name)
+
 def main():
      # Set the download path relative to the project directory
     download_path = os.path.join(os.getcwd(), "backend-thea-aa/downloads")
@@ -100,7 +118,9 @@ def main():
     print(f"Excel file saved to: {download_path}")
 
     # Rename the downloaded file by removing the last 6 digits
-    rename_file(download_path)
+    # rename_file(download_path)
+
+    remove_lines_and_rename(download_path)
 
 if __name__ == "__main__":
     main()
