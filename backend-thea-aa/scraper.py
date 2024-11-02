@@ -5,7 +5,10 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 import time
 from selenium.webdriver.support.ui import Select
-import xlsxwriter
+import pandas as pd
+from xls2xlsx import XLS2XLSX
+import pandas as pd
+import os  
 
 
 # Set up Selenium WebDriver with Chrome options
@@ -64,29 +67,13 @@ def download_excel_file(driver):
 
     except Exception as e:
         print(f"Error downloading the Excel file: {e}")
-
-# Rename the downloaded file: removing the last 6 digits
-def rename_file(download_path):
-    files = glob.glob(os.path.join(download_path, 'cqry*.xls'))  # Match the downloaded file
-    if files:
-        old_name = files[0]  # Assume there's only one matching file
-        filename, ext = os.path.splitext(os.path.basename(old_name)) 
-        new_name = filename[:-13] + ext  # Remove last 6 digits
-        new_path = os.path.join(download_path, new_name)
-
-        try:
-            os.rename(old_name, new_path)
-            print(f"Renamed file: {old_name} -> {new_path}")
-        except Exception as e:
-            print(f"Error renaming file {old_name}: {e}")
-    else:
-        print("No matching file found to rename.")
-
+        
+# removed the unnecessary 55 lines and renames the file
 def remove_lines_and_rename(download_path):
     files = glob.glob(os.path.join(download_path, 'cqry*.xls')) # Downloaded file
     old_name = files[0]  # Assume there's only one matching file
     filename, ext = os.path.splitext(os.path.basename(old_name))
-    new_name = filename[:-6] + ext
+    new_name = filename[:4] + ext
     print(" Created " + new_name)
     new_path = os.path.join(download_path, new_name)
 
@@ -99,6 +86,33 @@ def remove_lines_and_rename(download_path):
 
     os.remove(old_name)
 
+def convert_to_csv(downloaded_path):
+    # downloaded_path will be: /thea-aa/backend-thea-aa/downloads
+    
+    # relative paths to the stored .xls file
+    xls_file_path = downloaded_path + "/cqry.xls"
+    print("xls saved file path: ",xls_file_path)
+    xlsx_file_path = "backend-thea-aa/downloads/converted/converted.xlsx"
+
+    # convert to xlxs
+    converter = XLS2XLSX(xls_file_path)
+    converter.to_xlsx(xlsx_file_path)
+    print("\nConverted the .xls to .xlxs file\n")
+    
+    # read the data
+    df = pd.read_excel(xlsx_file_path)
+    print("Read the .xlxs file as Pandas DataFrame\n")
+    
+    # delete converted folder files
+    print("Clear the Downloads/Converted folder")
+    clean_download_folder(downloaded_path + "/converted")
+    
+    # then save the csv file back to the converted
+    os.makedirs('backend-thea-aa/downloads/converted', exist_ok=True)  
+    df.to_csv('backend-thea-aa/downloads/converted/superfund_data.csv')  
+    print("Saved the Superfund data as csv successfully!")
+     
+    
 def main():
      # Set the download path relative to the project directory
     download_path = os.path.join(os.getcwd(), "backend-thea-aa/downloads")
@@ -117,10 +131,9 @@ def main():
     driver.quit()
     print(f"Excel file saved to: {download_path}")
 
-    # Rename the downloaded file by removing the last 6 digits
-    # rename_file(download_path)
-
     remove_lines_and_rename(download_path)
+    
+    convert_to_csv(download_path)
 
 if __name__ == "__main__":
     main()
