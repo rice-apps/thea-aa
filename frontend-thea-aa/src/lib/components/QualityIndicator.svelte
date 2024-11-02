@@ -1,18 +1,23 @@
 <script lang="ts">
-    let props: {quality: Number} = $props();
+    let {quality = 0.0, name = ""} = $props();
    
     const ranges = [
-       { max: 50, color: 'bg-green-500', textColor: 'text-white' },    // Green
-       { max: 100, color: 'bg-yellow-200', textColor: 'text-black' },  // Yellow
-       { max: 150, color: 'bg-orange-500', textColor: 'text-white' },  // Orange
-       { max: 200, color: 'bg-red-600', textColor: 'text-white' },     // Red
-       { max: 300, color: 'bg-purple-600', textColor: 'text-white' },  // Purple
-       { max: Infinity, color: 'bg-rose-900', textColor: 'text-white' } // Maroon
+       { max: 0, color: 'bg-black'},    // Green
+       { max: 50, color: 'bg-green-500'},    // Green
+       { max: 100, color: 'bg-yellow-300'},  // Yellow
+       { max: 150, color: 'bg-orange-500'},  // Orange
+       { max: 200, color: 'bg-red-600'},     // Red
+       { max: 300, color: 'bg-purple-600'},  // Purple
+       { max: Infinity, color: 'bg-rose-900'} // Maroon
     ];
    
-    let range = ranges.find(r => props.quality <= r.max) || ranges[ranges.length - 1];
+    let range = ranges.find(r => quality <= r.max) || ranges[ranges.length - 1];
 </script>
 
-<div class="rounded p-4 w-20 h-8 flex items-center justify-between {range.color} {range.textColor}">
-    <span>{props.quality}</span>
+<div class="text-white rounded w-20 h-8 flex text-center items-center justify-center {range.color} {range.textColor}">
+    {#if name == ""}
+        <span>{quality}</span>
+    {:else}
+        <span>{name}</span>
+    {/if}
 </div>
