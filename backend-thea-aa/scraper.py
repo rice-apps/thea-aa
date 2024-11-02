@@ -4,7 +4,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 import time
-import xlsxwriter
 from selenium.webdriver.support.ui import Select
 
 
@@ -84,7 +83,7 @@ def rename_file(download_path):
 
 def main():
      # Set the download path relative to the project directory
-    download_path = os.path.join(os.getcwd(), "downloads")
+    download_path = os.path.join(os.getcwd(), "backend-thea-aa/downloads")
     os.makedirs(download_path, exist_ok=True)
 
     # Clean the download folder before downloading a new file
