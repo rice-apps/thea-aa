@@ -5,6 +5,7 @@
     import { onMount } from 'svelte'
     import {ChevronLeft, ChevronRight} from "lucide-svelte/icons"
 	import NearAq from '$lib/components/NearAq.svelte'
+	import DetailedContamTable from '$lib/components/DetailedContamTable.svelte'
 
 
     let { data } = $props()
@@ -42,10 +43,10 @@
         <p class="text-6xl"><b>{data.name}</b></p> 
         <p class="text-sm text-gray-600 pt-3"><b>Last Updated at</b> 11:45am CST October 19</p>
     </div>
-    <div class="flex flex-row">
+    <div class="flex flex-row mt-3">
         <div class="flex-col w-1/4">
             <div bind:this={mapElement} class="h-80 w-full"></div>
-            <div class="bg-slate-100 rounded p-5 mt-10">
+            <div class="bg-slate-100 rounded p-5 mt-5">
                 <p class="text-xl"><b>Air Quality in the area</b></p>
                 <p><b>Station</b></p>
                 <!-- use for each here for real thing -->
@@ -88,7 +89,7 @@
             </div>
             <div class="flex flex-col pt-8">
                 <p class="text-xl"><b>Contaminant List</b></p>
-                <!-- some table component from shadcn -->
+                <DetailedContamTable/>
             </div>
         </div>
         
