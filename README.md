@@ -2,7 +2,7 @@
 
 ## Installation process
 Prerequisites:
-- Python, 3.9 or newer
+- Python, 3.10 or newer (ideally 3.12.5)
 - Pip, the Python package installer
 - Git, the version control system
 - A code editor, such as Visual Studio Code
@@ -44,3 +44,6 @@ bun install
 ```bash
 bun run dev
 ```
+
+8. Note that this project is using Svelte 5
+These are the docs for svelte 5: https://svelte-5-preview.vercel.app/docs/introduction
