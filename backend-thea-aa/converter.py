@@ -24,8 +24,9 @@ converter.to_xlsx(xlsx_file_path)
 # read the data
 df = pd.read_excel(xlsx_file_path)
 
-os.makedirs('folder/subfolder', exist_ok=True)  
-df.to_csv('folder/subfolder/out.csv')  
+# backend-thea-aa/downloads
+os.makedirs('backend-thea-aa/downloads/converted', exist_ok=True)  
+df.to_csv('backend-thea-aa/downloads/converted/superfund_data.csv')  
 
 # display
 print(df.head(15))
