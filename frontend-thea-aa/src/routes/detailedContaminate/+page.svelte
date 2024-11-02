@@ -92,8 +92,4 @@
             <div class="flex flex-col pt-8">
                 <p class="text-xl font-bold">Contaminant List</p>
                 <DetailedContamTable items={tableInfo}/>
-            </div>
-        </div>
-        
-    </div>
 </div>
