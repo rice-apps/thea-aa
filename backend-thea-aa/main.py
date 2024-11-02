@@ -294,7 +294,7 @@ def contaminants(questions, answers, order, sheet, sheet2, j):
                     if len(x) > 1:
                         cell5 = int(x[1])
                     else:
-                        cell5 = ""
+                        cell5 = " "
                 elif print_out == 'Process Unit or Area Common Names':
                     text = order[2].__getattribute__('text').split("\n")
                     answers_counter += (len(text) - 1)

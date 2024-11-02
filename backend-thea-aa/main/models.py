@@ -8,6 +8,7 @@ class EmissionEvents(models.Model):
     rn =  models.TextField()
     re_name = models.TextField()
     physical_location = models.TextField()
+<<<<<<< HEAD
     county = models.TextField()
     tceq_region = models.IntegerField()
     start_date_time = models.DateTimeField()
@@ -31,3 +32,14 @@ class EmissionEvents(models.Model):
     hours_elapsed = models.DecimalField()
     emissions_rate = models.DecimalField()
     flag = models.BinaryField()
+=======
+    start_date_time = models.TextField()
+    end_date_time = models.TextField()
+    contaminant = models.TextField()
+    estimated_quantity = models.TextField()
+    emissions_limit = models.TextField()
+    limit_units = models.TextField()
+    hours_elapsed = models.TextField()
+    emissions_rate = models.TextField()
+    flag = models.IntegerField()
+>>>>>>> ede402e844ddbcf4fcea6c1140d5b311551b394f
