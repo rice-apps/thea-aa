@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { EmissionEvent } from '$lib/types';
-import LoadMore from './LoadMore.svelte'
+  import LoadMore from './LoadMore.svelte'
 
   let props: {items: EmissionEvent[]} = $props()
 
