@@ -1,11 +1,13 @@
 from django.db import models
 
+<<<<<<<<< Temporary merge branch 1
+=========
+
+>>>>>>>>> Temporary merge branch 2
 # Create your models here.
 class EmissionEvents(models.Model):
 
     # Initialize fields for the Django model storing emission events
-    incident_no = models.IntegerField()
-    rn =  models.TextField()
     re_name = models.TextField()
     physical_location = models.TextField()
     start_date_time = models.TextField()
