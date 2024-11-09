@@ -24,8 +24,12 @@
         }).addTo(map)
       }
     })
+
+    export function updateViewCentering(lat: number, long: number, radius: number) {
+        if (!map) return;
+        map.setView([lat, long], 10);
+    }
   
-    // Make this function available to the parent component
     export function updateMarkers() {
       if (!map || !L) return;
       
