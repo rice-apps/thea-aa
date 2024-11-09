@@ -80,39 +80,18 @@
 				alert('Could not find the specified address');
 				return;
 			}
-
 			const radius = parseFloat(searchRadius);
 			
 			filteredData = {
-				contaminatedSites: data.contaminatedSites.filter(site => 
-					calculateDistance(
-						addressCoords.lat,
-						addressCoords.long,
-						site.location.lat,
-						site.location.long
-					) <= radius
-				),
-				emissionEvents: data.emissionEvents.filter(event => 
-					calculateDistance(
-						addressCoords.lat,
-						addressCoords.long,
-						event.location.lat,
-						event.location.long
-					) <= radius
-				),
-				airQualitySites: data.airQualitySites.filter(site => 
-					calculateDistance(
-						addressCoords.lat,
-						addressCoords.long,
-						site.location.lat,
-						site.location.long
-					) <= radius
-				)
+				contaminatedSites: data.contaminatedSites.filter(site => calculateDistance(addressCoords.lat, addressCoords.long, site.location.lat, site.location.long) <= radius),
+				emissionEvents: data.emissionEvents.filter(event => calculateDistance(addressCoords.lat, addressCoords.long, event.location.lat, event.location.long) <= radius),
+				airQualitySites: data.airQualitySites.filter(site => calculateDistance(addressCoords.lat, addressCoords.long, site.location.lat, site.location.long) <= radius)
 			};
 
 			// Update map markers
 			if (mapInstance?.updateMarkers) {
 				mapInstance.updateMarkers();
+				mapInstance.updateViewCentering(addressCoords.lat, addressCoords.long);
 			}
 		} catch (error) {
 			console.error('Error during filtering:', error);
@@ -133,7 +112,7 @@
    
    <svelte:window bind:innerHeight={height} />
    
-   <header class="flex items-center p-4">
+   <header class="flex items-center px-12 py-8">
 	 <h1 class="text-3xl font-bold">Texas Environment Tracker</h1>
    </header>
    
