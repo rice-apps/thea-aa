@@ -4,12 +4,14 @@
 
 <script lang="ts">
 	import { onMount } from 'svelte'
-    import type { ContaminatedSite, EmissionEvent } from '$lib/types';
-
+	import type { ContaminatedSite, EmissionEvent } from '$lib/types'
 
 	let mapElement: HTMLDivElement | null = $state(null)
 
-	let props: {contaminatedSite: ContaminatedSite[] | null, emissionEvent: EmissionEvent[]|null} = $props()
+	let props: {
+		contaminatedSite: ContaminatedSite[] | null
+		emissionEvent: EmissionEvent[] | null
+	} = $props()
 
 	onMount(async () => {
 		const L = (await import('leaflet')).default
@@ -26,8 +28,8 @@
 			// 	attribution:
 			// 		'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 			// }).addTo(map)
-			
-			if (props.emissionEvent){
+
+			if (props.emissionEvent) {
 				props.emissionEvent.forEach((event) => {
 					const marker = L.marker([event.location.lat, event.location.long]).addTo(map)
 					marker.bindPopup(`Emission Event: ${event.site}`).openPopup()
