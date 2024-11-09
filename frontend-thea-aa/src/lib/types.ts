@@ -1,25 +1,39 @@
-export type LatLong = {
+export interface LatLong {
 	lat: number
 	long: number
 }
 
-export type AirQualitySite = {
+export interface AirQualitySite {
 	station: string
 	location: LatLong
 	airQuality: number
 }
 
-export type EmissionEvent = {
+export interface EmissionEvent {
 	location: LatLong
 	number: number
 	site: string
 }
 
-export type ContaminatedSite = {
+export interface ContaminatedSite {
 	status: string
 	name: string
 	location: LatLong
 	hazardScore: number
+}
+
+export interface DetailedContaminatedSite {
+	status: string
+	name: string
+	location: LatLong
+	hazardScore: number
+	regionID: number
+	siteID: string
+	locationName: string
+	constructionComplete: string
+	partialDeletion: string
+	proposedDate: string
+	listingDate: string
 }
 
 export type DetailedContaminatedSite = {
