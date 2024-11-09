@@ -7,26 +7,27 @@
     let amountToShow = $state(3)
 </script>
 
-<h3>Air Quality Ranking</h3>
-
-<table>
+<div class="max-w-4xl mx-auto py-6">
+<h3  class="text-l font-bold mb-4 text-gray-800">Air Quality Ranking</h3>
+<table class="min-w-full table-auto border-collapse">
     <thead>
-        <tr>
-        <th>Rank</th>
-        <th>City</th>
-        <th>Quality</th>
+        <tr class="bg-gray-100">
+        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Rank</th>
+        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">City</th>
+        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Quality</th>
         </tr>
     </thead>
     <tbody>
         {#each props.items.slice(0, amountToShow) as item, rank}
-        <tr>
-            <td>{rank}</td>
-            <td>{item.station}</td>
-            <td>{item.airQuality}</td>
+        <tr class="border-b hover:bg-gray-50">
+            <td class="px-4 py-2 text-sm text-gray-700">{rank}</td>
+            <td class="px-4 py-2 text-sm text-gray-700">{item.station}</td>
+            <td class="px-4 py-2 text-sm text-gray-700">{item.airQuality}</td>
         </tr>
         {/each}
     </tbody>
 </table>
+</div>
 
 <LoadMore onclick={() => amountToShow += 3} />
 

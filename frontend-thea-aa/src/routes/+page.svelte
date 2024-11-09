@@ -67,11 +67,11 @@
 		 <EmissionEvents items={data.emissionEvents}/>
 	   {/if}
 	   {#if currentView === 'air quality'}
-		 <EmissionEvents items={data.emissionEvents}/>
+		 <AirQualityRanking items={data.airQualitySites}/>
 	   {/if}
 	 </aside>
 	 
-	 <div class="w-2/3" style="height: {height * 0.8}px">
+	 <div class="w-2/3">
 	   <Map 
 		 bind:this={mapInstance}
 		 currentView={currentView} 
