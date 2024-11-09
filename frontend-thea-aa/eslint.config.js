@@ -7,6 +7,7 @@ import tseslint from 'typescript-eslint'
 export default tseslint.config(
 	eslint.configs.recommended,
 	...tseslint.configs.recommended,
+	...tseslint.configs.stylistic,
 	...svelte.configs['flat/recommended'],
 	prettier,
 	...svelte.configs['flat/prettier'],
