@@ -29,7 +29,7 @@ export function load() {
 		casNumber: string
 	}
 
-	const tableInfo: Array<contaminantRow> = [
+	const tableInfo: contaminantRow[] = [
 		{
 			contaminantName: 'CHLORETHENE (VINYL CHLORIDE)',
 			contaminatedMedia: 'Groundwater',

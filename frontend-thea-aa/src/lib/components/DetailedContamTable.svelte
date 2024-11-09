@@ -9,8 +9,8 @@
     }
     // Array of contaminants based on the image
 
-    let props: {items: Array<contaminantRow>} = $props()
-    const contaminants: Array<contaminantRow> = props.items
+    let props: {items: contaminantRow[]} = $props()
+    const contaminants: contaminantRow[] = props.items
 </script>
 
 <Table.Root>
