@@ -1,23 +1,23 @@
 export type LatLong = {
-    lat: number
-    long: number
+	lat: number
+	long: number
 }
 
 export type AirQualitySite = {
-    station: string
-    location: LatLong
-    airQuality: number
+	station: string
+	location: LatLong
+	airQuality: number
 }
 
 export type EmissionEvent = {
-    location: LatLong
-    number: number
-    site: string
+	location: LatLong
+	number: number
+	site: string
 }
 
 export type ContaminatedSite = {
-    status: string
-    name: string
-    location: LatLong
-    hazardScore: number
+	status: string
+	name: string
+	location: LatLong
+	hazardScore: number
 }

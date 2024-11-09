@@ -1,0 +1,4 @@
+cd frontend
+bun lint
+bun format
+bun check
