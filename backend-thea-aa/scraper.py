@@ -7,9 +7,6 @@ import time
 from selenium.webdriver.support.ui import Select
 import pandas as pd
 from xls2xlsx import XLS2XLSX
-import pandas as pd
-import os  
-
 
 # Set up Selenium WebDriver with Chrome options
 def setup_driver(download_path):
@@ -113,7 +110,7 @@ def convert_to_csv(downloaded_path):
     print("Saved the Superfund data as csv successfully!")
      
     
-def main():
+def main(request):
      # Set the download path relative to the project directory
     download_path = os.path.join(os.getcwd(), "backend-thea-aa/downloads")
     os.makedirs(download_path, exist_ok=True)
@@ -135,5 +132,5 @@ def main():
     
     convert_to_csv(download_path)
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
