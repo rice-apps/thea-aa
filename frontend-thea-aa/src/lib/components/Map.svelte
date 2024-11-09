@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import type { ContaminatedSite, EmissionEvent } from '$lib/types';
+    import type { AirQualitySite, ContaminatedSite, EmissionEvent } from '$lib/types';
     
     let L: typeof import('leaflet');
     let mapElement: HTMLDivElement | null = $state(null)
@@ -9,6 +9,7 @@
       currentView: string, 
       contaminatedSite: ContaminatedSite[] | null, 
       emissionEvent: EmissionEvent[] | null
+      airQualitySite: AirQualitySite[] | null
     } = $props()
   
     onMount(async () => {
@@ -39,19 +40,24 @@
       if (props.currentView === 'superfund' && props.contaminatedSite) {
         props.contaminatedSite.forEach((site) => {
           const marker = L.marker([site.location.lat, site.location.long]).addTo(map);
-          marker.bindPopup(`Contaminated site: ${site.name}`).openPopup();
+          marker.bindPopup(`Contaminated Site: ${site.name}`).openPopup();
         });
       } else if (props.currentView === 'emission' && props.emissionEvent) {
         props.emissionEvent.forEach((event) => {
           const marker = L.marker([event.location.lat, event.location.long]).addTo(map);
           marker.bindPopup(`Emission Event: ${event.site}`).openPopup();
         });
+      } else if (props.currentView === 'air quality' && props.airQualitySite) {
+        props.airQualitySite.forEach((site) => {
+          const marker = L.marker([site.location.lat, site.location.long]).addTo(map);
+          marker.bindPopup(`Air Quality Site: ${site.station}`).openPopup();
+        });
       }
     }
   
     // Watch for props changes
     $effect(() => {
-      if (map && (props.currentView || props.contaminatedSite || props.emissionEvent)) {
+      if (map && (props.currentView || props.contaminatedSite || props.emissionEvent || props.airQualitySite)) {
         updateMarkers();
       }
     });
