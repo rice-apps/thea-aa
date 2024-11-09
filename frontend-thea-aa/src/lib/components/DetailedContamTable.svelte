@@ -26,7 +26,7 @@
     <Table.Body>
         {#each contaminants as contaminant}
             <Table.Row>
-                <Table.Cell class="font-semibold">{contaminant.contaminantName}</Table.Cell>
+                <Table.Cell>{contaminant.contaminantName}</Table.Cell>
                 <Table.Cell>{contaminant.contaminatedMedia}</Table.Cell>
                 <Table.Cell>{contaminant.areaOfSiteFound}</Table.Cell>
                 <Table.Cell>{contaminant.moreInfo}</Table.Cell>
