@@ -1,4 +1,4 @@
-cd frontend-thea-aa
+cd frontend
 bun lint
 bun format
 bun check
