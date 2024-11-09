@@ -9,12 +9,14 @@
 
 
     let { data } = $props()
+    const contaminatedSite = data.contaminatedSite
+    const tableInfo = data.tableInfo
 
     let mapElement: HTMLDivElement | null = $state(null)
     onMount(async () => {
 		const L = (await import('leaflet')).default
 		if (mapElement) {
-			const map = L.map(mapElement).setView([data.location.lat, data.location.long], 13) // change to use props later
+			const map = L.map(mapElement).setView([contaminatedSite.location.lat, contaminatedSite.location.long], 13) // change to use props later
 			L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
 				attribution: `&copy;<a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>,
           &copy;<a href="https://carto.com/attributions" target="_blank">CARTO</a>`,
@@ -40,7 +42,7 @@
                 <p class="text-lg text-gray-400">CONTAMINATED SITES</p>
             </div>
         </a>
-        <p class="text-6xl"><b>{data.name}</b></p> 
+        <p class="text-6xl"><b>{contaminatedSite.name}</b></p> 
         <p class="text-sm text-gray-600 pt-3"><b>Last Updated at</b> 11:45am CST October 19</p>
     </div>
     <div class="flex flex-row mt-3">
@@ -66,16 +68,16 @@
                 <p class="text-xl pb-2 pl-4"><b>Site Overview</b></p>
             </div>
             <div class="grid grid-cols-4 gap-4">
-                <Statistic title={"Hazard Level"} stat={data.hazardScore}/>
-                <Statistic title={"Region ID"} stat={data.regionID}/>
-                <Statistic title={"EPA Site ID"} stat={data.siteID}/>
-                <Statistic title={"Location"} stat={data.locationName}/>
-                <Statistic title={"Latitude"} stat={data.location.lat}/>
-                <Statistic title={"Longitude"} stat={data.location.long}/>
-                <Statistic title={"Construction Completion"} stat={data.constructionComplete}/>
-                <Statistic title={"Partial Deletion"} stat={data.partialDeletion}/>
-                <Statistic title={"Proposed"} stat={data.proposedDate}/>
-                <Statistic title={"Listing"} stat={data.listingDate}/>
+                <Statistic title={"Hazard Level"} stat={contaminatedSite.hazardScore}/>
+                <Statistic title={"Region ID"} stat={contaminatedSite.regionID}/>
+                <Statistic title={"EPA Site ID"} stat={contaminatedSite.siteID}/>
+                <Statistic title={"Location"} stat={contaminatedSite.locationName}/>
+                <Statistic title={"Latitude"} stat={contaminatedSite.location.lat}/>
+                <Statistic title={"Longitude"} stat={contaminatedSite.location.long}/>
+                <Statistic title={"Construction Completion"} stat={contaminatedSite.constructionComplete}/>
+                <Statistic title={"Partial Deletion"} stat={contaminatedSite.partialDeletion}/>
+                <Statistic title={"Proposed"} stat={contaminatedSite.proposedDate}/>
+                <Statistic title={"Listing"} stat={contaminatedSite.listingDate}/>
             </div>
             <div class="flex flex-col pt-8">
                 <p class="text-xl pb-5"><b>Background</b></p>
@@ -89,7 +91,7 @@
             </div>
             <div class="flex flex-col pt-8">
                 <p class="text-xl"><b>Contaminant List</b></p>
-                <DetailedContamTable/>
+                <DetailedContamTable items={tableInfo}/>
             </div>
         </div>
         

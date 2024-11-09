@@ -1,79 +1,16 @@
 <script lang="ts">
     import * as Table from "$lib/components/ui/table/index.js";
-
+    interface contaminantRow {
+        contaminantName: string
+        contaminatedMedia: string
+        areaOfSiteFound: string
+        moreInfo: string
+        casNumber: string
+    }
     // Array of contaminants based on the image
-    const contaminants = [
-        {
-            contaminantName: "CHLORETHENE (VINYL CHLORIDE)",
-            contaminatedMedia: "Groundwater",
-            areaOfSiteFound: "GROUNDWATER (02)",
-            moreInfo: "ATSDR Profile",
-            casNumber: "75-01-4"
-        },
-        {
-            contaminantName: "CHLORETHENE (VINYL CHLORIDE)",
-            contaminatedMedia: "Air",
-            areaOfSiteFound: "GROUNDWATER (02)",
-            moreInfo: "ATSDR Profile",
-            casNumber: "75-01-4"
-        },
-        {
-            contaminantName: "CIS-1,2-DICHLOROETHENE",
-            contaminatedMedia: "Groundwater",
-            areaOfSiteFound: "GROUNDWATER (02)",
-            moreInfo: "ATSDR Profile",
-            casNumber: "156-59-2"
-        },
-        {
-            contaminantName: "CIS-1,2-DICHLOROETHENE",
-            contaminatedMedia: "Air",
-            areaOfSiteFound: "GROUNDWATER (02)",
-            moreInfo: "ATSDR Profile",
-            casNumber: "156-59-2"
-        },
-        {
-            contaminantName: "POLYCHLORINATED BIPHENYLS (PCBs)",
-            contaminatedMedia: "Buildings/Structures",
-            areaOfSiteFound: "SOURCE (01)",
-            moreInfo: "ATSDR Profile",
-            casNumber: "1336-36-3"
-        },
-        {
-            contaminantName: "POLYCHLORINATED BIPHENYLS (PCBs)",
-            contaminatedMedia: "Groundwater",
-            areaOfSiteFound: "GROUNDWATER (02)",
-            moreInfo: "ATSDR Profile",
-            casNumber: "1336-36-3"
-        },
-        {
-            contaminantName: "POLYCHLORINATED BIPHENYLS (PCBs)",
-            contaminatedMedia: "Soil",
-            areaOfSiteFound: "SOURCE (01)",
-            moreInfo: "ATSDR Profile",
-            casNumber: "1336-36-3"
-        },
-        {
-            contaminantName: "TRICHLOROETHENE",
-            contaminatedMedia: "Groundwater",
-            areaOfSiteFound: "GROUNDWATER (02)",
-            moreInfo: "ATSDR Profile",
-            casNumber: "79-01-6"
-        },
-        {
-            contaminantName: "TRICHLOROETHENE",
-            contaminatedMedia: "Air",
-            areaOfSiteFound: "GROUNDWATER (02)",
-            moreInfo: "ATSDR Profile",
-            casNumber: "79-01-6"
-        },
-        {
-            contaminantName: "TRICHLOROETHENE",
-            contaminatedMedia: "Soil",
-            areaOfSiteFound: "SOURCE (01)",
-            moreInfo: "ATSDR Profile",
-            casNumber: "79-01-6"
-        }
-    ];
+
+    let props: {items: Array<contaminantRow>} = $props()
+    const contaminants: Array<contaminantRow> = props.items
 </script>
 
 <Table.Root>
