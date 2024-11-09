@@ -1,7 +1,9 @@
 from django.db import models
 
-
 # Create your models here.
+
+# TODO: parse text to create boolean fields, debug issues with decimal fields
+
 class EmissionEvents(models.Model):
 
     # Initialize fields for the Django model storing emission events
@@ -18,35 +20,35 @@ class EmissionEvents(models.Model):
     flag = models.IntegerField()
 
 class SuperfundSite(models.Model):
-    epa_id = models.CharField()
+
+    epa_id = models.CharField(max_length=12)
     site_name = models.TextField() 
-    city = models.CharField()
-    county = models.CharField()
-    state = models.CharField()
+    city = models.TextField()
+    county = models.TextField()
+    state = models.CharField(max_length=2)
     street_address = models.TextField()
-    zip_code = models.CharField()
-    region = models.IntegerField()
-    npl_status = models.CharField()
-    partial_npl_deletion = models.BooleanField()
-    superfund_alternative_approach = models.BooleanField()
-    site_wide_ready_for_anticipated_use = models.BooleanField()
-    human_exposure_under_control = models.BooleanField()
-    groundwater_migration_under_control = models.BooleanField()
-    construction_complete = models.BooleanField()
-    construction_completion_date = models.DateTimeField()  
-    non_npl_status_category = models.CharField()
-    non_npl_status_subcategory = models.CharField()
-    non_npl_status = models.CharField()
-    site_status = models.CharField()
-    site_type = models.CharField()
-    site_type_subcategory = models.CharField()
+    zip_code = models.CharField(max_length=5)
+    region = models.TextField()
+    npl_status = models.TextField()
+    partial_npl_deletion = models.TextField()
+    superfund_alternative_approach = models.TextField()
+    site_wide_ready_for_anticipated_use = models.TextField()
+    human_exposure_under_control = models.TextField()
+    groundwater_migration_under_control = models.TextField()
+    construction_complete = models.TextField()
+    construction_completion_date = models.TextField()  
+    non_npl_status_category = models.TextField()
+    non_npl_status_subcategory = models.TextField()
+    non_npl_status = models.TextField()
+    site_status = models.TextField()
+    site_type = models.TextField()
+    site_type_subcategory = models.TextField()
     federal_agency = models.TextField() 
-    native_american_interest = models.BooleanField()
-    indian_entity_nai_status = models.CharField()
-    hrs_score = models.DecimalField()  
-    federal_facility_indicator = models.BooleanField()
+    native_american_interest = models.TextField()
+    indian_entity_nai_status = models.TextField()
+    hrs_score = models.TextField()  
+    federal_facility_indicator = models.TextField()
     alias_alternative_site_name = models.TextField()
-    non_npl_status_date = models.DateTimeField()  
-    superfund_site_profile_page_url = models.URLField()
-    rcra_handler_id = models.CharField()
-    rcra_handler_name = models.TextField() 
+    non_npl_status_date = models.TextField()  
+    superfund_site_profile_page_url = models.TextField()
+    rcra_handler_id_name = models.TextField() 

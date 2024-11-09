@@ -16,8 +16,15 @@ Including another URLconf
 """
 
 from django.contrib import admin
+from django.conf.urls import include, re_path
+from rest_framework.routers import DefaultRouter
+from main.views import EmissionEventsViewSet, SuperfundSiteViewSet
 from django.urls import path
 
+router = DefaultRouter()
+router.register('INSERT', EmissionEventsViewSet, base_name = 'emission_event')
+router.register('INSERT', SuperfundSiteViewSet, base_name = 'emission_event')
+
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("^", include(router.urls)),
 ]
