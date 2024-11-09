@@ -10,12 +10,20 @@
        { max: 300, color: 'bg-purple-600'},  // Purple
        { max: Infinity, color: 'bg-rose-900'} // Maroon
     ];
-   
-    let range = ranges.find(r => quality <= r.max) || ranges[ranges.length - 1];
+
+    // Calculate the range index based on quality
+    let rangeIndex = Math.min(
+        ranges.findIndex(r => quality <= r.max),
+        ranges.length - 1 // Ensure it doesn't go out of bounds
+    );
+
+    // Access the correct range directly by index
+    let range = ranges[rangeIndex];
 </script>
 
+
 <div class="text-white rounded w-20 h-8 flex text-center items-center justify-center {range.color} {range.textColor}">
-    {#if name == ""}
+    {#if name === ""}
         <span>{quality}</span>
     {:else}
         <span>{name}</span>
