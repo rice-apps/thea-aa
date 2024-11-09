@@ -4,10 +4,10 @@
 
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import type { ContaminatedSite, EmissionEvent } from '$lib/types'	import L from 'leaflet'
+    import type { ContaminatedSite, EmissionEvent } from '$lib/types';
 
+    let L: typeof import('leaflet');
 	let mapElement: HTMLDivElement | null = $state(null)
-
     let map: L.Map; 
 	let props: {currentView: string, 
 		contaminatedSite: ContaminatedSite[] | null
@@ -15,7 +15,7 @@
 	} = $props()
 
 	onMount(async () => {
-		const L = (await import('leaflet')).default
+		L = (await import('leaflet')).default
 		if (mapElement) {
 			map = L.map(mapElement).setView([29.71929, -95.3906], 13)
 			L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
@@ -28,27 +28,27 @@
 		updateMarkers()
 	})
 
-    function updateMarkers() {
+    export function updateMarkers() {
         if (map) {
             map.eachLayer((layer: any) => {
                 if (layer instanceof L.Marker) {
                     map.removeLayer(layer);
                 }
             });
+        }
 
-            if (props.contaminatedSite) {
-                props.contaminatedSite.forEach((site) => {
-                    const marker = L.marker([site.location.lat, site.location.long]).addTo(map);
-                    marker.bindPopup(`Contaminated site: ${site.name}`).openPopup();
-                });
-            }
+        if (props.contaminatedSite) {
+            props.contaminatedSite.forEach((site) => {
+                const marker = L.marker([site.location.lat, site.location.long]).addTo(map);
+                marker.bindPopup(`Contaminated site: ${site.name}`).openPopup();
+            });
+        }
 
-            if (props.emissionEvent) {
-                props.emissionEvent.forEach((event) => {
-                    const marker = L.marker([event.location.lat, event.location.long]).addTo(map);
-                    marker.bindPopup(`Emission Event: ${event.site}`).openPopup();
-                });
-            }
+        if (props.emissionEvent) {
+            props.emissionEvent.forEach((event) => {
+                const marker = L.marker([event.location.lat, event.location.long]).addTo(map);
+                marker.bindPopup(`Emission Event: ${event.site}`).openPopup();
+            });
         }
     }
 </script>
