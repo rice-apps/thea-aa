@@ -21,7 +21,7 @@ jobs:
     
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -50,7 +50,7 @@ jobs:
           git config --local user.name "GitHub Actions"
           git add results/output_*.xlsx
           git commit -m "Add data for $timestamp"
-          git push
+          git push --force
         env:
           # GitHub Token for permissions to push
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
