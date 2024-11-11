@@ -33,23 +33,23 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-          - name: Install Chrome
-          run: |
-            sudo apt-get update
-            sudo apt-get install -y google-chrome-stable
-  
-          - name: Install ChromeDriver
-            run: |
-              CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
-              sudo curl -Lo /usr/local/bin/chromedriver "https://chromedriver.storage.googleapis.com/$CHROME_VERSION/chromedriver_linux64.zip"
-              sudo chmod +x /usr/local/bin/chromedriver
-    
-          - name: Run Scraper
-            env:
-              CHROME_BIN: "/usr/bin/google-chrome"  # Optional, in case your script needs the Chrome path
-              CHROMEDRIVER_PATH: "/usr/local/bin/chromedriver"
-            run: |
-              python main.py
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Install ChromeDriver
+        run: |
+          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
+          sudo curl -Lo /usr/local/bin/chromedriver "https://chromedriver.storage.googleapis.com/$CHROME_VERSION/chromedriver_linux64.zip"
+          sudo chmod +x /usr/local/bin/chromedriver
+
+      - name: Run Scraper
+        env:
+          CHROME_BIN: "/usr/bin/google-chrome"  # Optional, in case your script needs the Chrome path
+          CHROMEDRIVER_PATH: "/usr/local/bin/chromedriver"
+        run: |
+          python main.py
         
       - name: Save Excel Output
         # Create a file name with the date and time
