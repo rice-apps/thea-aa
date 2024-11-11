@@ -34,6 +34,19 @@ def new_line_remover(question):
 def setup():
     global single_case
     global single_incident
+
+    # Configure Chrome options for GitHub Actions environment
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless")  # Run Chrome in headless mode
+    options.add_argument("--no-sandbox")  # Bypass OS security model
+    options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource issues
+    options.add_argument("--disable-gpu")  # Disable GPU hardware acceleration
+    options.add_argument("--remote-debugging-port=9222")  # Enable remote debugging
+    options.binary_location = "/usr/bin/google-chrome"  # Path to Chrome binary
+    
+    # Specify the path to ChromeDriver
+    service = Service("/usr/local/bin/chromedriver")
+    driver = webdriver.Chrome(service=service, options=options)
     service = Service()
     options = webdriver.ChromeOptions()
     driver = webdriver.Chrome(service=service, options=options)
@@ -436,5 +449,6 @@ def main():
     else:
         cases = collecting_information(driver)
         extracting_information(driver, cases)
-
+    driver.quit()
+    
 main()
