@@ -37,10 +37,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
+          sudo apt install -y ./google-chrome-stable_114.0.5735.90-1_amd64.deb
 
       - name: Install ChromeDriver
         run: |
-          CHROME_DRIVER_VERSION="115.0.5790.170"
+          CHROME_DRIVER_VERSION="114.0.5735.90"
           echo "Installing ChromeDriver version $CHROME_DRIVER_VERSION"
           curl -Lo /tmp/chromedriver.zip "https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip"
           sudo apt-get install -y unzip
