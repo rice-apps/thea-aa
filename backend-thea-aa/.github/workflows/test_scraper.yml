@@ -54,3 +54,5 @@ jobs:
         env:
           # GitHub Token for permissions to push
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+# make sure to push to scraper-tecq branch
