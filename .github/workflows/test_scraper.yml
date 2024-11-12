@@ -36,22 +36,14 @@ jobs:
       - name: Install Chrome
         run: |
           sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+          sudo apt-get install -y wget
+          wget -q https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-unstable/google-chrome-unstable_119.0.6053.3-1_amd64.deb
+          sudo apt install -y ./google-chrome-unstable_119.0.6053.3-1_amd64.deb
+          sudo ln -s /usr/bin/google-chrome-unstable /usr/bin/google-chrome
         
       - name: Install ChromeDriver
         run: |
-          # Get the major version of the installed Chrome
-          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+' | head -1)
-          echo "Installed Chrome major version is $CHROME_VERSION"
-          
-          # Find the closest ChromeDriver version available for this major version
-          CHROMEDRIVER_VERSION=$(curl -sS "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION" || echo "")
-          
-          if [ -z "$CHROMEDRIVER_VERSION" ]; then
-            echo "No matching ChromeDriver version found for Chrome $CHROME_VERSION."
-            exit 1
-          fi
-          
+          CHROMEDRIVER_VERSION="119.0.6053.3"
           echo "Installing ChromeDriver version $CHROMEDRIVER_VERSION"
           curl -Lo /tmp/chromedriver.zip "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
           sudo apt-get install -y unzip
