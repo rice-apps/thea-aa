@@ -37,18 +37,28 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y wget
-          wget -q https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-unstable/google-chrome-unstable_119.0.6053.3-1_amd64.deb
-          sudo apt install -y ./google-chrome-unstable_108.0.5359.22-1_amd64.deb
-          sudo ln -s /usr/bin/google-chrome-unstable /usr/bin/google-chrome
+          wget -q https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-unstable/google-chrome-unstable_108.0.5359.22-1_amd64.deb -O /tmp/google-chrome-unstable_108.0.5359.22-1_amd64.deb
+          if [ -f "/tmp/google-chrome-unstable_108.0.5359.22-1_amd64.deb" ]; then
+            sudo apt install -y /tmp/google-chrome-unstable_108.0.5359.22-1_amd64.deb
+            sudo ln -s /usr/bin/google-chrome-unstable /usr/bin/google-chrome
+          else
+            echo "Failed to download Chrome .deb file."
+            exit 1
+          fi
         
       - name: Install ChromeDriver
         run: |
           CHROMEDRIVER_VERSION="108.0.5359.22"
           echo "Installing ChromeDriver version $CHROMEDRIVER_VERSION"
           curl -Lo /tmp/chromedriver.zip "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
-          sudo apt-get install -y unzip
-          sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
-          sudo chmod +x /usr/local/bin/chromedriver
+          if [ -f "/tmp/chromedriver.zip" ]; then
+            sudo apt-get install -y unzip
+            sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
+            sudo chmod +x /usr/local/bin/chromedriver
+          else
+            echo "Failed to download ChromeDriver zip file."
+            exit 1
+          fi
 
       - name: Run Scraper
         env:
