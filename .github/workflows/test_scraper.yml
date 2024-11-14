@@ -36,15 +36,15 @@ jobs:
       - name: Install Chrome
         run: |
           sudo apt-get update
-          sudo apt-get install -y wget
-          wget -q https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-unstable/google-chrome-unstable_108.0.5359.22-1_amd64.deb -O /tmp/google-chrome-unstable_108.0.5359.22-1_amd64.deb
-          if [ -f "/tmp/google-chrome-unstable_108.0.5359.22-1_amd64.deb" ]; then
-            sudo apt install -y /tmp/google-chrome-unstable_108.0.5359.22-1_amd64.deb
-            sudo ln -s /usr/bin/google-chrome-unstable /usr/bin/google-chrome
-          else
-            echo "Failed to download Chrome .deb file."
-            exit 1
-          fi
+          sudo apt-get install -y google-chrome-stable
+          shell: /usr/bin/bash -e {0}
+          env:
+            pythonLocation: /opt/hostedtoolcache/Python/3.13.0/x64
+            PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.0/x64/lib/pkgconfig
+            Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.0/x64
+            Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.0/x64
+            Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.0/x64
+            LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.0/x64/lib
         
       - name: Install ChromeDriver
         run: |
