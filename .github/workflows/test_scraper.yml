@@ -46,9 +46,15 @@ jobs:
             exit 1
           fi
         
-      - name: setup-chromedriver
-        uses: nanasess/setup-chromedriver@v2.2.2
-            
+      - name: Install ChromeDriver
+        run: |
+          CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          echo "Installing ChromeDriver version $CHROMEDRIVER_VERSION"
+          curl -Lo /tmp/chromedriver.zip "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip" || { echo "Failed to download ChromeDriver."; exit 1; }
+          sudo apt-get update
+          sudo apt-get install -y unzip
+          sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
 # include input commands into the command line
       - name: Run Scraper
         env:
