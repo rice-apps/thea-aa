@@ -33,10 +33,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Install Chrome
+      - name: Install Chrome 94
         run: |
+          # Remove any existing versions of Chrome
+          sudo apt-get remove -y google-chrome-stable || true
+          
+          # Download Chrome 94 .deb package
+          wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_94.0.4606.81-1_amd64.deb -O /tmp/google-chrome-stable.deb
+          
+          # Install Chrome 94
           sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+          sudo apt-get install -y /tmp/google-chrome-stable.deb
+          
+          # Verify installation
+          google-chrome --version
       - name: Install ChromeDriver
         run: |
           wget https://chromedriver.storage.googleapis.com/94.0.4606.61/chromedriver_linux64.zip
