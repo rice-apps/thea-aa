@@ -21,7 +21,7 @@ class EmissionEvents(models.Model):
 
 class SuperfundSite(models.Model):
 
-    epa_id = models.CharField(max_length=12)
+    epa_id = models.CharField(max_length=12, unique=True)
     site_name = models.TextField() 
     city = models.TextField()
     county = models.TextField()

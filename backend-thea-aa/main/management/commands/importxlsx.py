@@ -6,26 +6,25 @@ from main.models import SuperfundSite, EmissionEvents
 def import_emission_events(file_path):
     df = pd.read_excel(file_path)
 
-    for _, row in df.iterrows():
-        EmissionEvents.objects.create(
-            re_name = row['RE NAME'],
-            physical_location = row['PHYSICAL LOCATION'],
-            start_date_time = row['START DATE/TIME'],
-            end_date_time = row['END DATE/TIME'],
-            contaminant = row['CONTAMINANT'],
-            estimated_quantity = row['EST QUANTITY/OPACITY'],
-            emissions_limit = row['EMISSION LIMIT'],
-            limit_units = row['LIMIT UNITS'],
-            hours_elapsed = row['Hours Elapsed:'],
-            emissions_rate = row['Emissions Rate (lbs/hr):'],
-            flag = row['Flag(Y/N):'],
-        )
+    emission_events = [EmissionEvents(
+                            re_name = row['RE NAME'],
+                            physical_location = row['PHYSICAL LOCATION'],
+                            start_date_time = row['START DATE/TIME'],
+                            end_date_time = row['END DATE/TIME'],
+                            contaminant = row['CONTAMINANT'],
+                            estimated_quantity = row['EST QUANTITY/OPACITY'],
+                            emissions_limit = row['EMISSION LIMIT'],
+                            limit_units = row['LIMIT UNITS'],
+                            hours_elapsed = row['Hours Elapsed:'],
+                            emissions_rate = row['Emissions Rate (lbs/hr):'],
+                            flag = row['Flag(Y/N):']) for _, row in df.iterrows()]
+    
+    EmissionEvents.objects.bulk_create(emission_events)
 
 def import_superfund_sites(file_path):
     df = pd.read_excel(file_path)
 
-    for _, row in df.iterrows():
-        SuperfundSite.objects.create(
+    superfund_sites = [SuperfundSite(
             epa_id = row['EPA ID'],
             site_name = row['Site Name'],
             city = row['City'],
@@ -56,8 +55,9 @@ def import_superfund_sites(file_path):
             alias_alternative_site_name = row['Alias/Alternative Site Name'],
             non_npl_status_date = row['Non-NPL Status Date'],
             superfund_site_profile_page_url = row['Superfund Site Profile Page URL'],
-            rcra_handler_id_name = row['RCRA Handler ID - RCRA Handler Name'] 
-        )
+            rcra_handler_id_name = row['RCRA Handler ID - RCRA Handler Name']) for _, row in df.iterrows()]
+    
+    SuperfundSite.objects.bulk_create(superfund_sites)
 
 class Command(BaseCommand):
     help = 'Import emission event data from Excel file'
