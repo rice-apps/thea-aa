@@ -40,7 +40,7 @@ jobs:
       - name: Run Scraper
         env:
           CHROME_BIN: "/usr/bin/google-chrome"  # Optional, in case your script needs the Chrome path
-          CHROMEDRIVER_PATH: "/usr/local/bin/chromedriver"
+          CHROMEDRIVER_PATH: "/usr/local/share/chrome_driver"
         run: |
           python main.py
         
