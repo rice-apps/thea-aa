@@ -34,7 +34,7 @@ def new_line_remover(question):
 def setup():
     global single_case
     global single_incident
-    service = Service()
+    service = Service("/usr/local/bin/chromedriver")
     options = webdriver.ChromeOptions()
     driver = webdriver.Chrome(service=service, options=options)
 
