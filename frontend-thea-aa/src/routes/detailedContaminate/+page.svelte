@@ -57,9 +57,9 @@
 				<p class="font-bold">Station</p>
 				<!-- use for each here for real thing -->
 
-				<NearAq name={'Houston North Wayside C405'} quality={32.07} />
-				<NearAq name={'Houston Bayland Park'} quality={64.04} />
-				<NearAq name={'Vleux Carre Drive'} quality={270.4} />
+				<NearAq name='Houston North Wayside C405' quality={32.07} />
+				<NearAq name='Houston Bayland Park' quality={64.04} />
+				<NearAq name='Vleux Carre Drive' quality={270.4} />
 
 				<p class="mt-8 text-xl font-bold">Emission Events in the Area</p>
 				<p class="mt-3">Brazos Amine Treater Facility</p>
