@@ -40,8 +40,8 @@
 	<div class="flex-col">
 		<a href="/">
 			<div class="flex flex-row items-center">
-				<ChevronLeft class="text-gray-400" />
-				<p class="text-lg text-gray-400">CONTAMINATED SITES</p>
+				<ChevronLeft class="text-foreground" />
+				<p class="text-lg text-foreground">CONTAMINATED SITES</p>
 			</div>
 		</a>
 		<p class="text-6xl font-bold">{contaminatedSite.name}</p>
@@ -52,7 +52,7 @@
 	<div class="mt-3 flex flex-row">
 		<div class="w-1/4 flex-col">
 			<div bind:this={mapElement} class="h-80 w-full"></div>
-			<div class="mt-5 rounded bg-slate-100 p-5">
+			<div class="mt-5 rounded bg-muted p-5">
 				<p class="text-xl font-bold">Air Quality in the area</p>
 				<p class="font-bold">Station</p>
 				<!-- use for each here for real thing -->
@@ -66,22 +66,22 @@
 				<p class="mt-3">Wildcat Gas Plant</p>
 			</div>
 		</div>
-		<div class="ml-10 mr-10 w-full rounded bg-slate-100 p-6">
+		<div class="ml-10 mr-10 w-full rounded bg-muted p-6">
 			<div class="flex flex-row">
-				<QualityIndicator quality={39.65} name={'NPL'} />
+				<QualityIndicator quality={39.65} name='NPL' />
 				<p class="pb-2 pl-4 text-xl font-bold">Site Overview</p>
 			</div>
 			<div class="grid grid-cols-4 gap-4">
-				<Statistic title={'Hazard Level'} stat={contaminatedSite.hazardScore} />
-				<Statistic title={'Region ID'} stat={contaminatedSite.regionID} />
-				<Statistic title={'EPA Site ID'} stat={contaminatedSite.siteID} />
-				<Statistic title={'Location'} stat={contaminatedSite.locationName} />
-				<Statistic title={'Latitude'} stat={contaminatedSite.location.lat} />
-				<Statistic title={'Longitude'} stat={contaminatedSite.location.long} />
-				<Statistic title={'Construction Completion'} stat={contaminatedSite.constructionComplete} />
-				<Statistic title={'Partial Deletion'} stat={contaminatedSite.partialDeletion} />
-				<Statistic title={'Proposed'} stat={contaminatedSite.proposedDate} />
-				<Statistic title={'Listing'} stat={contaminatedSite.listingDate} />
+				<Statistic title='Hazard Level' stat={contaminatedSite.hazardScore} />
+				<Statistic title='Region ID' stat={contaminatedSite.regionID} />
+				<Statistic title='EPA Site ID' stat={contaminatedSite.siteID} />
+				<Statistic title='Location' stat={contaminatedSite.locationName} />
+				<Statistic title='Latitude' stat={contaminatedSite.location.lat} />
+				<Statistic title='Longitude' stat={contaminatedSite.location.long} />
+				<Statistic title='Construction Completion' stat={contaminatedSite.constructionComplete} />
+				<Statistic title='Partial Deletion' stat={contaminatedSite.partialDeletion} />
+				<Statistic title='Proposed' stat={contaminatedSite.proposedDate} />
+				<Statistic title='Listing' stat={contaminatedSite.listingDate} />
 			</div>
 			<div class="flex flex-col pt-8">
 				<p class="pb-5 text-xl font-bold">Background</p>

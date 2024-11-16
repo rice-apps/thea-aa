@@ -16,7 +16,7 @@
 <Table.Root>
 	<Table.Header>
 		<Table.Row>
-			<Table.Head class="w-[200px]">Contaminant Name</Table.Head>
+			<Table.Head>Contaminant Name</Table.Head>
 			<Table.Head>Contaminated Media</Table.Head>
 			<Table.Head>Area of Site Found (Operable Unit)</Table.Head>
 			<Table.Head>More Information</Table.Head>

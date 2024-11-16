@@ -22,7 +22,7 @@
 </script>
 
 <div
-	class="flex h-8 w-20 items-center justify-center rounded text-center text-white {range.color} {range.textColor}"
+	class="flex h-8 w-20 items-center justify-center rounded text-center text-white {range.color} {range.color}"
 >
 	{#if name === ''}
 		<span>{quality}</span>
