@@ -8,21 +8,21 @@
 </script>
 
 <div class="max-w-4xl mx-auto py-6">
-<h3  class="text-l font-bold mb-4 text-gray-800">Air Quality Ranking</h3>
+<h3  class="text-l font-bold mb-4">Air Quality Ranking</h3>
 <table class="min-w-full table-auto border-collapse">
     <thead>
-        <tr class="bg-gray-100">
-        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Rank</th>
-        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">City</th>
-        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Quality</th>
+        <tr class="bg-secondary">
+        <th class="px-4 py-2 text-left text-sm font-medium text-secondary-foreground">Rank</th>
+        <th class="px-4 py-2 text-left text-sm font-medium text-secondary-foreground">City</th>
+        <th class="px-4 py-2 text-left text-sm font-medium text-secondary-foreground">Quality</th>
         </tr>
     </thead>
     <tbody>
         {#each props.items.slice(0, amountToShow) as item, rank}
-        <tr class="border-b hover:bg-gray-50">
-            <td class="px-4 py-2 text-sm text-gray-700">{rank}</td>
-            <td class="px-4 py-2 text-sm text-gray-700">{item.station}</td>
-            <td class="px-4 py-2 text-sm text-gray-700">{item.airQuality}</td>
+        <tr class="border-b">
+            <td class="px-4 py-2 text-sm">{rank}</td>
+            <td class="px-4 py-2 text-sm">{item.station}</td>
+            <td class="px-4 py-2 text-sm">{item.airQuality}</td>
         </tr>
         {/each}
     </tbody>

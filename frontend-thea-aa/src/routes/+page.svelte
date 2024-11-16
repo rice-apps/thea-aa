@@ -4,7 +4,8 @@
 	import ContaminatedSites from '$lib/components/ContaminatedSites.svelte'
 	import Map from '$lib/components/Map.svelte'
 	import { Button } from '$lib/components/ui/button'
-	import { Building, Building2, Search } from 'lucide-svelte';
+	import Building from 'lucide-svelte/icons/building'
+	import Search from 'lucide-svelte/icons/search'
 	import { Cloudy } from 'lucide-svelte';
 	import { Wind } from 'lucide-svelte';
 	import { ListFilter } from 'lucide-svelte';
@@ -118,7 +119,7 @@
    </header>
    
    <main class="flex h-full p-10 space-x-9">
-	 <aside class="w-1/3 bg-white rounded-lg shadow-lg p-8">
+	 <aside class="w-1/3 rounded-lg shadow-lg p-8">
 	   <div class="flex items-center space-x-2 mb-4">
 		<div class="flex items-center border rounded w-full">
 			<Search class="ml-2" />
@@ -128,7 +129,7 @@
 		<Button on:click={applyFilter} disabled={isLoading}><ListFilter></ListFilter></Button>
 	   </div>
 	   {#if isLoading}
-			<div class="text-center py-2 text-sm text-gray-600">
+			<div class="text-center py-2 text-sm">
 				Loading...
 			</div>
 		{/if}
