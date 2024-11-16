@@ -27,7 +27,7 @@
 
     export function updateViewCentering(lat: number, long: number, radius: number) {
         if (!map) return;
-        map.setView([lat, long], 10);
+        map.setView([lat, long], 8);
     }
   
     export function updateMarkers() {
@@ -73,4 +73,4 @@
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
     crossorigin=""
   />
-  <div bind:this={mapElement} class="h-96 w-96"></div>
+  <div bind:this={mapElement} class="h-96 w-96" style="width: {typeof window !== 'undefined' ? 0.6 * window.innerWidth + 'px' : '100%'}; height: {typeof window !== 'undefined' ? 0.7 * window.innerHeight + 'px' : '100%'};"></div>

@@ -4,7 +4,7 @@
 	import ContaminatedSites from '$lib/components/ContaminatedSites.svelte'
 	import Map from '$lib/components/Map.svelte'
 	import { Button } from '$lib/components/ui/button'
-	import { Building, Building2 } from 'lucide-svelte';
+	import { Building, Building2, Search } from 'lucide-svelte';
 	import { Cloudy } from 'lucide-svelte';
 	import { Wind } from 'lucide-svelte';
 	import { ListFilter } from 'lucide-svelte';
@@ -119,7 +119,10 @@
    <main class="flex h-full p-10 space-x-9">
 	 <aside class="w-1/3 bg-white rounded-lg shadow-lg p-8">
 	   <div class="flex items-center space-x-2 mb-4">
-		<input bind:value={searchAddress} placeholder="Search Address or Site" class="p-2 border rounded w-full" />
+		<div class="flex items-center border rounded w-full">
+			<Search class="ml-2" />
+			<input bind:value={searchAddress} placeholder="Search Address or Site" class="p-2 w-full" />
+		</div>
 		<input bind:value={searchRadius} type="number" min="0" placeholder="Range (miles)" class="p-2 border rounded w-1/3" />
 		<Button on:click={applyFilter} disabled={isLoading}><ListFilter></ListFilter></Button>
 	   </div>
