@@ -8,6 +8,7 @@
 	import { Cloudy } from 'lucide-svelte';
 	import { Wind } from 'lucide-svelte';
 	import { ListFilter } from 'lucide-svelte';
+	import AirQualityRanking from '$lib/components/AirQualityRanking.svelte'
    
 	let { data } = $props()
 	let currentView = $state('');
