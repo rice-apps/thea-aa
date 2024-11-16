@@ -1,8 +1,8 @@
 from django.urls import path, include
 from .models import EmissionEvents, SuperfundSite
-from rest_framework.serializers import routers, serializers, viewsets
+from rest_framework.serializers import ModelSerializer
 
-class EmissionEventSerializer(serializers.HyperlinkedModelSerializer):
+class EmissionEventSerializer(ModelSerializer):
     class Meta:
         model = EmissionEvents
         fields = ['re_name',
@@ -17,24 +17,38 @@ class EmissionEventSerializer(serializers.HyperlinkedModelSerializer):
             'emissions_rate',
             'flag']
         
-class EmissionEventViewSet(viewsets.ModelViewSet):
-    queryset = EmissionEvents.objects.all()
-    serializer_class = EmissionEventSerializer
 
-class SuperfundSiteSerializer(serializers.HyperlinkedModelSerializer):
+class SuperfundSiteSerializer(ModelSerializer):
     class Meta:
         model = SuperfundSite
-        fields = []
-        
-class SuperfundSiteViewSet(viewsets.ModelViewSet):
-    queryset = SuperfundSite.objects.all()
-    serializer_class = SuperfundSiteSerializer
-
-router = routers.DefaultRouter()
-router.register(r'Emission Events', EmissionEventViewSet)
-router.register(r'Superfund Sites', SuperfundSiteViewSet)
-
-urlpatterns = [
-    path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-]
+        fields = ['epa_id',
+                  'site_name',
+                  'city',
+                  'county',
+                  'state',
+                  'street_address',
+                  'zip_code',
+                  'region',
+                  'npl_status',
+                  'partial_npl_deletion',
+                  'superfund_alternative_approach',
+                  'site_wide_ready_for_anticipated_use',
+                  'human_exposure_under_control',
+                  'groundwater_migration_under_control',
+                  'construction_complete',
+                  'construction_completion_date',
+                  'non_npl_status_category',
+                  'non_npl_status_subcategory',
+                  'site_status',
+                  'site_type',
+                  'site_type_subcategory',
+                  'federal_agency',
+                  'native_american_interest',
+                  'indian_entity_nai_status',
+                  'hrs_score',
+                  'federal_facility_indicator',
+                  'alias_alternative_site_name',
+                  'non_npl_status_date',
+                  'superfund_site_profile_page_url',
+                  'rcra_handler_id_name'
+                  ]

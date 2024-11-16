@@ -16,15 +16,17 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.conf.urls import include, re_path
+from django.conf.urls import include
 from rest_framework.routers import DefaultRouter
 from main.views import EmissionEventsViewSet, SuperfundSiteViewSet
 from django.urls import path
+from main.models import EmissionEvents
 
 router = DefaultRouter()
-router.register('INSERT', EmissionEventsViewSet, base_name = 'emission_event')
-router.register('INSERT', SuperfundSiteViewSet, base_name = 'emission_event')
+router.register(r'emission', EmissionEventsViewSet)
+router.register(r'superfund', SuperfundSiteViewSet)
 
 urlpatterns = [
-    path("^", include(router.urls)),
+    path("admin/", admin.site.urls),
+    path("api", include(router.urls))
 ]
