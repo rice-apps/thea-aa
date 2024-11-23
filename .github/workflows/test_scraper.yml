@@ -11,8 +11,8 @@ on:
   push:
       branches:
         - scraper-tecq
-  schedule:
-    - cron: "*/5 * * * *" # This runs every 5 minutes
+  # schedule:
+  #   - cron: "*/5 * * * *" # This runs every 5 minutes
   workflow_dispatch: # This allows you to run the workflow manually
 
 jobs:
