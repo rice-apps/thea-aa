@@ -64,7 +64,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         superfund_path = 'main/data/superfund.xlsx'
-        emission_path = 'main/data/example.xlsx'
+        emission_path = 'main/data/emissionevents.xlsx'
 
         import_emission_events(emission_path)
         import_superfund_sites(superfund_path)
