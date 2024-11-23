@@ -91,9 +91,8 @@ def convert_to_csv(downloaded_path):
     # relative paths to the stored .xls file
     xls_file_path = downloaded_path + "/cqry.xls"
     print("xls saved file path: ",xls_file_path)
-    xlsx_file_path = "backend-thea-aa/downloads/converted/converted.xlsx"
-
-    # convert to xlxs
+    xlsx_file_path = os.path.splitext(xls_file_path)[0] + ".xlsx"  # Change the extension to .xlsx
+    print("xlsx saved file path: ",xlsx_file_path)
     converter = XLS2XLSX(xls_file_path)
     converter.to_xlsx(xlsx_file_path)
     print("\nConverted the .xls to .xlxs file\n")
@@ -104,11 +103,10 @@ def convert_to_csv(downloaded_path):
     
     # delete converted folder files
     print("Clear the Downloads/Converted folder")
-    clean_download_folder(downloaded_path + "/converted")
+    clean_download_folder(downloaded_path)
     
     # then save the csv file back to the converted
-    os.makedirs('backend-thea-aa/downloads/converted', exist_ok=True)  
-    df.to_csv('backend-thea-aa/downloads/converted/superfund_data.csv')  
+    df.to_csv('backend-thea-aa/downloads/superfund_data.csv')  
     print("Saved the Superfund data as csv successfully!")
      
     
