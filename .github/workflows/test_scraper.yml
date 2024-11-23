@@ -1,19 +1,12 @@
 name: Run Scraper Daily
 
-# Set the schedule to run every 24 hours
-# on:
-#   schedule:
-#     - cron: "0 0 * * *" # This runs at midnight UTC every day
-
-#testing
-# Set the schedule to run every 5 minutes
 on:
   push:
-      branches:
-        - scraper-tecq
+    branches:
+      - scraper-tecq
   schedule:
-    - cron: "*/5 * * * *" # This runs every 5 minutes
-  workflow_dispatch: # This allows you to run the workflow manually
+    - cron: "*/5 * * * *" # Runs every 5 minutes
+  workflow_dispatch: # Allows manual workflow trigger
 
 jobs:
   run-scraper:
@@ -32,15 +25,25 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Setup Chrome
+      
+      # Setup Chrome and ChromeDriver
+      - name: Setup Chrome and ChromeDriver
         uses: browser-actions/setup-chrome@v1.7.2
         with:
-          chrome-version: 120
+          chrome-version: 120  # Match your target Chrome version
           install-chromedriver: true
+
+      # Ensure CHROME_BIN and CHROMEDRIVER_PATH are exported
+      - name: Export Chrome and ChromeDriver Paths
+        run: |
+          echo "CHROME_BIN=/usr/bin/google-chrome" >> $GITHUB_ENV
+          echo "CHROMEDRIVER_PATH=$(which chromedriver)" >> $GITHUB_ENV
+
+      # Run the scraper
       - name: Run Scraper
         env:
-          CHROME_BIN: "/usr/bin/google-chrome"  # Optional, in case your script needs the Chrome path
-          CHROMEDRIVER_PATH: "/opt/hostedtoolcache/setup-chrome/chromedriver/120.0.6099.109/x64"
+          CHROME_BIN: ${{ env.CHROME_BIN }}  # Pass Chrome binary path to your script
+          CHROMEDRIVER_PATH: ${{ env.CHROMEDRIVER_PATH }}  # Pass ChromeDriver path to your script
         run: |
           python main.py
         
@@ -59,7 +62,4 @@ jobs:
           git commit -m "Add data for $timestamp"
           git push --force
         env:
-          # GitHub Token for permissions to push
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-# make sure to push to scraper-tecq branch
