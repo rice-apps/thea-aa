@@ -35,12 +35,14 @@
 					marker.bindPopup(`Emission Event: ${event.site}`).openPopup()
 				})
 			}
-			if (props.contaminatedSite) {
-				props.contaminatedSite.forEach((event) => {
-					const marker = L.marker([event.location.lat, event.location.long]).addTo(map)
-					marker.bindPopup(`Contaminated site: ${event.name}`).openPopup()
-				})
-			}
+			// Add back later
+
+			// if (props.contaminatedSite) {
+			// 	props.contaminatedSite.forEach((event) => {
+			// 		const marker = L.marker([event.location.lat, event.location.long]).addTo(map)
+			// 		marker.bindPopup(`Contaminated site: ${event.name}`).openPopup()
+			// 	})
+			// }
 		}
 	})
 </script>

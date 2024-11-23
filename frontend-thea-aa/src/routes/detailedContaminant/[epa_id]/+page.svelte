@@ -6,8 +6,12 @@
 	import { ChevronLeft, ChevronRight } from 'lucide-svelte/icons'
 	import NearAq from '$lib/components/NearAq.svelte'
 	import DetailedContamTable from '$lib/components/DetailedContamTable.svelte'
+	import { page } from '$app/stores'
+	const lol = $page.params.epa_id
+	console.log('lol', lol)
 
 	let { data } = $props()
+
 	const contaminatedSite = data.contaminatedSite
 	const tableInfo = data.tableInfo
 
@@ -16,7 +20,8 @@
 		const L = (await import('leaflet')).default
 		if (mapElement) {
 			const map = L.map(mapElement).setView(
-				[contaminatedSite.location.lat, contaminatedSite.location.long],
+				// [contaminatedSite.location.lat, contaminatedSite.location.long],
+				[10, 10],
 				13
 			) // change to use props later
 			L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
@@ -44,7 +49,7 @@
 				<p class="text-lg text-foreground">CONTAMINATED SITES</p>
 			</div>
 		</a>
-		<p class="text-6xl font-bold">{contaminatedSite.name}</p>
+		<p class="text-6xl font-bold">{contaminatedSite?.site_name}</p>
 		<p class="pt-3 text-sm text-foreground">
 			<span class="font-bold">Last Updated at</span> 11:45am CST October 19
 		</p>
@@ -72,16 +77,19 @@
 				<p class="pb-2 pl-4 text-xl font-bold">Site Overview</p>
 			</div>
 			<div class="grid grid-cols-4 gap-4">
-				<Statistic title="Hazard Level" stat={contaminatedSite.hazardScore} />
-				<Statistic title="Region ID" stat={contaminatedSite.regionID} />
-				<Statistic title="EPA Site ID" stat={contaminatedSite.siteID} />
-				<Statistic title="Location" stat={contaminatedSite.locationName} />
-				<Statistic title="Latitude" stat={contaminatedSite.location.lat} />
-				<Statistic title="Longitude" stat={contaminatedSite.location.long} />
-				<Statistic title="Construction Completion" stat={contaminatedSite.constructionComplete} />
-				<Statistic title="Partial Deletion" stat={contaminatedSite.partialDeletion} />
-				<Statistic title="Proposed" stat={contaminatedSite.proposedDate} />
-				<Statistic title="Listing" stat={contaminatedSite.listingDate} />
+				<Statistic title="Hazard Level" stat={contaminatedSite.hrs_score} />
+				<Statistic title="Region ID" stat={contaminatedSite.region} />
+				<Statistic title="EPA Site ID" stat={contaminatedSite.epa_id} />
+				<Statistic title="Location" stat={contaminatedSite.site_name} />
+				<!-- fix later -->
+				<!-- <Statistic title="Latitude" stat={contaminatedSite.location.lat} />
+				<Statistic title="Longitude" stat={contaminatedSite.location.long} /> -->
+				<Statistic title="Latitude" stat={10} />
+				<Statistic title="Longitude" stat={10} />
+				<Statistic title="Construction Completion" stat={contaminatedSite.construction_complete} />
+				<Statistic title="Partial Deletion" stat={contaminatedSite.partial_npl_deletion} />
+				<Statistic title="Proposed" stat={contaminatedSite.npl_status} />
+				<Statistic title="Listing" stat={contaminatedSite.construction_completion_date} />
 			</div>
 			<div class="flex flex-col pt-8">
 				<p class="pb-5 text-xl font-bold">Background</p>
