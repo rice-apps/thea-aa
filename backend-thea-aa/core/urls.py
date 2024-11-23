@@ -27,5 +27,5 @@ router.register(r'superfund', SuperfundSiteViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api", include(router.urls))
+    path("api/", include(router.urls))
 ]
