@@ -53,62 +53,90 @@ def search_for_state(driver):
     search_button = driver.find_element(By.ID, 'submit1')
     search_button.click()
 
-# Click the download link to get the Excel file
-def download_excel_file(driver):
-    try:
-        # Locate the download link by its text or href
-        download_link = driver.find_element(By.LINK_TEXT, "Download Excel file containing values for all search criteria")
-        download_link.click()
-        print("Excel file download initiated.")
+def extract_records_with_long_lat(driver):
+    """
+    Extract records from the table, including latitude and longitude.
+    """
+    records = []
 
-        # Wait for the download to complete 
-        time.sleep(10) 
+    # Locate the table by ID
+    table = driver.find_element(By.ID, "tablesorter")
+    rows = table.find_elements(By.XPATH, ".//tbody/tr")  # Get all rows in the table body
+    print(len(rows))
+    
+    for i in range(len(rows)):
+        row = rows[i]
+        try:
+            # Extract data from columns
+            epa_id = row.find_element(By.XPATH, "./td[1]").text
+            site_name = row.find_element(By.XPATH, "./td[2]").text
+            city = row.find_element(By.XPATH, "./td[3]").text
+            county = row.find_element(By.XPATH, "./td[4]").text
+            state = row.find_element(By.XPATH, "./td[5]").text
+            national_priority_list_status = row.find_element(By.XPATH, "./td[6]").text
+            superfund_alternative_approach = row.find_element(By.XPATH, "./td[7]").text
+            construction_complete = row.find_element(By.XPATH, "./td[8]").text
+            sitewide_ready_for_anticipated_use = row.find_element(By.XPATH, "./td[9]").text
+            human_exposure_under_control = row.find_element(By.XPATH, "./td[10]").text
+            groundwater_migration_under_control = row.find_element(By.XPATH, "./td[11]").text
 
-    except Exception as e:
-        print(f"Error downloading the Excel file: {e}")
+            # Get the link to the individual page
+            site_link = row.find_element(By.XPATH, "./td[2]/a").get_attribute("href")
+
+            # Navigate to the individual page and extract latitude and longitude
+            latitude, longitude = extract_lat_long_from_record(driver, site_link)
+
+            # Append data to records
+            records.append({
+                "EPA ID": epa_id,
+                "Site Name": site_name,
+                "City": city,
+                "County": county,
+                "State": state,
+                "National Priority List Status": national_priority_list_status,
+                "Superfund Alternative Approach": superfund_alternative_approach,
+                "Construction Complete": construction_complete,
+                "Sitewide Ready for Anticipated Use": sitewide_ready_for_anticipated_use,
+                "Human Exposure Under Control": human_exposure_under_control,
+                "Groundwater Migration Under Control": groundwater_migration_under_control,
+                "Latitude": latitude,
+                "Longitude": longitude,
+            })
+
+        except Exception as e:
+            print(f"Error processing table {i}: {e}")
         
-# removed the unnecessary 55 lines and renames the file
-def remove_lines_and_rename(download_path):
-    files = glob.glob(os.path.join(download_path, 'cqry*.xls')) # Downloaded file
-    old_name = files[0]  # Assume there's only one matching file
-    filename, ext = os.path.splitext(os.path.basename(old_name))
-    new_name = filename[:4] + ext
-    print(" Created " + new_name)
-    new_path = os.path.join(download_path, new_name)
+    return records
 
-    with open(old_name, "r") as file:
-        lines = file.readlines()
+def extract_lat_long_from_record(driver, record_url):
+    """
+    Extract latitude and longitude from an individual record's page.
+    """
+    driver.get(record_url)
+    time.sleep(2)  # Wait for the page to load
 
-    with open(new_path, "w") as file:
-        for line in lines[54:]:
-            file.write(line)
+    try:
+        # Locate the table containing latitude and longitude
+        table = driver.find_element(By.CLASS_NAME, "nostyle")
+        
+        latitude = None
+        longitude = None
+        
+        # Extract latitude and longitude using their labels
+        try:
+            latitude = table.find_element(By.XPATH, ".//td[strong[contains(text(), 'Latitude')]]/following-sibling::td").text.strip()
+        except Exception:
+            print(f"Latitude not found for {record_url}. Adding NaN.")
 
-    os.remove(old_name)
+        try:
+            longitude = table.find_element(By.XPATH, ".//td[strong[contains(text(), 'Longitude')]]/following-sibling::td").text.strip()
+        except Exception:
+            print(f"Longitude not found for {record_url}. Adding NaN.")
 
-def convert_to_csv(downloaded_path):
-    # downloaded_path will be: /thea-aa/backend-thea-aa/downloads
-    
-    # relative paths to the stored .xls file
-    xls_file_path = downloaded_path + "/cqry.xls"
-    print("xls saved file path: ",xls_file_path)
-    xlsx_file_path = os.path.splitext(xls_file_path)[0] + ".xlsx"  # Change the extension to .xlsx
-    print("xlsx saved file path: ",xlsx_file_path)
-    converter = XLS2XLSX(xls_file_path)
-    converter.to_xlsx(xlsx_file_path)
-    print("\nConverted the .xls to .xlxs file\n")
-    
-    # read the data
-    df = pd.read_excel(xlsx_file_path)
-    print("Read the .xlxs file as Pandas DataFrame\n")
-    
-    # delete converted folder files
-    print("Clear the Downloads/Converted folder")
-    clean_download_folder(downloaded_path)
-    
-    # then save the csv file back to the converted
-    df.to_csv('backend-thea-aa/downloads/superfund_data.csv')  
-    print("Saved the Superfund data as csv successfully!")
-     
+        return latitude, longitude
+    except Exception as e:
+        print(f"Error extracting latitude/longitude from {record_url}: {e}")
+        return None, None
     
 def main():
      # Set the download path relative to the project directory
@@ -120,17 +148,18 @@ def main():
 
     driver = setup_driver(download_path)
     search_for_state(driver)
-
-    # Initiate the file download
-    download_excel_file(driver)
+    
+    records = extract_records_with_long_lat(driver)
+    print("Extracted records with coordinates:")
+    
+    # Save the extracted records to a CSV file
+    df = pd.DataFrame(records)
+    output_file = os.path.join(download_path, "superfund_data.csv")
+    df.to_csv(output_file, index=False)
+    print(f"Saved extracted records with coordinates to {output_file}")
 
     # Close the browser
     driver.quit()
-    print(f"Excel file saved to: {download_path}")
-
-    remove_lines_and_rename(download_path)
-    
-    convert_to_csv(download_path)
 
 if __name__ == "__main__":
     main()
