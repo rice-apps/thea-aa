@@ -20,7 +20,6 @@ from django.conf.urls import include
 from rest_framework.routers import DefaultRouter
 from main.views import EmissionEventsViewSet, SuperfundSiteViewSet
 from django.urls import path
-from main.models import EmissionEvents
 
 router = DefaultRouter()
 router.register(r'emission', EmissionEventsViewSet)
