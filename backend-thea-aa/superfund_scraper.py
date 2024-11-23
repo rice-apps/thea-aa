@@ -56,57 +56,71 @@ def search_for_state(driver):
 def extract_records_with_long_lat(driver):
     """
     Extract records from the table, including latitude and longitude.
+    Handles stale element references and ensures proper data appending.
     """
     records = []
 
-    # Locate the table by ID
-    table = driver.find_element(By.ID, "tablesorter")
-    rows = table.find_elements(By.XPATH, ".//tbody/tr")  # Get all rows in the table body
-    print(len(rows))
-    
-    for i in range(len(rows)):
-        row = rows[i]
+    while True: 
         try:
-            # Extract data from columns
-            epa_id = row.find_element(By.XPATH, "./td[1]").text
-            site_name = row.find_element(By.XPATH, "./td[2]").text
-            city = row.find_element(By.XPATH, "./td[3]").text
-            county = row.find_element(By.XPATH, "./td[4]").text
-            state = row.find_element(By.XPATH, "./td[5]").text
-            national_priority_list_status = row.find_element(By.XPATH, "./td[6]").text
-            superfund_alternative_approach = row.find_element(By.XPATH, "./td[7]").text
-            construction_complete = row.find_element(By.XPATH, "./td[8]").text
-            sitewide_ready_for_anticipated_use = row.find_element(By.XPATH, "./td[9]").text
-            human_exposure_under_control = row.find_element(By.XPATH, "./td[10]").text
-            groundwater_migration_under_control = row.find_element(By.XPATH, "./td[11]").text
+           
+            table = driver.find_element(By.ID, "tablesorter")
+            rows = table.find_elements(By.XPATH, ".//tbody/tr")  
 
-            # Get the link to the individual page
-            site_link = row.find_element(By.XPATH, "./td[2]/a").get_attribute("href")
+            for i in range(len(rows)):
+                try:
+                    # Refresh rows to avoid stale references
+                    rows = table.find_elements(By.XPATH, ".//tbody/tr")
+                    row = rows[i]  # Re-fetch the row
 
-            # Navigate to the individual page and extract latitude and longitude
-            latitude, longitude = extract_lat_long_from_record(driver, site_link)
+                    epa_id = row.find_element(By.XPATH, "./td[1]").text
+                    site_name = row.find_element(By.XPATH, "./td[2]").text
+                    city = row.find_element(By.XPATH, "./td[3]").text
+                    county = row.find_element(By.XPATH, "./td[4]").text
+                    state = row.find_element(By.XPATH, "./td[5]").text
+                    national_priority_list_status = row.find_element(By.XPATH, "./td[6]").text
+                    superfund_alternative_approach = row.find_element(By.XPATH, "./td[7]").text
+                    construction_complete = row.find_element(By.XPATH, "./td[8]").text
+                    sitewide_ready_for_anticipated_use = row.find_element(By.XPATH, "./td[9]").text
+                    human_exposure_under_control = row.find_element(By.XPATH, "./td[10]").text
+                    groundwater_migration_under_control = row.find_element(By.XPATH, "./td[11]").text
 
-            # Append data to records
-            records.append({
-                "EPA ID": epa_id,
-                "Site Name": site_name,
-                "City": city,
-                "County": county,
-                "State": state,
-                "National Priority List Status": national_priority_list_status,
-                "Superfund Alternative Approach": superfund_alternative_approach,
-                "Construction Complete": construction_complete,
-                "Sitewide Ready for Anticipated Use": sitewide_ready_for_anticipated_use,
-                "Human Exposure Under Control": human_exposure_under_control,
-                "Groundwater Migration Under Control": groundwater_migration_under_control,
-                "Latitude": latitude,
-                "Longitude": longitude,
-            })
+                    site_link = row.find_element(By.XPATH, "./td[2]/a").get_attribute("href")
+
+                    latitude, longitude = extract_lat_long_from_record(driver, site_link)
+
+                    records.append({
+                        "EPA ID": epa_id,
+                        "Site Name": site_name,
+                        "City": city,
+                        "County": county,
+                        "State": state,
+                        "National Priority List Status": national_priority_list_status,
+                        "Superfund Alternative Approach": superfund_alternative_approach,
+                        "Construction Complete": construction_complete,
+                        "Sitewide Ready for Anticipated Use": sitewide_ready_for_anticipated_use,
+                        "Human Exposure Under Control": human_exposure_under_control,
+                        "Groundwater Migration Under Control": groundwater_migration_under_control,
+                        "Latitude": latitude,
+                        "Longitude": longitude,
+                    })
+
+                except Exception as e:
+                    print(f"Error processing row {i + 1}: {e}")
+
+            try:
+                next_link = driver.find_element(By.LINK_TEXT, "Next")
+                next_link.click()
+                time.sleep(3)  # Wait for the next page to load
+            except Exception:
+                print("No more pages to scrape.")
+                break
 
         except Exception as e:
-            print(f"Error processing table {i}: {e}")
-        
+            print(f"Error processing table: {e}")
+            break
+
     return records
+
 
 def extract_lat_long_from_record(driver, record_url):
     """
