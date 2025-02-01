@@ -13,6 +13,17 @@
 	// import L from "@types/leaflet"
 	// import { types } from 'util'
 	// import * as L from 'leaflet'
+	import Toast from '$lib/components/Toast.svelte'
+	import { writable } from 'svelte/store'
+
+	let toastVisible = writable(false)
+	let toastMessage = writable('')
+
+	function showToast(msg: string) {
+		toastMessage.set(msg)
+		toastVisible.set(true)
+		setTimeout(() => toastVisible.set(false), 3000)
+	}
 
 	let { data } = $props()
 	let currentView = $state('')
@@ -88,7 +99,7 @@
 		try {
 			const addressCoords = await geocodeAddress(searchAddress)
 			if (!addressCoords) {
-				alert('Could not find the specified address')
+				showToast('Could not find the specified address')
 				return
 			}
 			const radius = parseFloat(searchRadius)
@@ -118,7 +129,7 @@
 			}
 		} catch (error) {
 			console.error('Error during filtering:', error)
-			alert('An error occurred while filtering the data. Please try again.')
+			showToast('An error occurred while filtering the data. Please try again.')
 		} finally {
 			isLoading = false
 		}
@@ -140,6 +151,7 @@
 </header>
 
 <main class="flex h-full space-x-9 p-10">
+	<Toast bind:message={$toastMessage} bind:visible={$toastVisible} duration={3000} />
 	<aside class="w-1/3 rounded-lg p-8 shadow-lg">
 		<div class="mb-4 flex items-center space-x-2">
 			<div class="flex w-full items-center rounded border">
