@@ -77,7 +77,10 @@
 				<p class="pb-2 pl-4 text-xl font-bold">Site Overview</p>
 			</div>
 			<div class="grid grid-cols-4 gap-4">
-				<Statistic title="Hazard Level" stat={contaminatedSite.hrs_score} />
+				<Statistic
+					title="Hazard Level"
+					stat={contaminatedSite.hrs_score == 'nan' ? 'No data' : contaminatedSite.hrs_score}
+				/>
 				<Statistic title="Region ID" stat={contaminatedSite.region} />
 				<Statistic title="EPA Site ID" stat={contaminatedSite.epa_id} />
 				<Statistic title="Location" stat={contaminatedSite.site_name} />
