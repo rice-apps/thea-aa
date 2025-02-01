@@ -37,7 +37,7 @@ export async function load() {
 	]
 	let contaminatedApiData: ContaminatedSite[] = []
 	try {
-		const response = await fetch('http://127.0.0.1:8000/apisuperfund/')
+		const response = await fetch('http://127.0.0.1:8000/api/superfund/retrieve/')
 		contaminatedApiData = await response.json() // assuming the response is in the correct format
 	} catch (error) {
 		console.error('Error fetching contaminated sites:', error)
