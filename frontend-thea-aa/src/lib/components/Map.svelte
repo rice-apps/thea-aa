@@ -71,7 +71,7 @@
 
 		if (props.currentView === 'superfund' && props.contaminatedSite) {
 			props.contaminatedSite.forEach((site) => {
-				const marker = L!.marker([site.location.lat, site.location.long]).addTo(map!)
+				const marker = L!.marker([5, 5]).addTo(map!) // replace back later with site.location.lat, site.location.long
 				marker.bindPopup(`Contaminated Site: ${site.name}`).openPopup()
 			})
 		} else if (props.currentView === 'emission' && props.emissionEvent) {
@@ -81,7 +81,7 @@
 			})
 		} else if (props.currentView === 'air quality' && props.airQualitySite) {
 			props.airQualitySite.forEach((site) => {
-				const marker = L!.marker([site.location.lat, site.location.long]).addTo(map!)
+				const marker = L!.marker([5, 5]).addTo(map!) // replace back later with site.location.lat, site.location.long
 				marker.bindPopup(`Air Quality Site: ${site.station}`).openPopup()
 			})
 		}

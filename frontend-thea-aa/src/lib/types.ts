@@ -16,6 +16,8 @@ export interface EmissionEvent {
 }
 
 export interface ContaminatedSite {
+	name: string
+	// location: string
 	epa_id: string
 	site_name: string
 	city: string

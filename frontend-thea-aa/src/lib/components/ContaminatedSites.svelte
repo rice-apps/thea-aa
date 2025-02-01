@@ -15,32 +15,25 @@
 <div class="mx-auto max-w-4xl py-6">
 	<h3 class="text-l mb-4 font-bold">Contaminated Sites Update (Superfund)</h3>
 
-<table>
-	<thead>
-		<tr>
-			<th>Status</th>
-			<th>Site</th>
-			<th>Hazard Score</th>
-		</tr>
-	</thead>
-	<tbody>
-		{#each props.items.slice(0, amountToShow) as item}
-			<tr onclick={() => goToDetail(item)}>
-				<td>{item.site_status}</td>
-				<td>{item.site_name}</td>
-				<td>{item.hrs_score}</td>
+	<table>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Site</th>
+				<th>Hazard Score</th>
 			</tr>
 		</thead>
 		<tbody>
 			{#each props.items.slice(0, amountToShow) as item}
-				<tr class="hover border-b">
-					<td class="px-4 py-2 text-sm">{item.status}</td>
-					<td class="px-4 py-2 text-sm">{item.name}</td>
-					<td class="px-4 py-2 text-sm">{item.hazardScore}</td>
+				<tr onclick={() => goToDetail(item)} class="hover border-b">
+					<td class="px-4 py-2 text-sm">{item.site_status}</td>
+					<td class="px-4 py-2 text-sm">{item.site_name}</td>
+					<td class="px-4 py-2 text-sm">{item.hrs_score}</td>
 				</tr>
 			{/each}
 		</tbody>
 	</table>
+
 	<div class="pt-4">
 		<LoadMore onclick={() => (amountToShow += 3)} />
 	</div>

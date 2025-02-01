@@ -95,13 +95,7 @@
 
 			filteredData = {
 				contaminatedSites: data.contaminatedSites.filter(
-					(site) =>
-						calculateDistance(
-							addressCoords.lat,
-							addressCoords.long,
-							site.location.lat,
-							site.location.long
-						) <= radius
+					() => calculateDistance(addressCoords.lat, addressCoords.long, 5, 5) <= radius // add back site later site.location.lat
 				),
 				emissionEvents: data.emissionEvents.filter(
 					(event) =>
@@ -113,13 +107,7 @@
 						) <= radius
 				),
 				airQualitySites: data.airQualitySites.filter(
-					(site) =>
-						calculateDistance(
-							addressCoords.lat,
-							addressCoords.long,
-							site.location.lat,
-							site.location.long
-						) <= radius
+					() => calculateDistance(addressCoords.lat, addressCoords.long, 5, 5) <= radius // add back site later with lat, long
 				)
 			}
 
