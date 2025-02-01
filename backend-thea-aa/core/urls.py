@@ -16,8 +16,20 @@ Including another URLconf
 """
 
 from django.contrib import admin
+from django.conf.urls import include
+from rest_framework.routers import DefaultRouter
+from main.views import EmissionEventsViewSet, SuperfundSiteViewSet
 from django.urls import path
+from main.models import EmissionEvents
+
+router = DefaultRouter()
+router.register(r'/emission', EmissionEventsViewSet)
+router.register(r'/superfund', SuperfundSiteViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/", include(router.urls)),
+    path("api/superfund/retrieve/", SuperfundSiteViewSet.as_view({'get': 'retrieve'})),  # Custom endpoint
 ]
+
+#http://127.0.0.1:8000/api/superfund/retrieve/?epa_id=TX0000605401

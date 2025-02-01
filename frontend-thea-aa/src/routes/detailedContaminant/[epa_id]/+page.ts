@@ -1,24 +1,34 @@
-import type { DetailedContaminatedSite } from '$lib/types'
+import type { ContaminatedSite } from '$lib/types'
 
-export function load() {
+export async function load({ params }) {
 	// let airQualitySites: AirQualitySite[] = []
 	// let emissionEvents: EmissionEvent[] = []
 	// let contaminatedSites: ContaminatedSite[] = []
 
 	// randomly generate some data
 
-	const contaminatedSite: DetailedContaminatedSite = {
-		status: 'active',
-		name: 'Sol Lynn/Industrial Transformers (Houston TX)',
-		location: { lat: 29.678889, long: -95.398611 },
-		hazardScore: 39.65,
-		regionID: 6,
-		siteID: 'TXD980873327 (PDF)',
-		locationName: 'Harris County, Houston, Texas',
-		constructionComplete: '9/29/1993',
-		partialDeletion: 'No',
-		proposedDate: '10/15/1984 (PDF)',
-		listingDate: '03/31/1989 (PDF)'
+	// const contaminatedSite: DetailedContaminatedSite = {
+	// 	status: 'active',
+	// 	name: 'Sol Lynn/Industrial Transformers (Houston TX)',
+	// 	location: { lat: 29.678889, long: -95.398611 },
+	// 	hazardScore: 39.65,
+	// 	regionID: 6,
+	// 	siteID: 'TXD980873327 (PDF)',
+	// 	locationName: 'Harris County, Houston, Texas',
+	// 	constructionComplete: '9/29/1993',
+	// 	partialDeletion: 'No',
+	// 	proposedDate: '10/15/1984 (PDF)',
+	// 	listingDate: '03/31/1989 (PDF)'
+	// }
+	let contaminatedApiData: ContaminatedSite
+	const { epa_id } = params
+	try {
+		const response = await fetch('http://127.0.0.1:8000/api/superfund/retrieve/?epa_id=' + epa_id)
+		console.log(response)
+		contaminatedApiData = await response.json() // assuming the response is in the correct format
+	} catch (error) {
+		console.error('Error fetching contaminated sites:', error)
+		throw new Error('Error fetching contaminated sites:')
 	}
 
 	interface contaminantRow {
@@ -101,5 +111,5 @@ export function load() {
 			casNumber: '79-01-6'
 		}
 	]
-	return { contaminatedSite: contaminatedSite, tableInfo: tableInfo }
+	return { contaminatedSite: contaminatedApiData, tableInfo: tableInfo }
 }
