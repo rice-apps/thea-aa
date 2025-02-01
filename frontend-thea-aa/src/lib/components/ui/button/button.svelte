@@ -2,11 +2,19 @@
 	import { Button as ButtonPrimitive } from 'bits-ui'
 	import { type Events, type Props, buttonVariants } from './index.js'
 	import { cn } from '$lib/utils.js'
+	import type { Builder } from 'bits-ui'
 
-	type $$Props = Props
+	type $$Props = {
+		variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
+		size?: 'default' | 'sm' | 'lg' | 'icon'
+		builders?: Builder[]
+		class?: string
+		disabled?: boolean
+	}
+
 	type $$Events = Events
 
-	let className: $$Props['class'] = undefined
+	let className: string = ''
 	export let variant: $$Props['variant'] = 'default'
 	export let size: $$Props['size'] = 'default'
 	export let builders: $$Props['builders'] = []
@@ -15,7 +23,7 @@
 
 <ButtonPrimitive.Root
 	{builders}
-	class={cn(buttonVariants({ variant, size, className }))}
+	class={cn(buttonVariants({ variant, size }), className)}
 	type="button"
 	{...$$restProps}
 	on:click

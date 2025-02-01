@@ -7,23 +7,27 @@
 	let amountToShow = $state(3)
 </script>
 
-<h3>Emission Events</h3>
+<div class="mx-auto max-w-4xl py-6">
+	<h3 class="text-l mb-4 font-bold">Emission Events</h3>
 
-<table>
-	<thead>
-		<tr>
-			<th>Number</th>
-			<th>Site</th>
-		</tr>
-	</thead>
-	<tbody>
-		{#each props.items.slice(0, amountToShow) as item, rank}
-			<tr>
-				<td>{rank}</td>
-				<td>{item.site}</td>
+	<table class="min-w-full table-auto border-collapse">
+		<thead>
+			<tr class="bg-secondary">
+				<th class="px-4 py-2 text-left text-sm font-medium text-secondary-foreground">Number</th>
+				<th class="px-4 py-2 text-left text-sm font-medium text-secondary-foreground">Site</th>
 			</tr>
-		{/each}
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			{#each props.items.slice(0, amountToShow) as item, rank}
+				<tr>
+					<td class="px-4 py-2 text-sm">{rank}</td>
+					<td class="px-4 py-2 text-sm">{item.site}</td>
+				</tr>
+			{/each}
+		</tbody>
+	</table>
 
-<LoadMore onclick={() => (amountToShow += 3)} />
+	<div class="pt-4">
+		<LoadMore onclick={() => (amountToShow += 3)} />
+	</div>
+</div>
