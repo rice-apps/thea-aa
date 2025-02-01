@@ -2,6 +2,8 @@ from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateMo
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.exceptions import NotFound
+from django.core import serializers
+from django.http import HttpResponse
 from .models import EmissionEvents, SuperfundSite
 from .serializers import EmissionEventSerializer, SuperfundSiteSerializer
 
@@ -14,7 +16,9 @@ class EmissionEventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin
         re_name = request.GET.get('re_name', None)
 
         if not re_name:
-            return Response({"detail": "re_name query parameter is required."}, status=400)
+            sites = EmissionEvents.objects.all()
+            serializer = self.get_serializer(sites, many=True)
+            return Response(serializer.data)
 
         # Try to find the EmissionEvent that matches the re_name
         try:
@@ -36,8 +40,9 @@ class SuperfundSiteViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin,
         epa_id = request.GET.get('epa_id', None)
 
         if not epa_id:
-            return Response({"detail": "epa_id query parameter is required."}, status=400)
-
+            sites = SuperfundSite.objects.all()
+            serializer = self.get_serializer(sites, many=True)
+            return Response(serializer.data)
         # Try to find the SuperfundSite that matches the epa_id
         try:
             site = SuperfundSite.objects.get(epa_id=epa_id)
