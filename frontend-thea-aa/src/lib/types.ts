@@ -36,7 +36,7 @@ export interface DetailedContaminatedSite {
 	listingDate: string
 }
 
-export type DetailedContaminatedSite = {
+export interface DetailedContaminatedSite {
 	status: string
 	name: string
 	location: LatLong
