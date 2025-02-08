@@ -5,16 +5,19 @@ from django.db import models
 # TODO: parse text to create boolean fields, debug issues with decimal fields
 
 class EmissionEvents(models.Model):
-
-    # Initialize fields for the Django model storing emission events
     re_name = models.TextField()
     physical_location = models.TextField()
     start_date_time = models.TextField()
     end_date_time = models.TextField()
     contaminant = models.TextField()
-    estimated_quantity = models.TextField()
-    emissions_limit = models.TextField()
-    limit_units = models.TextField()
+    
+    # Fields for estimated contaminant table data
+    contaminant_est_quantity = models.TextField() 
+    contaminant_est_quantity_units = models.TextField()
+    contaminant_emissions_limit = models.TextField()  
+    contaminant_emissions_limit_units = models.TextField()  
+    authorization = models.TextField()
+    
     hours_elapsed = models.TextField()
     emissions_rate = models.TextField()
     flag = models.IntegerField()
