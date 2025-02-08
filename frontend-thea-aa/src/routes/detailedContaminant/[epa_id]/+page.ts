@@ -1,4 +1,4 @@
-import type { ContaminatedSite } from '$lib/types'
+import type { ContaminatedSite, GeocodeResponse } from '$lib/types'
 
 export async function load({ params }) {
 	// let airQualitySites: AirQualitySite[] = []
@@ -30,6 +30,36 @@ export async function load({ params }) {
 		console.error('Error fetching contaminated sites:', error)
 		throw new Error('Error fetching contaminated sites:')
 	}
+
+	try {
+		let street_address: string = contaminatedApiData.street_address
+		street_address = street_address.replaceAll(' ', '+')
+		console.log(street_address)
+		const zip_code: string = contaminatedApiData.zip_code
+		const city: string = contaminatedApiData.city
+		const county: string = contaminatedApiData.county
+		const state = 'TX'
+		const country = 'US'
+		const apiKey = import.meta.env.VITE_PUBLIC_API_KEY
+
+		const url = `https://geocode.maps.co/search?street=${street_address}&city=${city}&county=${county}&state=${state}&postalcode=${zip_code}&country=${country}&api_key=${apiKey}`
+		const response = await fetch(url)
+
+		console.log(response)
+		const addressResponse: GeocodeResponse[] = await response.json() // assuming the response is in the correct format
+		console.log('address response', addressResponse)
+		if (addressResponse.length) {
+			contaminatedApiData.long_lat = {
+				lat: parseFloat(addressResponse[0].lat),
+				long: parseFloat(addressResponse[0].lon)
+			}
+			console.log('bruh changed', contaminatedApiData)
+		}
+	} catch (error) {
+		console.error('Error fetching contaminated sites:', error)
+		throw new Error('Error fetching contaminated sites:')
+	}
+	console.log('data', contaminatedApiData)
 
 	interface contaminantRow {
 		contaminantName: string

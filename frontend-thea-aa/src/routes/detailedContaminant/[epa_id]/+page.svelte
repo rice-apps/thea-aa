@@ -16,20 +16,30 @@
 	const tableInfo = data.tableInfo
 
 	let mapElement: HTMLDivElement | null = $state(null)
+
 	onMount(async () => {
 		const L = (await import('leaflet')).default
+
 		if (mapElement) {
-			const map = L.map(mapElement).setView(
-				// [contaminatedSite.location.lat, contaminatedSite.location.long],
-				[10, 10],
-				13
-			) // change to use props later
+			const map = L.map(mapElement)
+			if (!contaminatedSite.long_lat) {
+				map.setView([29.71929, -95.3906], 13)
+			} else {
+				map.setView([contaminatedSite.long_lat.lat, contaminatedSite.long_lat.long], 13)
+			}
+
 			L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
 				attribution: `&copy;<a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>,
-          &copy;<a href="https://carto.com/attributions" target="_blank">CARTO</a>`,
+		&copy;<a href="https://carto.com/attributions" target="_blank">CARTO</a>`,
 				subdomains: 'abcd',
 				maxZoom: 19
 			}).addTo(map)
+
+			// ✅ Add a marker at the contaminated site
+			L.marker([contaminatedSite.long_lat.lat, contaminatedSite.long_lat.long])
+				.addTo(map)
+				.bindPopup(contaminatedSite.site_name) // Optional: Add a popup
+				.openPopup() // Open popup by default
 		}
 	})
 </script>
@@ -87,8 +97,18 @@
 				<!-- fix later -->
 				<!-- <Statistic title="Latitude" stat={contaminatedSite.location.lat} />
 				<Statistic title="Longitude" stat={contaminatedSite.location.long} /> -->
-				<Statistic title="Latitude" stat={10} />
-				<Statistic title="Longitude" stat={10} />
+				<Statistic
+					title="Latitude"
+					stat={contaminatedSite.long_lat && contaminatedSite.long_lat.lat
+						? contaminatedSite.long_lat.lat
+						: 'Nan'}
+				/>
+				<Statistic
+					title="Longitude"
+					stat={contaminatedSite.long_lat && contaminatedSite.long_lat.long
+						? contaminatedSite.long_lat.long
+						: 'Nan'}
+				/>
 				<Statistic title="Construction Completion" stat={contaminatedSite.construction_complete} />
 				<Statistic title="Partial Deletion" stat={contaminatedSite.partial_npl_deletion} />
 				<Statistic title="Proposed" stat={contaminatedSite.npl_status} />
