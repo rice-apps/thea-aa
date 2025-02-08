@@ -52,5 +52,7 @@ class SuperfundSiteSerializer(ModelSerializer):
                   'alias_alternative_site_name',
                   'non_npl_status_date',
                   'superfund_site_profile_page_url',
-                  'rcra_handler_id_name'
+                  'rcra_handler_id_name',
+                  'lon',
+                  'lat',
                   ]

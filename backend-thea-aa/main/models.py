@@ -55,3 +55,5 @@ class SuperfundSite(models.Model):
     non_npl_status_date = models.TextField()  
     superfund_site_profile_page_url = models.TextField()
     rcra_handler_id_name = models.TextField() 
+    lon = models.FloatField(null=True)
+    lat = models.FloatField(null=True)

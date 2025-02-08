@@ -6,9 +6,6 @@
 	import { ChevronLeft, ChevronRight } from 'lucide-svelte/icons'
 	import NearAq from '$lib/components/NearAq.svelte'
 	import DetailedContamTable from '$lib/components/DetailedContamTable.svelte'
-	import { page } from '$app/stores'
-	const lol = $page.params.epa_id
-	console.log('lol', lol)
 
 	let { data } = $props()
 
@@ -22,10 +19,10 @@
 
 		if (mapElement) {
 			const map = L.map(mapElement)
-			if (!contaminatedSite.long_lat) {
+			if (!contaminatedSite.lon || !contaminatedSite.lat) {
 				map.setView([29.71929, -95.3906], 13)
 			} else {
-				map.setView([contaminatedSite.long_lat.lat, contaminatedSite.long_lat.long], 13)
+				map.setView([contaminatedSite.lat, contaminatedSite.lon], 13)
 			}
 
 			L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
@@ -36,7 +33,7 @@
 			}).addTo(map)
 
 			// ✅ Add a marker at the contaminated site
-			L.marker([contaminatedSite.long_lat.lat, contaminatedSite.long_lat.long])
+			L.marker([contaminatedSite.lat, contaminatedSite.lon])
 				.addTo(map)
 				.bindPopup(contaminatedSite.site_name) // Optional: Add a popup
 				.openPopup() // Open popup by default
@@ -97,18 +94,8 @@
 				<!-- fix later -->
 				<!-- <Statistic title="Latitude" stat={contaminatedSite.location.lat} />
 				<Statistic title="Longitude" stat={contaminatedSite.location.long} /> -->
-				<Statistic
-					title="Latitude"
-					stat={contaminatedSite.long_lat && contaminatedSite.long_lat.lat
-						? contaminatedSite.long_lat.lat
-						: 'Nan'}
-				/>
-				<Statistic
-					title="Longitude"
-					stat={contaminatedSite.long_lat && contaminatedSite.long_lat.long
-						? contaminatedSite.long_lat.long
-						: 'Nan'}
-				/>
+				<Statistic title="Latitude" stat={contaminatedSite.lat ? contaminatedSite.lat : 'Nan'} />
+				<Statistic title="Longitude" stat={contaminatedSite.lon ? contaminatedSite.lon : 'Nan'} />
 				<Statistic title="Construction Completion" stat={contaminatedSite.construction_complete} />
 				<Statistic title="Partial Deletion" stat={contaminatedSite.partial_npl_deletion} />
 				<Statistic title="Proposed" stat={contaminatedSite.npl_status} />
