@@ -3,6 +3,19 @@ export interface LatLong {
 	long: number
 }
 
+export interface GeocodeResponse {
+	class: string
+	display_name: string
+	importance: number
+	lat: string
+	licence: string
+	lon: string
+	osm_id: number
+	osm_type: string
+	place_id: number
+	type: string
+}
+
 export interface AirQualitySite {
 	station: string
 	location: LatLong
@@ -24,6 +37,7 @@ export interface ContaminatedSite {
 	county: string
 	state: string
 	street_address: string
+	long_lat: LatLong
 	zip_code: string
 	region: string
 	npl_status: string
