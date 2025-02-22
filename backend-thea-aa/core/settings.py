@@ -48,6 +48,12 @@ INSTALLED_APPS = [
     "rest_framework",
     "main.apps.MainConfig",
     'corsheaders',
+    'django_crontab'
+]
+
+CRONJOBS = [
+    ('*/5 * * * *', 'app.tasks.scrape_superfund_sites'),
+    ('*/5 * * * *', 'app.tasks.scrape_tceq_events')
 ]
 
 MIDDLEWARE = [

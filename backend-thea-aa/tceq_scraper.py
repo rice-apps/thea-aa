@@ -3,6 +3,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 import xlsxwriter
 import os
+import datetime
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -30,8 +31,90 @@ def new_line_remover(question):
     else:
         return question.__getattribute__('text')
 
+# searches the last three months
+def defined_inputs(driver):
+    global single_case
+    
+    event_start_beg = driver.find_element(By.NAME, 'event_start_beg_dt')
+    event_start_end = driver.find_element(By.NAME, 'event_start_end_dt')
+    event_end_beg = driver.find_element(By.NAME, 'event_end_beg_dt')
+    event_end_end = driver.find_element(By.NAME, 'event_end_end_dt')
+    cn = driver.find_element(By.NAME,  'cn_txt')
+    customer_name = driver.find_element(By.NAME, 'cust_name')
+    rn = driver.find_element(By.NAME, 'rn_txt')
+    regulated_entity_name = driver.find_element(By.NAME, 're_name')
+    county = driver.find_element(By.NAME, 'ls_cnty_name')
+    region = driver.find_element(By.NAME, 'ls_region_cd')
+    event_type = driver.find_element(By.NAME, 'ls_event_typ_cd')
 
-def setup():
+    #Best Test Date 2/14/2021
+    now = datetime.datetime.now()
+    last_start = datetime.date(now.year, now.month, now.day)
+    beginning_start = str(last_start - datetime.timedelta(weeks = 12))
+    last_start = str(last_start)
+    event_start_beg.send_keys(beginning_start)
+    event_start_end.send_keys(str(last_start))
+    event_end_beg.send_keys("")
+    event_end_end.send_keys("")
+    cn.send_keys("")
+    customer_name.send_keys("")
+    rn.send_keys("")
+    regulated_entity_name.send_keys("")
+    county.send_keys("")
+    region.send_keys("")
+    event_type.send_keys("")
+    single_case = False
+
+# user-defined inputs
+def custom_input(driver):
+    event_start_beg = driver.find_element(By.NAME, 'event_start_beg_dt')
+    event_start_end = driver.find_element(By.NAME, 'event_start_end_dt')
+    event_end_beg = driver.find_element(By.NAME, 'event_end_beg_dt')
+    event_end_end = driver.find_element(By.NAME, 'event_end_end_dt')
+    cn = driver.find_element(By.NAME,  'cn_txt')
+    customer_name = driver.find_element(By.NAME, 'cust_name')
+    rn = driver.find_element(By.NAME, 'rn_txt')
+    regulated_entity_name = driver.find_element(By.NAME, 're_name')
+    county = driver.find_element(By.NAME, 'ls_cnty_name')
+    region = driver.find_element(By.NAME, 'ls_region_cd')
+    event_type = driver.find_element(By.NAME, 'ls_event_typ_cd')
+
+    #Best Test Date 2/14/2021
+    print('Enter Beginning Start Date Range (##/##/####):')
+    beginning_start = input()
+    event_start_beg.send_keys(beginning_start)
+    print('Enter Last Start Date Range (##/##/####):')
+    last_start = input()
+    event_start_end.send_keys(last_start)
+    print('Enter Beginning End Date Range (##/##/#### must be after 1/31/2003):')
+    end_start = input()
+    event_end_beg.send_keys(end_start)
+    print('Enter Last End Date Range (##/##/#### must be after 1/31/2003):')
+    end_end = input()
+    event_end_end.send_keys(end_end)
+    print('Enter CN:')
+    cn_input = input()
+    cn.send_keys(cn_input)
+    print('Enter Customer Name:')
+    customer_name_input = input()
+    customer_name.send_keys(customer_name_input)
+    print('Enter RN:')
+    rn_input = input()
+    rn.send_keys(rn_input)
+    print('Enter Regulated Entity Name:')
+    regulated_entity_name_input = input()
+    regulated_entity_name.send_keys(regulated_entity_name_input)
+    print('Enter County:')
+    county_input = input()
+    county.send_keys(county_input)
+    print('Enter Region (REGION ## - _____):')
+    region_input = input()
+    region.send_keys(region_input)
+    print('Enter Event Type:')
+    event_type_input = input()
+    event_type.send_keys(event_type_input)
+
+def setup(custom = False):
     global single_case
     global single_incident
     service = Service("/usr/local/bin/chromedriver")
@@ -42,61 +125,18 @@ def setup():
     driver.get('https://www2.tceq.texas.gov/oce/eer/index.cfm')
 
     # Find input boxes
-    print('Enter Incident Number:')
-    single_search = input()
-    if len(single_search) > 0:
-        incident_number = driver.find_element(By.NAME, 'incid_track_num')
-        incident_number.send_keys(single_search)
-        single_case = True
-        single_incident = [single_search]
+    if not custom:
+        defined_inputs(driver)
     else:
-        single_case = False
-        event_start_beg = driver.find_element(By.NAME, 'event_start_beg_dt')
-        event_start_end = driver.find_element(By.NAME, 'event_start_end_dt')
-        event_end_beg = driver.find_element(By.NAME, 'event_end_beg_dt')
-        event_end_end = driver.find_element(By.NAME, 'event_end_end_dt')
-        cn = driver.find_element(By.NAME,  'cn_txt')
-        customer_name = driver.find_element(By.NAME, 'cust_name')
-        rn = driver.find_element(By.NAME, 'rn_txt')
-        regulated_entity_name = driver.find_element(By.NAME, 're_name')
-        county = driver.find_element(By.NAME, 'ls_cnty_name')
-        region = driver.find_element(By.NAME, 'ls_region_cd')
-        event_type = driver.find_element(By.NAME, 'ls_event_typ_cd')
-
-        #Best Test Date 2/14/2021
-        print('Enter Beginning Start Date Range (##/##/####):')
-        beginning_start = input()
-        event_start_beg.send_keys(beginning_start)
-        print('Enter Last Start Date Range (##/##/####):')
-        last_start = input()
-        event_start_end.send_keys(last_start)
-        print('Enter Beginning End Date Range (##/##/#### must be after 1/31/2003):')
-        end_start = input()
-        event_end_beg.send_keys(end_start)
-        print('Enter Last End Date Range (##/##/#### must be after 1/31/2003):')
-        end_end = input()
-        event_end_end.send_keys(end_end)
-        print('Enter CN:')
-        cn_input = input()
-        cn.send_keys(cn_input)
-        print('Enter Customer Name:')
-        customer_name_input = input()
-        customer_name.send_keys(customer_name_input)
-        print('Enter RN:')
-        rn_input = input()
-        rn.send_keys(rn_input)
-        print('Enter Regulated Entity Name:')
-        regulated_entity_name_input = input()
-        regulated_entity_name.send_keys(regulated_entity_name_input)
-        print('Enter County:')
-        county_input = input()
-        county.send_keys(county_input)
-        print('Enter Region (REGION ## - _____):')
-        region_input = input()
-        region.send_keys(region_input)
-        print('Enter Event Type:')
-        event_type_input = input()
-        event_type.send_keys(event_type_input)
+        print('Enter Incident Number:')
+        single_search = input()
+        if len(single_search) > 0:
+            incident_number = driver.find_element(By.NAME, 'incid_track_num')
+            incident_number.send_keys(single_search)
+            single_case = True
+            single_incident = [single_search]
+        else:
+            custom_input()
 
     # Click submit
     search = driver.find_element(By.NAME, '_fuseaction=main.searchresults')

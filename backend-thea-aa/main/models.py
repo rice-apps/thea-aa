@@ -7,8 +7,13 @@ from django.db import models
 class EmissionEvents(models.Model):
 
     # Initialize fields for the Django model storing emission events
+    registration = models.TextField()
     re_name = models.TextField()
     physical_location = models.TextField()
+    region_id = models.TextField()
+    event_type = models.TextField()
+    emission_point_name = models.TextField()
+    epn = models.TextField()
     start_date_time = models.TextField()
     end_date_time = models.TextField()
     contaminant = models.TextField()
@@ -17,7 +22,14 @@ class EmissionEvents(models.Model):
     limit_units = models.TextField()
     hours_elapsed = models.TextField()
     emissions_rate = models.TextField()
-    flag = models.IntegerField()
+    authorization_comment = models.TextField()
+    cause = models.TextField()
+    actions_taken = models.TextField()
+    basis_used = models.TextField()
+    initial_notice = models.TextField()
+    flag = models.CharField(max_length = 1)
+
+
 
 class SuperfundSite(models.Model):
 

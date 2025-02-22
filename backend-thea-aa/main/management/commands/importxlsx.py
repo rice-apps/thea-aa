@@ -7,8 +7,13 @@ def import_emission_events(file_path):
     df = pd.read_excel(file_path)
 
     emission_events = [EmissionEvents(
+                            registration = row['RN'],
                             re_name = row['RE NAME'],
                             physical_location = row['PHYSICAL LOCATION'],
+                            region_id = row['TCEQ REGION'],
+                            # event_type = row['EVENT_TYPE'],
+                            emission_point_name = row['EMISSION POINT NAME'],
+                            epn = row['EPN'],
                             start_date_time = row['START DATE/TIME'],
                             end_date_time = row['END DATE/TIME'],
                             contaminant = row['CONTAMINANT'],
@@ -17,7 +22,14 @@ def import_emission_events(file_path):
                             limit_units = row['LIMIT UNITS'],
                             hours_elapsed = row['Hours Elapsed:'],
                             emissions_rate = row['Emissions Rate (lbs/hr):'],
+                            authorization_comment = row['AUTHORIZATION COMMENT'],
+                            cause = row['Cause of Emission Event'],
+                            actions_taken = row['Actions Taken'],
+                            basis_used = row['Basis Used to Determine Quantities and Any Additional Information Necessary to Evaluate the Event'],
+                            initial_notice = row['Initial Notification:'],
                             flag = row['Flag(Y/N):']) for _, row in df.iterrows()]
+    
+    
     
     EmissionEvents.objects.bulk_create(emission_events)
 
@@ -63,8 +75,8 @@ class Command(BaseCommand):
     help = 'Import emission event data from Excel file'
 
     def handle(self, *args, **options):
-        superfund_path = 'main/data/superfund.xlsx'
-        emission_path = 'main/data/example.xlsx'
+        superfund_path = 'main/data/superfund/superfund.xlsx'
+        emission_path = 'main/data/tecq/tecq.xlsx'
 
         import_emission_events(emission_path)
         import_superfund_sites(superfund_path)

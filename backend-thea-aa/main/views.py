@@ -13,21 +13,20 @@ class EmissionEventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin
 
     def retrieve(self, request, *args, **kwargs):
         # Get the 're_name' query parameter
+
         re_name = request.GET.get('re_name', None)
 
         if not re_name:
             sites = EmissionEvents.objects.all()
-            serializer = self.get_serializer(sites, many=True)
+            serializer = self.serializer_class(sites, many=True)
             return Response(serializer.data)
 
-        # Try to find the EmissionEvent that matches the re_name
-        try:
-            event = EmissionEvents.objects.get(re_name=re_name)
-        except EmissionEvents.DoesNotExist:
-            raise NotFound(detail="EmissionEvent with the specified re_name not found.")
+        # Try to find the EmissionEvents that match the re_name
+        event = EmissionEvents.objects.filter(re_name=re_name)
 
         # Serialize the data and return a single object
-        serializer = self.serializer_class(event)
+
+        serializer = self.serializer_class(event, many = True)
         return Response(serializer.data)
 
 
@@ -41,7 +40,7 @@ class SuperfundSiteViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin,
 
         if not epa_id:
             sites = SuperfundSite.objects.all()
-            serializer = self.get_serializer(sites, many=True)
+            serializer = self.serializer_class(sites, many=True)
             return Response(serializer.data)
         # Try to find the SuperfundSite that matches the epa_id
         try:
