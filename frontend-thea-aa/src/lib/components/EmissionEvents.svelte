@@ -1,10 +1,14 @@
 <script lang="ts">
 	import type { EmissionEvent } from '$lib/types'
 	import LoadMore from './LoadMore.svelte'
+	import { goto } from '$app/navigation'
 
 	let props: { items: EmissionEvent[] } = $props()
 
 	let amountToShow = $state(3)
+	const goToDetail = (item: EmissionEvent) => {
+		goto(`/detailedEmissionEvent/${item.location}`) // Navigate to the detailed page with the epaId
+	}
 </script>
 
 <div class="mx-auto max-w-4xl py-6">
@@ -19,7 +23,7 @@
 		</thead>
 		<tbody>
 			{#each props.items.slice(0, amountToShow) as item, rank}
-				<tr class="cursor-pointer">
+				<tr onclick={() => goToDetail(item)} class="hover cursor-pointer border-b">
 					<td class="px-4 py-2 text-sm">{rank}</td>
 					<td class="px-4 py-2 text-sm">{item.site}</td>
 				</tr>
