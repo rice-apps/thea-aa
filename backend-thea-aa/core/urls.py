@@ -29,6 +29,7 @@ router.register(r'superfund', SuperfundSiteViewSet)
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
+    path("api/superfund/retrieve/<str:epa_id>/", SuperfundSiteViewSet.as_view({'get': 'retrieve'})),
     path("api/superfund/retrieve/", SuperfundSiteViewSet.as_view({'get': 'retrieve'})),  # Custom endpoint
     path("api/emissions/retrieve/", EmissionEventsViewSet.as_view({'get': 'retrieve'}))   # Custom endpoint
 ]
