@@ -99,3 +99,29 @@ export interface DetailedContaminatedSite {
 	proposedDate: string
 	listingDate: string
 }
+
+export interface DetailedEmissionEvent {
+	registration: string
+	re_name: string
+	physical_location: string
+	region_id: string
+	event_type: string
+	emission_point_name: string
+	epn: string
+	start_date_time: string
+	end_date_time: string
+	contaminant: string
+	contaminant_est_quantity: string
+	contaminant_est_quantity_units: string
+	contaminant_emissions_limit: string
+	contaminant_emissions_limit_units: string
+	authorization: string
+	hours_elapsed: string
+	emissions_rate: string
+	authorization_comment: string
+	cause: string
+	actions_taken: string
+	basis_used: string
+	initial_notice: string
+	flag: string
+}
