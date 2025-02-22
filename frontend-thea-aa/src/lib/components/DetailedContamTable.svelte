@@ -1,36 +1,39 @@
 <script lang="ts">
 	import * as Table from '$lib/components/ui/table/index.js'
-	interface contaminantRow {
+	interface ContaminantRow {
 		contaminantName: string
-		contaminatedMedia: string
-		areaOfSiteFound: string
-		moreInfo: string
-		casNumber: string
+		estQuantity: string
+		quantityUnit: string
+		emissionLimit: string
+		emissionLimitUnit: string
+		authorization: string
 	}
 	// Array of contaminants based on the image
 
-	let props: { items: contaminantRow[] } = $props()
-	const contaminants: contaminantRow[] = props.items
+	let props: { items: ContaminantRow[] } = $props()
+	const contaminants: ContaminantRow[] = props.items
 </script>
 
 <Table.Root>
 	<Table.Header>
 		<Table.Row>
 			<Table.Head>Contaminant Name</Table.Head>
-			<Table.Head>Contaminated Media</Table.Head>
-			<Table.Head>Area of Site Found (Operable Unit)</Table.Head>
-			<Table.Head>More Information</Table.Head>
-			<Table.Head>CAS #</Table.Head>
+			<Table.Head>Est. Contaminant Quantity/Opacity</Table.Head>
+			<Table.Head>Contaminant Quantity Unit</Table.Head>
+			<Table.Head>Emission Limit</Table.Head>
+			<Table.Head>Emission Limit Unit</Table.Head>
+			<Table.Head>Authorization</Table.Head>
 		</Table.Row>
 	</Table.Header>
 	<Table.Body>
 		{#each contaminants as contaminant}
 			<Table.Row>
 				<Table.Cell>{contaminant.contaminantName}</Table.Cell>
-				<Table.Cell>{contaminant.contaminatedMedia}</Table.Cell>
-				<Table.Cell>{contaminant.areaOfSiteFound}</Table.Cell>
-				<Table.Cell>{contaminant.moreInfo}</Table.Cell>
-				<Table.Cell>{contaminant.casNumber}</Table.Cell>
+				<Table.Cell>{contaminant.estQuantity}</Table.Cell>
+				<Table.Cell>{contaminant.quantityUnit}</Table.Cell>
+				<Table.Cell>{contaminant.emissionLimit}</Table.Cell>
+				<Table.Cell>{contaminant.emissionLimitUnit}</Table.Cell>
+				<Table.Cell>{contaminant.authorization}</Table.Cell>
 			</Table.Row>
 		{/each}
 	</Table.Body>
