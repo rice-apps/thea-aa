@@ -12,11 +12,13 @@ def import_emission_events(file_path):
                             start_date_time = row['START DATE/TIME'],
                             end_date_time = row['END DATE/TIME'],
                             contaminant = row['CONTAMINANT'],
+                            
                             contaminant_est_quantity = row['EST QUANTITY/OPACITY'],
                             contaminant_est_quantity_units = row['UNITS'],
                             contaminant_emissions_limit = row['EMISSION LIMIT'],
                             contaminant_emissions_limit_units = row['LIMIT UNITS'],
                             authorization = row['AUTHORIZATION COMMENT'],
+                            
                             hours_elapsed = row['Hours Elapsed:'],
                             emissions_rate = row['Emissions Rate (lbs/hr):'],
                             flag = row['Flag(Y/N):']) for _, row in df.iterrows()]

@@ -13,10 +13,10 @@ class EmissionEvents(models.Model):
     
     # Fields for estimated contaminant table data
     contaminant_est_quantity = models.TextField() 
-    contaminant_est_quantity_units = models.TextField()
+    contaminant_est_quantity_units = models.TextField(default="")
     contaminant_emissions_limit = models.TextField()  
     contaminant_emissions_limit_units = models.TextField()  
-    authorization = models.TextField()
+    authorization = models.TextField(default="")
     
     hours_elapsed = models.TextField()
     emissions_rate = models.TextField()

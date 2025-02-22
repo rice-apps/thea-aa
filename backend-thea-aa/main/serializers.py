@@ -10,11 +10,13 @@ class EmissionEventSerializer(ModelSerializer):
             'start_date_time',
             'end_date_time',
             'contaminant',
+            
             'contaminant_est_quantity',
             'contaminant_est_quantity_units',
             'contaminant_emissions_limit',
             'contaminant_emissions_limit_units',
             'authorization',
+            
             'hours_elapsed',
             'emissions_rate',
             'flag']
