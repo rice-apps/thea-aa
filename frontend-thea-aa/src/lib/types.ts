@@ -37,7 +37,8 @@ export interface ContaminatedSite {
 	county: string
 	state: string
 	street_address: string
-	long_lat: LatLong
+	lon: number
+	lat: number
 	zip_code: string
 	region: string
 	npl_status: string

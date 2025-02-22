@@ -5,8 +5,13 @@ from rest_framework.serializers import ModelSerializer
 class EmissionEventSerializer(ModelSerializer):
     class Meta:
         model = EmissionEvents
-        fields = ['re_name',
+        fields = ['registration',
+            're_name',
             'physical_location',
+            'region_id',
+            'event_type',
+            'emission_point_name',
+            'epn',
             'start_date_time',
             'end_date_time',
             'contaminant',
@@ -19,6 +24,11 @@ class EmissionEventSerializer(ModelSerializer):
             
             'hours_elapsed',
             'emissions_rate',
+            'authorization_comment',
+            'cause',
+            'actions_taken',
+            'basis_used',
+            'initial_notice',
             'flag']
         
 
@@ -54,5 +64,7 @@ class SuperfundSiteSerializer(ModelSerializer):
                   'alias_alternative_site_name',
                   'non_npl_status_date',
                   'superfund_site_profile_page_url',
-                  'rcra_handler_id_name'
+                  'rcra_handler_id_name',
+                  'lon',
+                  'lat',
                   ]
