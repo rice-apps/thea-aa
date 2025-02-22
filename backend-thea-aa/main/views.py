@@ -19,10 +19,11 @@ class EmissionEventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin
         # Get the 're_name' query parameter
 
         re_name = request.GET.get('re_name', None)
+        print('renam', re_name)
 
         if not re_name:
             sites = EmissionEvents.objects.all()
-            serializer = self.serializer_class(sites, many=True)
+            serializer = self.get_serializer(sites, many=True)
             return Response(serializer.data)
 
         # Try to find the EmissionEvents that match the re_name
@@ -30,7 +31,7 @@ class EmissionEventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin
 
         # Serialize the data and return a single object
 
-        serializer = self.serializer_class(event, many = True)
+        serializer = self.get_serializer(event, many = True)
         return Response(serializer.data)
 
 
@@ -40,11 +41,11 @@ class SuperfundSiteViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin,
 
     def retrieve(self, request, *args, **kwargs):
         # Get the 'epa_id' query parameter
-        epa_id = request.GET.get('epa_id', None)
+        epa_id = kwargs.get('epa_id') or request.GET.get('epa_id', None)
 
         if not epa_id:
             sites = SuperfundSite.objects.all()
-            serializer = self.serializer_class(sites, many=True)
+            serializer = self.get_serializer(sites, many=True)
             return Response(serializer.data)
         # Try to find the SuperfundSite that matches the epa_id
         try:
@@ -72,7 +73,7 @@ class SuperfundSiteViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin,
             site.lat = float(geocode_data[0]['lat'])
             site.save()
             site.refresh_from_db()
-        serializer = self.serializer_class(site)
+        serializer = self.get_serializer(site)
         return Response(serializer.data)
 
         # try:
