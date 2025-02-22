@@ -24,7 +24,6 @@ export async function load({ params }) {
 	const { epa_id } = params
 	try {
 		const response = await fetch('http://127.0.0.1:8000/api/superfund/retrieve/?epa_id=' + epa_id)
-		console.log(response)
 		contaminatedApiData = await response.json() // assuming the response is in the correct format
 	} catch (error) {
 		console.error('Error fetching contaminated sites:', error)

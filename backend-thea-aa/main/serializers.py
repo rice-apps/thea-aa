@@ -15,9 +15,11 @@ class EmissionEventSerializer(ModelSerializer):
             'start_date_time',
             'end_date_time',
             'contaminant',
-            'estimated_quantity',
-            'emissions_limit',
-            'limit_units',
+            'contaminant_est_quantity',
+            'contaminant_est_quantity_units',
+            'contaminant_emissions_limit',
+            'contaminant_emissions_limit_units',
+            'authorization',
             'hours_elapsed',
             'emissions_rate',
             'authorization_comment',
@@ -60,5 +62,7 @@ class SuperfundSiteSerializer(ModelSerializer):
                   'alias_alternative_site_name',
                   'non_npl_status_date',
                   'superfund_site_profile_page_url',
-                  'rcra_handler_id_name'
+                  'rcra_handler_id_name',
+                  'lon',
+                  'lat',
                   ]

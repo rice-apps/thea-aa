@@ -6,9 +6,6 @@
 	import { ChevronLeft, ChevronRight } from 'lucide-svelte/icons'
 	import NearAq from '$lib/components/NearAq.svelte'
 	import DetailedContamTable from '$lib/components/DetailedContamTable.svelte'
-	import { page } from '$app/stores'
-	const lol = $page.params.epa_id
-	console.log('lol', lol)
 
 	let { data } = $props()
 
@@ -16,20 +13,30 @@
 	const tableInfo = data.tableInfo
 
 	let mapElement: HTMLDivElement | null = $state(null)
+
 	onMount(async () => {
 		const L = (await import('leaflet')).default
+
 		if (mapElement) {
-			const map = L.map(mapElement).setView(
-				// [contaminatedSite.location.lat, contaminatedSite.location.long],
-				[10, 10],
-				13
-			) // change to use props later
+			const map = L.map(mapElement)
+			if (!contaminatedSite.lon || !contaminatedSite.lat) {
+				map.setView([29.71929, -95.3906], 13)
+			} else {
+				map.setView([contaminatedSite.lat, contaminatedSite.lon], 13)
+			}
+
 			L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
 				attribution: `&copy;<a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>,
-          &copy;<a href="https://carto.com/attributions" target="_blank">CARTO</a>`,
+		&copy;<a href="https://carto.com/attributions" target="_blank">CARTO</a>`,
 				subdomains: 'abcd',
 				maxZoom: 19
 			}).addTo(map)
+
+			// ✅ Add a marker at the contaminated site
+			L.marker([contaminatedSite.lat, contaminatedSite.lon])
+				.addTo(map)
+				.bindPopup(contaminatedSite.site_name) // Optional: Add a popup
+				.openPopup() // Open popup by default
 		}
 	})
 </script>
@@ -87,8 +94,8 @@
 				<!-- fix later -->
 				<!-- <Statistic title="Latitude" stat={contaminatedSite.location.lat} />
 				<Statistic title="Longitude" stat={contaminatedSite.location.long} /> -->
-				<Statistic title="Latitude" stat={10} />
-				<Statistic title="Longitude" stat={10} />
+				<Statistic title="Latitude" stat={contaminatedSite.lat ? contaminatedSite.lat : 'Nan'} />
+				<Statistic title="Longitude" stat={contaminatedSite.lon ? contaminatedSite.lon : 'Nan'} />
 				<Statistic title="Construction Completion" stat={contaminatedSite.construction_complete} />
 				<Statistic title="Partial Deletion" stat={contaminatedSite.partial_npl_deletion} />
 				<Statistic title="Proposed" stat={contaminatedSite.npl_status} />

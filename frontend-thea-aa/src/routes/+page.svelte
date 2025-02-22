@@ -33,7 +33,7 @@
 		updateViewCentering: (lat: number, long: number) => void
 	} | null = null
 
-	let apiKey = '672fc9cf41928442178811nqtede4fc'
+	let apiKey = import.meta.env.VITE_PUBLIC_API_KEY
 
 	let searchAddress = $state('')
 	let searchRadius = $state('')

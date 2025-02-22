@@ -385,7 +385,7 @@ def contaminants(questions, answers, order, sheet, sheet2, j):
 
 
 def extracting_information(driver, cases):
-    direct = os.getcwd() + '/TCEQ_Data.xlsx'
+    direct = os.getcwd() + '/tceq_data.xlsx'
     book = xlsxwriter.Workbook(direct)
     sheet = book.add_worksheet('Cases')
     sheet2 = book.add_worksheet('Incident Sums')
