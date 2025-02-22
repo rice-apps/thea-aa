@@ -19,7 +19,7 @@
 		</thead>
 		<tbody>
 			{#each props.items.slice(0, amountToShow) as item, rank}
-				<tr>
+				<tr class="cursor-pointer">
 					<td class="px-4 py-2 text-sm">{rank}</td>
 					<td class="px-4 py-2 text-sm">{item.site}</td>
 				</tr>

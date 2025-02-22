@@ -80,7 +80,10 @@
 		</div>
 		<div class="ml-10 mr-10 w-full rounded bg-muted p-6">
 			<div class="flex flex-row">
-				<QualityIndicator quality={39.65} name="NPL" />
+				<QualityIndicator
+					quality={contaminatedSite.hrs_score == 'nan' ? 39.65 : Number(contaminatedSite.hrs_score)}
+					name="NPL"
+				/>
 				<p class="pb-2 pl-4 text-xl font-bold">Site Overview</p>
 			</div>
 			<div class="grid grid-cols-4 gap-4">

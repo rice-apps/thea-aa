@@ -25,10 +25,10 @@
 		</thead>
 		<tbody>
 			{#each props.items.slice(0, amountToShow) as item}
-				<tr onclick={() => goToDetail(item)} class="hover border-b">
+				<tr onclick={() => goToDetail(item)} class="hover cursor-pointer border-b">
 					<td class="px-4 py-2 text-sm">{item.site_status}</td>
 					<td class="px-4 py-2 text-sm">{item.site_name}</td>
-					<td class="px-4 py-2 text-sm">{item.hrs_score}</td>
+					<td class="px-4 py-2 text-sm">{item.hrs_score == 'nan' ? 'No data' : item.hrs_score}</td>
 				</tr>
 			{/each}
 		</tbody>
