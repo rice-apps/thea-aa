@@ -1,6 +1,7 @@
 import type { ContaminatedSite } from '$lib/types'
+import type { LoadEvent } from '@sveltejs/kit'
 
-export async function load({ params }) {
+export async function load({ params }: LoadEvent) {
 	let contaminatedApiData: ContaminatedSite
 	const { epa_id } = params
 	try {
@@ -20,8 +21,7 @@ export async function load({ params }) {
 		authorization: string
 	}
 
-	const tableInfo: contaminantRow[] = [
-	]
-	
+	const tableInfo: contaminantRow[] = []
+
 	return { contaminatedSite: contaminatedApiData, tableInfo: tableInfo }
 }
