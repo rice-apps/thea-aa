@@ -8,6 +8,7 @@ from .models import EmissionEvents, SuperfundSite
 from .serializers import EmissionEventSerializer, SuperfundSiteSerializer
 import requests
 import os
+from collections import defaultdict
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -16,23 +17,87 @@ class EmissionEventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin
     queryset = EmissionEvents.objects.all()
 
     def retrieve(self, request, *args, **kwargs):
-        # Get the 're_name' query parameter
+        """
+        API to retrieve emission events but group data by `registration` ID
+        so each unique registration contains a list of contaminants.
+        """
+        # get the registration ID from the request
+        registration = kwargs.get('registration') or request.GET.get('registration', None)
 
-        re_name = request.GET.get('re_name', None)
-        print('renam', re_name)
+        if not registration:
+            events = EmissionEvents.objects.all()
+        else:
+            # filter all the objests with the given registration
+            events = EmissionEvents.objects.filter(registration=registration)
 
-        if not re_name:
-            sites = EmissionEvents.objects.all()
-            serializer = self.get_serializer(sites, many=True)
-            return Response(serializer.data)
+        # if the registration id is invalid
+        if not events.exists():
+            raise NotFound(detail="No emission events found for this registration.")
 
-        # Try to find the EmissionEvents that match the re_name
-        event = EmissionEvents.objects.filter(re_name=re_name)
+        # serialize the filtered data into json 
+        serialized_data = EmissionEventSerializer(events, many=True).data
 
-        # Serialize the data and return a single object
+        # define new entry type where contaminants is a list
+        aggregated_data = defaultdict(lambda: {
+            "registration": "",
+            "re_name": "",
+            "physical_location": "",
+            "region_id": "",
+            "event_type": "",
+            "emission_point_name": "",
+            "epn": "",
+            "start_date_time": "",
+            "end_date_time": "",
+            "hours_elapsed": "",
+            "emissions_rate": "",
+            "authorization_comment": "",
+            "cause": "",
+            "actions_taken": "",
+            "basis_used": "",
+            "initial_notice": "",
+            "flag": "",
+            "contaminants": []  
+        })
 
-        serializer = self.get_serializer(event, many = True)
-        return Response(serializer.data)
+        # Process each event and group by registration
+        for event in serialized_data:
+            reg_id = event["registration"]
+
+            if not aggregated_data[reg_id]["registration"]:
+                
+                # Populate main details that are unique
+                aggregated_data[reg_id].update({
+                    "registration": event["registration"],
+                    "re_name": event["re_name"],
+                    "physical_location": event["physical_location"],
+                    "region_id": event["region_id"],
+                    "event_type": event["event_type"],
+                    "emission_point_name": event["emission_point_name"],
+                    "epn": event["epn"],
+                    "start_date_time": event["start_date_time"],
+                    "end_date_time": event["end_date_time"],
+                    "hours_elapsed": event["hours_elapsed"],
+                    "emissions_rate": event["emissions_rate"],
+                    "authorization_comment": event["authorization_comment"],
+                    "cause": event["cause"],
+                    "actions_taken": event["actions_taken"],
+                    "basis_used": event["basis_used"],
+                    "initial_notice": event["initial_notice"],
+                    "flag": event["flag"]
+                })
+
+            # Populate each contaminant data into the contaminant list
+            aggregated_data[reg_id]["contaminants"].append({
+                "name": event["contaminant"],
+                "est_quantity": event["contaminant_est_quantity"],
+                "quantity_unit": event["contaminant_est_quantity_units"],
+                "emission_limit": event["contaminant_emissions_limit"],
+                "emission_limit_unit": event["contaminant_emissions_limit_units"],
+                "authorization": event["authorization"]
+            })
+
+        # Convert defaultdict to list of values
+        return Response(list(aggregated_data.values()))
 
 
 class SuperfundSiteViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, ListModelMixin):
