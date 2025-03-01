@@ -9,7 +9,7 @@
 
 	let { data } = $props()
 
-	const contaminatedSite = data.emissionSite
+	const contaminatedSite = data.emissionEventData
 	const tableInfo = data.tableInfo
 
 	let mapElement: HTMLDivElement | null = $state(null)

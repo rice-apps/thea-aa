@@ -1,17 +1,17 @@
 <script lang="ts">
 	import * as Table from '$lib/components/ui/table/index.js'
-	interface EmissionRow {
-		description: string
-		estimatedQuantity: number
-		units: string
-		emissionLimit: number
-		emissionUnits: string
+	interface ContaminantRow {
+		contaminantName: string
+		estQuantity: string
+		quantityUnit: string
+		emissionLimit: string
+		emissionLimitUnit: string
 		authorization: string
 	}
 	// Array of contaminants based on the image
 
-	let props: { items: EmissionRow[] } = $props()
-	const contaminants: EmissionRow[] = props.items
+	let props: { items: ContaminantRow[] } = $props()
+	const contaminants: ContaminantRow[] = props.items
 </script>
 
 <Table.Root>
@@ -28,11 +28,11 @@
 	<Table.Body>
 		{#each contaminants as contaminant}
 			<Table.Row>
-				<Table.Cell>{contaminant.description}</Table.Cell>
-				<Table.Cell>{contaminant.estimatedQuantity}</Table.Cell>
-				<Table.Cell>{contaminant.units}</Table.Cell>
+				<Table.Cell>{contaminant.contaminantName}</Table.Cell>
+				<Table.Cell>{contaminant.estQuantity}</Table.Cell>
+				<Table.Cell>{contaminant.quantityUnit}</Table.Cell>
 				<Table.Cell>{contaminant.emissionLimit}</Table.Cell>
-				<Table.Cell>{contaminant.emissionUnits}</Table.Cell>
+				<Table.Cell>{contaminant.emissionLimitUnit}</Table.Cell>
 				<Table.Cell>{contaminant.authorization}</Table.Cell>
 			</Table.Row>
 		{/each}
