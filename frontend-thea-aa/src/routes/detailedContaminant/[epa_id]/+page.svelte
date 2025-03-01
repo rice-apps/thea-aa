@@ -5,12 +5,10 @@
 	import { onMount } from 'svelte'
 	import { ChevronLeft, ChevronRight } from 'lucide-svelte/icons'
 	import NearAq from '$lib/components/NearAq.svelte'
-	import DetailedContamTable from '$lib/components/DetailedContamTable.svelte'
 
 	let { data } = $props()
 
 	const contaminatedSite = data.contaminatedSite
-	const tableInfo = data.tableInfo
 
 	let mapElement: HTMLDivElement | null = $state(null)
 
@@ -116,10 +114,6 @@
 					<p class="text-lg underline">Learn More</p>
 					<ChevronRight />
 				</div>
-			</div>
-			<div class="flex flex-col pt-8">
-				<p class="text-xl font-bold">Contaminant List</p>
-				<DetailedContamTable items={tableInfo} />
 			</div>
 		</div>
 	</div>
