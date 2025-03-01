@@ -1,4 +1,0 @@
-cd frontend-thea-aa
-bun lint
-bun format
-bun check
