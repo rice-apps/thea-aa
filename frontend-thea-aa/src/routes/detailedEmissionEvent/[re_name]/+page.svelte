@@ -9,7 +9,7 @@
 
 	let { data } = $props()
 
-	const contaminatedSite = data.emissionSite
+	const emissionSite = data.emissionSite
 	const tableInfo = data.tableInfo
 
 	let mapElement: HTMLDivElement | null = $state(null)
@@ -19,10 +19,10 @@
 
 	// 	if (mapElement) {
 	// 		const map = L.map(mapElement)
-	// 		if (!contaminatedSite.lon || !contaminatedSite.lat) {
+	// 		if (!emissionSite.lon || !emissionSite.lat) {
 	// 			map.setView([29.71929, -95.3906], 13)
 	// 		} else {
-	// 			map.setView([contaminatedSite.lat, contaminatedSite.lon], 13)
+	// 			map.setView([emissionSite.lat, emissionSite.lon], 13)
 	// 		}
 
 	// 		L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
@@ -33,9 +33,9 @@
 	// 		}).addTo(map)
 
 	// 		// ✅ Add a marker at the contaminated site
-	// 		L.marker([contaminatedSite.lat, contaminatedSite.lon])
+	// 		L.marker([emissionSite.lat, emissionSite.lon])
 	// 			.addTo(map)
-	// 			.bindPopup(contaminatedSite.site_name) // Optional: Add a popup
+	// 			.bindPopup(emissionSite.site_name) // Optional: Add a popup
 	// 			.openPopup() // Open popup by default
 	// 	}
 	// })
@@ -56,7 +56,7 @@
 				<p class="text-lg text-foreground">EMISSION EVENTS</p>
 			</div>
 		</a>
-		<p class="text-6xl font-bold">{contaminatedSite?.re_name}</p>
+		<p class="text-6xl font-bold">{emissionSite?.re_name}</p>
 		<p class="pt-3 text-sm text-foreground">
 			<span class="font-bold">Last Updated at</span> 11:45am CST October 19
 		</p>
@@ -86,14 +86,16 @@
 			<div class="grid grid-cols-4 gap-4">
 				<!-- <Statistic
 					title="Incident Tracking Num"
-					stat={contaminatedSite.}
+					stat={emissionSite.}
 				/> -->
-				<Statistic title="RN" stat={contaminatedSite.registration} />
-				<Statistic title="Start time" stat={contaminatedSite.start_date_time} />
-				<Statistic title="End time" stat={contaminatedSite.end_date_time} />
-				<Statistic title="Duration" stat={contaminatedSite.hours_elapsed} />
-				<Statistic title="Location" stat={contaminatedSite.physical_location} />
-				<Statistic title="Cause" stat={contaminatedSite.cause} />
+				<Statistic title="RN" stat={emissionSite.registration} />
+				<Statistic title="Start time" stat={emissionSite.start_date_time} />
+				<Statistic title="End time" stat={emissionSite.end_date_time} />
+				<Statistic title="Duration" stat={emissionSite.hours_elapsed} />
+				<Statistic title="Location" stat={emissionSite.physical_location} />
+				<Statistic title="Latitude" stat={emissionSite.lat ? emissionSite.lat : 'Nan'} />
+				<Statistic title="Longitude" stat={emissionSite.lon ? emissionSite.lon : 'Nan'} />
+				<Statistic title="Cause" stat={emissionSite.cause} />
 			</div>
 			<!-- <div class="flex flex-col pt-8">
 				<p class="pb-5 text-xl font-bold">Background</p>
