@@ -30,8 +30,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
     
-    path("api/superfund/retrieve/<str:epa_id>/", SuperfundSiteViewSet.as_view({'get': 'retrieve'})),  # Custom endpoint
-    path("api/emissions/retrieve/<str:re_name>/", EmissionEventsViewSet.as_view({'get': 'retrieve'}))   # Custom endpoint
+    path("api/superfund/retrieve/", SuperfundSiteViewSet.as_view({'get': 'retrieve'})),  # Custom endpoint
+    path("api/emissions/retrieve/", EmissionEventsViewSet.as_view({'get': 'retrieve'}))   # Custom endpoint
 ]
 
 #http://127.0.0.1:8000/api/superfund/retrieve/?epa_id=TX0000605401
