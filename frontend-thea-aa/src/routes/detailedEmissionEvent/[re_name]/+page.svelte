@@ -55,7 +55,7 @@
 				<p class="text-lg text-foreground">EMISSION EVENTS</p>
 			</div>
 		</a>
-		<p class="text-6xl font-bold">{contaminatedSite?.re_name}</p>
+		<p class="text-6xl font-bold">{emissionSite?.re_name}</p>
 		<p class="pt-3 text-sm text-foreground">
 			<span class="font-bold">Last Updated at</span> 11:45am CST October 19
 		</p>
