@@ -7,7 +7,7 @@
 
 	let amountToShow = $state(3)
 	const goToDetail = (item: EmissionEvent) => {
-		goto(`/detailedEmissionEvent/${item.location}`) // Navigate to the detailed page with the epaId
+		goto(`/detailedEmissionEvent/${item.re_name}`) // Navigate to the detailed page with the epaId
 	}
 </script>
 
@@ -25,7 +25,7 @@
 			{#each props.items.slice(0, amountToShow) as item, rank}
 				<tr onclick={() => goToDetail(item)} class="hover cursor-pointer border-b">
 					<td class="px-4 py-2 text-sm">{rank}</td>
-					<td class="px-4 py-2 text-sm">{item.site}</td>
+					<td class="px-4 py-2 text-sm">{item.re_name}</td>
 				</tr>
 			{/each}
 		</tbody>

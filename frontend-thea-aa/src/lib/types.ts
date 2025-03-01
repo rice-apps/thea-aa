@@ -22,12 +22,6 @@ export interface AirQualitySite {
 	airQuality: number
 }
 
-export interface EmissionEvent {
-	location: LatLong
-	number: number
-	site: string
-}
-
 export interface ContaminatedSite {
 	name: string
 	// location: string
@@ -100,10 +94,16 @@ export interface DetailedContaminatedSite {
 	listingDate: string
 }
 
+export interface EmissionEvent {
+	re_name: string
+}
+
 export interface DetailedEmissionEvent {
 	registration: string
 	re_name: string
 	physical_location: string
+	lon: number
+	lat: number
 	region_id: string
 	event_type: string
 	emission_point_name: string

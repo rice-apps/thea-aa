@@ -1,4 +1,4 @@
-import type { AirQualitySite, ContaminatedSite, EmissionEvent } from '$lib/types'
+import type { AirQualitySite, ContaminatedSite, DetailedEmissionEvent } from '$lib/types'
 
 // export const drinkNames = derived(contaminatedApiData, ($contaminatedApiData) => {
 // 	if ($contaminatedApiData){
@@ -24,21 +24,24 @@ export async function load() {
 		{ station: 'City Square', location: { lat: 51.1657, long: 10.4515 }, airQuality: 65 },
 		{ station: 'Lakefront', location: { lat: 45.5231, long: -122.6765 }, airQuality: 50 }
 	]
-	const emissionEvents: EmissionEvent[] = [
-		{ location: { lat: 51.5074, long: -0.1278 }, number: 120, site: 'Green Park' },
-		{ location: { lat: 40.7128, long: -74.006 }, number: 95, site: 'Central Station' },
-		{ location: { lat: 34.0522, long: -118.2437 }, number: 76, site: 'River View' },
-		{ location: { lat: 34.0522, long: -118.2437 }, number: 88, site: 'Sunset Boulevard' },
-		{ location: { lat: 41.8781, long: -87.6298 }, number: 54, site: 'Downtown Hub' },
-		{ location: { lat: 36.7783, long: -119.4179 }, number: 40, site: 'Seaside' },
-		{ location: { lat: 39.7392, long: -104.9903 }, number: 30, site: 'Mountain Peak' },
-		{ location: { lat: 51.1657, long: 10.4515 }, number: 85, site: 'City Square' },
-		{ location: { lat: 45.5231, long: -122.6765 }, number: 50, site: 'Lakefront' }
-	]
+	// const emissionEvents: EmissionEvent[] = [
+	// 	{ location: { lat: 51.5074, long: -0.1278 }, number: 120, site: 'Green Park' },
+	// 	{ location: { lat: 40.7128, long: -74.006 }, number: 95, site: 'Central Station' },
+	// 	{ location: { lat: 34.0522, long: -118.2437 }, number: 76, site: 'River View' },
+	// 	{ location: { lat: 34.0522, long: -118.2437 }, number: 88, site: 'Sunset Boulevard' },
+	// 	{ location: { lat: 41.8781, long: -87.6298 }, number: 54, site: 'Downtown Hub' },
+	// 	{ location: { lat: 36.7783, long: -119.4179 }, number: 40, site: 'Seaside' },
+	// 	{ location: { lat: 39.7392, long: -104.9903 }, number: 30, site: 'Mountain Peak' },
+	// 	{ location: { lat: 51.1657, long: 10.4515 }, number: 85, site: 'City Square' },
+	// 	{ location: { lat: 45.5231, long: -122.6765 }, number: 50, site: 'Lakefront' }
+	// ]
 	let contaminatedApiData: ContaminatedSite[] = []
+	let emissionEventsApiData: DetailedEmissionEvent[] = []
 	try {
-		const response = await fetch('http://127.0.0.1:8000/api/superfund/retrieve/')
-		contaminatedApiData = await response.json() // assuming the response is in the correct format
+		const superfundResponse = await fetch('http://127.0.0.1:8000/api/superfund/retrieve/')
+		const emissionEventsResponse = await fetch('http://127.0.0.1:8000/api/emission/retrieve/')
+		contaminatedApiData = await superfundResponse.json() // assuming the response is in the correct format
+		emissionEventsApiData = await emissionEventsResponse.json()
 	} catch (error) {
 		console.error('Error fetching contaminated sites:', error)
 		contaminatedApiData = [] // Return an empty array on error
@@ -103,7 +106,7 @@ export async function load() {
 
 	return {
 		airQualitySites: airQualitySites,
-		emissionEvents: emissionEvents,
+		emissionEvents: emissionEventsApiData,
 		contaminatedSites: contaminatedApiData
 	}
 }
