@@ -24,8 +24,8 @@ class EmissionEventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin
         # get the registration ID from the request
         # re_name = kwargs.get('re_name') or request.GET.get('re_name', None)
         re_name = request.GET.get('re_name', '').strip()
-        if not re_name:
-            return Response({"error": "Missing 're_name' parameter"}, status=400)
+        # if not re_name:
+            # return Response({"error": "Missing 're_name' parameter"}, status=400)
 
         if not re_name:
             events = EmissionEvents.objects.all()
