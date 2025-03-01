@@ -110,12 +110,7 @@
 				),
 				emissionEvents: data.emissionEvents.filter(
 					(event) =>
-						calculateDistance(
-							addressCoords.lat,
-							addressCoords.long,
-							event.location.lat,
-							event.location.long
-						) <= radius
+						calculateDistance(addressCoords.lat, addressCoords.long, event.lat, event.lon) <= radius
 				),
 				airQualitySites: data.airQualitySites.filter(
 					() => calculateDistance(addressCoords.lat, addressCoords.long, 5, 5) <= radius // add back site later with lat, long

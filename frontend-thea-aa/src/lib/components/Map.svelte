@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import type { AirQualitySite, ContaminatedSite, EmissionEvent } from '$lib/types'
+	import type { AirQualitySite, ContaminatedSite, DetailedEmissionEvent } from '$lib/types'
 
 	let mapElement: HTMLDivElement | null = null
 
@@ -14,7 +14,7 @@
 	let props: {
 		currentView: string
 		contaminatedSite: ContaminatedSite[] | null
-		emissionEvent: EmissionEvent[] | null
+		emissionEvent: DetailedEmissionEvent[] | null
 		airQualitySite: AirQualitySite[] | null
 	} = $props()
 
@@ -76,8 +76,8 @@
 			})
 		} else if (props.currentView === 'emission' && props.emissionEvent) {
 			props.emissionEvent.forEach((event) => {
-				const marker = L!.marker([event.location.lat, event.location.long]).addTo(map!)
-				marker.bindPopup(`Emission Event: ${event.site}`).openPopup()
+				const marker = L!.marker([event.lat, event.lon]).addTo(map!)
+				marker.bindPopup(`Emission Event: ${event.re_name}`).openPopup()
 			})
 		} else if (props.currentView === 'air quality' && props.airQualitySite) {
 			props.airQualitySite.forEach((site) => {

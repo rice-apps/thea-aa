@@ -38,12 +38,25 @@ class EmissionEventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin
 
         # serialize the filtered data into json 
         serialized_data = EmissionEventSerializer(events, many=True).data
+        # print('serialized data', serialized_data)
 
+        GEOCODE_API_KEY = os.getenv('GEOCODE_API_KEY')
+        geocode_url = f'https://geocode.maps.co/search?q={serialized_data[0]["physical_location"]}&api_key={GEOCODE_API_KEY}'
+        geocode_response = requests.get(geocode_url)
+        geocode_response.raise_for_status()
+        geocode_data = geocode_response.json()
+        default_lat = None
+        default_lon = None
+        if geocode_data:
+            default_lat =  float(geocode_data[0]['lon'])
+            default_lon = float(geocode_data[0]['lat'])
         # define new entry type where contaminants is a list
         aggregated_data = defaultdict(lambda: {
             "registration": "",
             "re_name": "",
             "physical_location": "",
+            "lat": default_lat,
+            "lon": default_lon,
             "region_id": "",
             "event_type": "",
             "emission_point_name": "",

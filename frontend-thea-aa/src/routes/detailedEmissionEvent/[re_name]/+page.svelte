@@ -19,10 +19,10 @@
 
 	// 	if (mapElement) {
 	// 		const map = L.map(mapElement)
-	// 		if (!contaminatedSite.lon || !contaminatedSite.lat) {
+	// 		if (!emissionSite.lon || !emissionSite.lat) {
 	// 			map.setView([29.71929, -95.3906], 13)
 	// 		} else {
-	// 			map.setView([contaminatedSite.lat, contaminatedSite.lon], 13)
+	// 			map.setView([emissionSite.lat, emissionSite.lon], 13)
 	// 		}
 
 	// 		L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
@@ -33,9 +33,9 @@
 	// 		}).addTo(map)
 
 	// 		// ✅ Add a marker at the contaminated site
-	// 		L.marker([contaminatedSite.lat, contaminatedSite.lon])
+	// 		L.marker([emissionSite.lat, emissionSite.lon])
 	// 			.addTo(map)
-	// 			.bindPopup(contaminatedSite.site_name) // Optional: Add a popup
+	// 			.bindPopup(emissionSite.site_name) // Optional: Add a popup
 	// 			.openPopup() // Open popup by default
 	// 	}
 	// })
@@ -53,18 +53,18 @@
 		<a href="/">
 			<div class="flex flex-row items-center">
 				<ChevronLeft class="text-foreground" />
-				<p class="text-lg text-foreground">EMISSION EVENTS</p>
+				<p class="text-foreground text-lg">EMISSION EVENTS</p>
 			</div>
 		</a>
-		<p class="text-6xl font-bold">{contaminatedSite?.re_name}</p>
-		<p class="pt-3 text-sm text-foreground">
+		<p class="text-6xl font-bold">{emissionSite?.re_name}</p>
+		<p class="text-foreground pt-3 text-sm">
 			<span class="font-bold">Last Updated at</span> 11:45am CST October 19
 		</p>
 	</div>
 	<div class="mt-3 flex flex-row">
 		<div class="w-1/4 flex-col">
 			<div bind:this={mapElement} class="h-80 w-full"></div>
-			<div class="mt-5 rounded bg-muted p-5">
+			<div class="bg-muted mt-5 rounded p-5">
 				<p class="text-xl font-bold">Pollution in the area</p>
 				<p class="font-bold">Station</p>
 				<!-- use for each here for real thing -->
@@ -78,7 +78,7 @@
 				<p class="mt-3">Wildcat Gas Plant</p>
 			</div>
 		</div>
-		<div class="ml-10 mr-10 w-full rounded bg-muted p-6">
+		<div class="bg-muted ml-10 mr-10 w-full rounded p-6">
 			<div class="flex flex-row">
 				<QualityIndicator quality={39.65} name="Open" />
 				<p class="pb-2 pl-4 text-xl font-bold">Site Overview</p>
@@ -86,14 +86,16 @@
 			<div class="grid grid-cols-4 gap-4">
 				<!-- <Statistic
 					title="Incident Tracking Num"
-					stat={contaminatedSite.}
+					stat={emissionSite.}
 				/> -->
-				<Statistic title="RN" stat={contaminatedSite.registration} />
-				<Statistic title="Start time" stat={contaminatedSite.start_date_time} />
-				<Statistic title="End time" stat={contaminatedSite.end_date_time} />
-				<Statistic title="Duration" stat={contaminatedSite.hours_elapsed} />
-				<Statistic title="Location" stat={contaminatedSite.physical_location} />
-				<Statistic title="Cause" stat={contaminatedSite.cause} />
+				<Statistic title="RN" stat={emissionSite.registration} />
+				<Statistic title="Start time" stat={emissionSite.start_date_time} />
+				<Statistic title="End time" stat={emissionSite.end_date_time} />
+				<Statistic title="Duration" stat={emissionSite.hours_elapsed} />
+				<Statistic title="Location" stat={emissionSite.physical_location} />
+				<Statistic title="Latitude" stat={emissionSite.lat ? emissionSite.lat : 'Nan'} />
+				<Statistic title="Longitude" stat={emissionSite.lon ? emissionSite.lon : 'Nan'} />
+				<Statistic title="Cause" stat={emissionSite.cause} />
 			</div>
 			<!-- <div class="flex flex-col pt-8">
 				<p class="pb-5 text-xl font-bold">Background</p>
