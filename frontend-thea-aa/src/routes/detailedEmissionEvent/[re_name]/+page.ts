@@ -24,8 +24,6 @@ export async function load({ params }) {
 				emissionLimitUnit: contaminant.emission_limit_unit,
 				authorization: contaminant.authorization
 			}))
-
-			console.log('tableInfo', tableInfo)
 			return { emissionEventData, tableInfo }
 		} else {
 			throw new Error('Data is empty')
