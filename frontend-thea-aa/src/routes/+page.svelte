@@ -10,9 +10,6 @@
 	import { Wind } from 'lucide-svelte'
 	import { ListFilter } from 'lucide-svelte'
 	import AirQualityRanking from '$lib/components/AirQualityRanking.svelte'
-	// import L from "@types/leaflet"
-	// import { types } from 'util'
-	// import * as L from 'leaflet'
 	import Toast from '$lib/components/Toast.svelte'
 	import { writable } from 'svelte/store'
 
