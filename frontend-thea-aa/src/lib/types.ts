@@ -110,11 +110,6 @@ export interface DetailedEmissionEvent {
 	epn: string
 	start_date_time: string
 	end_date_time: string
-	contaminant: string
-	contaminant_est_quantity: string
-	contaminant_est_quantity_units: string
-	contaminant_emissions_limit: string
-	contaminant_emissions_limit_units: string
 	authorization: string
 	hours_elapsed: string
 	emissions_rate: string
@@ -124,4 +119,14 @@ export interface DetailedEmissionEvent {
 	basis_used: string
 	initial_notice: string
 	flag: string
+	contaminants: Contaminant[]
+}
+
+export interface Contaminant {
+	name: string
+	est_quantity: string
+	quantity_unit: string
+	emission_limit: string
+	emission_limit_unit: string
+	authorization: string
 }

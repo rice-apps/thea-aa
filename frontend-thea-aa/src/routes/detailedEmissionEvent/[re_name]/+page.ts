@@ -1,84 +1,46 @@
 import type { DetailedEmissionEvent } from '$lib/types'
 
 export async function load({ params }) {
-	// let airQualitySites: AirQualitySite[] = []
-	// let emissionEvents: EmissionEvent[] = []
-	// let contaminatedSites: ContaminatedSite[] = []
-
-	// randomly generate some data
-
-	// const contaminatedSite: DetailedContaminatedSite = {
-	// 	status: 'active',
-	// 	name: 'Sol Lynn/Industrial Transformers (Houston TX)',
-	// 	location: { lat: 29.678889, long: -95.398611 },
-	// 	hazardScore: 39.65,
-	// 	regionID: 6,
-	// 	siteID: 'TXD980873327 (PDF)',
-	// 	locationName: 'Harris County, Houston, Texas',
-	// 	constructionComplete: '9/29/1993',
-	// 	partialDeletion: 'No',
-	// 	proposedDate: '10/15/1984 (PDF)',
-	// 	listingDate: '03/31/1989 (PDF)'
-	// }
-	let bruh: DetailedEmissionEvent[]
+	let tableInfo: ContaminantRow[] = []
 	let emissionEventData: DetailedEmissionEvent
-	console.log('params', params)
 	const { re_name } = params
-	console.log('re_name', re_name)
 
 	try {
 		const response = await fetch('http://127.0.0.1:8000/api/emission/retrieve/?re_name=' + re_name)
-		console.log('bruh', response)
-		bruh = await response.json() // assuming the response is in the correct format
-		emissionEventData = bruh[0]
+		if (!response.ok) {
+			throw new Error(`HTTP error! Status: ${response.status}`)
+		}
+
+		const data = await response.json()
+		console.log('response', data)
+
+		if (Array.isArray(data) && data.length > 0) {
+			emissionEventData = data[0]
+			tableInfo = emissionEventData.contaminants.map((contaminant) => ({
+				contaminantName: contaminant.name,
+				estQuantity: contaminant.est_quantity,
+				quantityUnit: contaminant.quantity_unit,
+				emissionLimit: contaminant.emission_limit,
+				emissionLimitUnit: contaminant.emission_limit_unit,
+				authorization: contaminant.authorization
+			}))
+
+			console.log('tableInfo', tableInfo)
+			return { emissionEventData, tableInfo }
+		} else {
+			throw new Error('Data is empty')
+		}
 	} catch (error) {
 		console.error('Error fetching contaminated sites:', error)
 		throw new Error('Error fetching contaminated sites:')
 	}
+}
 
-	interface EmissionRow {
-		description: string
-		estimatedQuantity: number
-		units: string
-		emissionLimit: number
-		emissionUnits: string
-		authorization: string
-	}
-
-	const tableInfo: EmissionRow[] = [
-		{
-			description: 'CO',
-			estimatedQuantity: 45.16,
-			units: 'Pounds',
-			emissionLimit: 0.0,
-			emissionUnits: 'Pounds',
-			authorization: 'NRSP 175554'
-		},
-		{
-			description: 'CO',
-			estimatedQuantity: 45.16,
-			units: 'Pounds',
-			emissionLimit: 0.0,
-			emissionUnits: 'Pounds',
-			authorization: 'NRSP 175554'
-		},
-		{
-			description: 'CO',
-			estimatedQuantity: 45.16,
-			units: 'Pounds',
-			emissionLimit: 0.0,
-			emissionUnits: 'Pounds',
-			authorization: 'NRSP 175554'
-		},
-		{
-			description: 'CO',
-			estimatedQuantity: 45.16,
-			units: 'Pounds',
-			emissionLimit: 0.0,
-			emissionUnits: 'Pounds',
-			authorization: 'NRSP 175554'
-		}
-	]
-
-	return { emissionSite: emissionEventData, tableInfo: tableInfo }
+interface ContaminantRow {
+	contaminantName: string
+	estQuantity: string
+	quantityUnit: string
+	emissionLimit: string
+	emissionLimitUnit: string
+	authorization: string
 }

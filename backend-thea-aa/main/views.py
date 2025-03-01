@@ -22,12 +22,14 @@ class EmissionEventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin
         so each unique registration contains a list of contaminants.
         """
         # get the registration ID from the request
-        re_name = kwargs.get('re_name') or request.GET.get('re_name', None)
+        # re_name = kwargs.get('re_name') or request.GET.get('re_name', None)
+        re_name = request.GET.get('re_name', '').strip()
+        if not re_name:
+            return Response({"error": "Missing 're_name' parameter"}, status=400)
 
         if not re_name:
             events = EmissionEvents.objects.all()
         else:
-            # filter all the objests with the given registration
             events = EmissionEvents.objects.filter(re_name=re_name)
 
         # if the registration id is invalid
@@ -76,9 +78,9 @@ class EmissionEventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin
 
         # Process each event and group by registration
         for event in serialized_data:
-            reg_id = event["registration"]
+            re_name_id  = event["re_name"]
 
-            if not aggregated_data[reg_id]["registration"]:
+            if not aggregated_data[re_name_id]["registration"]:
                 time = float(event["hours_elapsed"])
                 if time < 1:
 
@@ -89,7 +91,7 @@ class EmissionEventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin
                 print(formatted_time)
 
                 # Populate main details that are unique
-                aggregated_data[reg_id].update({
+                aggregated_data[re_name_id].update({
                     "registration": event["registration"],
                     "re_name": event["re_name"],
                     "physical_location": event["physical_location"],
@@ -110,7 +112,7 @@ class EmissionEventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin
                 })
 
             # Populate each contaminant data into the contaminant list
-            aggregated_data[reg_id]["contaminants"].append({
+            aggregated_data[re_name_id]["contaminants"].append({
                 "name": event["contaminant"],
                 "est_quantity": event["contaminant_est_quantity"],
                 "quantity_unit": event["contaminant_est_quantity_units"],
