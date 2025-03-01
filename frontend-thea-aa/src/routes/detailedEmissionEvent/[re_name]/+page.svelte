@@ -1,8 +1,7 @@
 <script lang="ts">
 	import QualityIndicator from '$lib/components/QualityIndicator.svelte'
 	import Statistic from '$lib/components/Statistic.svelte'
-	// import type { ContaminatedSite, DetailedContaminatedSite } from '$lib/types'
-	// import { onMount } from 'svelte'
+	import { onMount } from 'svelte'
 	import { ChevronLeft } from 'lucide-svelte/icons'
 	import NearAq from '$lib/components/NearAq.svelte'
 	import DetailedEmissionTable from '$lib/components/DetailedEmissionTable.svelte'
@@ -14,31 +13,31 @@
 
 	let mapElement: HTMLDivElement | null = $state(null)
 
-	// onMount(async () => {
-	// 	const L = (await import('leaflet')).default
+	onMount(async () => {
+		const L = (await import('leaflet')).default
 
-	// 	if (mapElement) {
-	// 		const map = L.map(mapElement)
-	// 		if (!emissionSite.lon || !emissionSite.lat) {
-	// 			map.setView([29.71929, -95.3906], 13)
-	// 		} else {
-	// 			map.setView([emissionSite.lat, emissionSite.lon], 13)
-	// 		}
+		if (mapElement) {
+			const map = L.map(mapElement)
+			if (!emissionSite.lon || !emissionSite.lat) {
+				map.setView([29.71929, -95.3906], 13)
+			} else {
+				map.setView([emissionSite.lat, emissionSite.lon], 13)
+			}
 
-	// 		L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-	// 			attribution: `&copy;<a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>,
-	// 	&copy;<a href="https://carto.com/attributions" target="_blank">CARTO</a>`,
-	// 			subdomains: 'abcd',
-	// 			maxZoom: 19
-	// 		}).addTo(map)
+			L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+				attribution: `&copy;<a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>,
+		&copy;<a href="https://carto.com/attributions" target="_blank">CARTO</a>`,
+				subdomains: 'abcd',
+				maxZoom: 19
+			}).addTo(map)
 
-	// 		// ✅ Add a marker at the contaminated site
-	// 		L.marker([emissionSite.lat, emissionSite.lon])
-	// 			.addTo(map)
-	// 			.bindPopup(emissionSite.site_name) // Optional: Add a popup
-	// 			.openPopup() // Open popup by default
-	// 	}
-	// })
+			// ✅ Add a marker at the contaminated site
+			L.marker([emissionSite.lat, emissionSite.lon])
+				.addTo(map)
+				.bindPopup(emissionSite.re_name) // Optional: Add a popup
+				.openPopup() // Open popup by default
+		}
+	})
 </script>
 
 <link
@@ -95,10 +94,11 @@
 				<Statistic title="Location" stat={emissionSite.physical_location} />
 				<Statistic title="Latitude" stat={emissionSite.lat ? emissionSite.lat : 'Nan'} />
 				<Statistic title="Longitude" stat={emissionSite.lon ? emissionSite.lon : 'Nan'} />
-				<Statistic title="Cause" stat={emissionSite.cause} />
 			</div>
-			<!-- <div class="flex flex-col pt-8">
-				<p class="pb-5 text-xl font-bold">Background</p>
+			<div class="flex flex-col pt-8">
+				<Statistic title="Cause" stat={emissionSite.cause} />
+
+				<!-- <p class="pb-5 text-xl font-bold">Background</p>
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vestibulum elit ac
 					pellentesque consectetur. In id enim eu turpis ultricies eleifend at ut nunc. Etiam vel
@@ -108,8 +108,8 @@
 				<div class="mt-3 flex flex-row items-center">
 					<p class="text-lg underline">Learn More</p>
 					<ChevronRight />
-				</div>
-			</div> -->
+				</div> -->
+			</div>
 			<div class="flex flex-col pt-8">
 				<p class="text-xl font-bold">Contaminant List</p>
 				<DetailedEmissionTable items={tableInfo} />

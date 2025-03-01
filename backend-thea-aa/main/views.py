@@ -46,8 +46,10 @@ class EmissionEventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin
         default_lat = None
         default_lon = None
         if geocode_data:
-            default_lat =  float(geocode_data[0]['lon'])
-            default_lon = float(geocode_data[0]['lat'])
+            default_lat =  float(geocode_data[0]['lat'])
+            default_lon = float(geocode_data[0]['lon'])
+        print(default_lat, default_lon)
+
         # define new entry type where contaminants is a list
         aggregated_data = defaultdict(lambda: {
             "registration": "",
@@ -77,7 +79,15 @@ class EmissionEventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin
             reg_id = event["registration"]
 
             if not aggregated_data[reg_id]["registration"]:
-                
+                time = float(event["hours_elapsed"])
+                if time < 1:
+
+                    formatted_time = str(round(time * 60, 2)) + " Minutes"
+                else:
+                    formatted_time = str(round(time, 0)) + " Hours"
+
+                print(formatted_time)
+
                 # Populate main details that are unique
                 aggregated_data[reg_id].update({
                     "registration": event["registration"],
@@ -89,7 +99,7 @@ class EmissionEventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin
                     "epn": event["epn"],
                     "start_date_time": event["start_date_time"],
                     "end_date_time": event["end_date_time"],
-                    "hours_elapsed": event["hours_elapsed"],
+                    "hours_elapsed": formatted_time,
                     "emissions_rate": event["emissions_rate"],
                     "authorization_comment": event["authorization_comment"],
                     "cause": event["cause"],
