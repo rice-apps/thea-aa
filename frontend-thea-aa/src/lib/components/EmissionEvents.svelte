@@ -1,11 +1,39 @@
 <script lang="ts">
 	import type { EmissionEvent } from '$lib/types'
+	import { onMount } from 'svelte'
 	import LoadMore from './LoadMore.svelte'
+	import { ArrowLeft } from 'lucide-svelte'
+	import { ArrowRight } from 'lucide-svelte'
+	import { Button } from '$lib/components/ui/button'
 	import { goto } from '$app/navigation'
 
 	let props: { items: EmissionEvent[] } = $props()
 
-	let amountToShow = $state(3)
+	let rows = []
+	let page = $state(0)
+	let allPages = $state<EmissionEvent[][]>([])
+	let itemsPerPage = 5
+	let pageOptions = []
+
+	const paginate = (items: EmissionEvent[]) => {
+		const pages = Math.ceil(items.length / itemsPerPage)
+		const paginatedItems = Array.from({ length: pages }, (_, index) => {
+			const start = index * itemsPerPage
+			return items.slice(start, start + itemsPerPage)
+		})
+		return paginatedItems
+	}
+
+	const setPage = (pageNumber: number) => {
+		if (pageNumber >= 0 && pageNumber < allPages.length) {
+			page = pageNumber
+		}
+	}
+
+	onMount(() => {
+		allPages = paginate(props.items)
+	})
+
 	const goToDetail = (item: EmissionEvent) => {
 		goto(`/detailedEmissionEvent/${item.re_name}`) // Navigate to the detailed page with the epaId
 	}
@@ -22,16 +50,25 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#each props.items.slice(0, amountToShow) as item, rank}
+			{#each props.items.slice(page * itemsPerPage, (page + 1) * itemsPerPage) as item}
 				<tr onclick={() => goToDetail(item)} class="hover cursor-pointer border-b">
-					<td class="px-4 py-2 text-sm">{rank}</td>
+					<!-- <td class="px-4 py-2 text-sm">{item.}</td> -->
 					<td class="px-4 py-2 text-sm">{item.re_name}</td>
 				</tr>
 			{/each}
 		</tbody>
 	</table>
 
-	<div class="pt-4">
-		<LoadMore onclick={() => (amountToShow += 3)} />
+	<div class="content-center pt-4">
+		<Button on:click={() => setPage(page - 1)} class="bg-primary-foreground"
+			><ArrowLeft size={10} class="text-primary"></ArrowLeft></Button
+		>
+		{#each allPages as pageRows, i}
+			<Button on:click={() => setPage(i)} class="bg-primary-foreground text-primary">{i + 1}</Button
+			>
+		{/each}
+		<Button on:click={() => setPage(page + 1)} class="bg-primary-foreground"
+			><ArrowRight size={10} class="text-primary"></ArrowRight></Button
+		>
 	</div>
 </div>
