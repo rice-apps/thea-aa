@@ -105,7 +105,8 @@
 				contaminatedSites: data.contaminatedSites.filter(
 					() => calculateDistance(addressCoords.lat, addressCoords.long, 5, 5) <= radius // add back site later site.location.lat
 				),
-				emissionEvents: data.emissionEvents.filter(
+				emissionEvents: data.emissionEvents
+				.filter(
 					(event) =>
 						calculateDistance(addressCoords.lat, addressCoords.long, event.lat, event.lon) <= radius
 				),
