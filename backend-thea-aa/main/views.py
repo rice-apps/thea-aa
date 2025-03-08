@@ -43,13 +43,10 @@ class EmissionEventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin
         GEOCODE_API_KEY = os.getenv('GEOCODE_API_KEY')
         geocode_url = f'https://geocode.maps.co/search?q={serialized_data[0]["physical_location"]}&api_key={GEOCODE_API_KEY}'
         geocode_response = requests.get(geocode_url)
-        geocode_response.raise_for_status()
         geocode_data = geocode_response.json()
-        default_lat = None
-        default_lon = None
-        if geocode_data:
-            default_lat =  float(geocode_data[0]['lat'])
-            default_lon = float(geocode_data[0]['lon'])
+
+        default_lat =  float(geocode_data[0]['lat']) if geocode_data else None
+        default_lon = float(geocode_data[0]['lon']) if geocode_data else None
         print(default_lat, default_lon)
 
         # define new entry type where contaminants is a list
@@ -156,7 +153,6 @@ class SuperfundSiteViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin,
         country = "US"
         geocode_url = f'https://geocode.maps.co/search?street={street_address}&city={city}&county={county}&state={state}&postalcode={zip_code}&country={country}&api_key={GEOCODE_API_KEY}'
         geocode_response = requests.get(geocode_url)
-        geocode_response.raise_for_status()
         geocode_data = geocode_response.json()
         if geocode_data:
             site.lon =  float(geocode_data[0]['lon'])
