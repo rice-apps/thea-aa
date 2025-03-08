@@ -7,7 +7,6 @@ import time
 from selenium.webdriver.support.ui import Select
 import pandas as pd
 from xls2xlsx import XLS2XLSX
-import pandas as pd
 import os  
 
 

@@ -1,14 +1,6 @@
 <script lang="ts">
 	import * as Table from '$lib/components/ui/table/index.js'
-	interface ContaminantRow {
-		contaminantName: string
-		estQuantity: string
-		quantityUnit: string
-		emissionLimit: string
-		emissionLimitUnit: string
-		authorization: string
-	}
-	// Array of contaminants based on the image
+	import type { ContaminantRow } from '$lib/types'
 
 	let props: { items: ContaminantRow[] } = $props()
 	const contaminants: ContaminantRow[] = props.items

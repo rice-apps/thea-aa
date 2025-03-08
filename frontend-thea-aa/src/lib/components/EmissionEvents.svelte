@@ -49,7 +49,9 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#each props.items.slice(page * itemsPerPage, (page + 1) * itemsPerPage).entries() as [rank, item]}
+			{#each props.items
+				.slice(page * itemsPerPage, (page + 1) * itemsPerPage)
+				.entries() as [rank, item]}
 				<tr onclick={() => goToDetail(item)} class="hover cursor-pointer border-b">
 					<td class="px-4 py-2 text-sm">{rank}</td>
 					<td class="px-4 py-2 text-sm">{item.re_name}</td>

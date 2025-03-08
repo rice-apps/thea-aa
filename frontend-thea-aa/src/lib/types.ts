@@ -16,6 +16,15 @@ export interface GeocodeResponse {
 	type: string
 }
 
+export interface ContaminantRow {
+	contaminantName: string
+	estQuantity: string
+	quantityUnit: string
+	emissionLimit: string
+	emissionLimitUnit: string
+	authorization: string
+}
+
 export interface AirQualitySite {
 	station: string
 	location: LatLong
