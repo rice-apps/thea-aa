@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { EmissionEvent } from '$lib/types'
 	import { onMount } from 'svelte'
-	import LoadMore from './LoadMore.svelte'
 	import { ArrowLeft } from 'lucide-svelte'
 	import { ArrowRight } from 'lucide-svelte'
 	import { Button } from '$lib/components/ui/button'
@@ -9,11 +8,10 @@
 
 	let props: { items: EmissionEvent[] } = $props()
 
-	let rows = []
 	let page = $state(0)
 	let allPages = $state<EmissionEvent[][]>([])
+	let indices = $state<number[]>([])
 	let itemsPerPage = 5
-	let pageOptions = []
 
 	const paginate = (items: EmissionEvent[]) => {
 		const pages = Math.ceil(items.length / itemsPerPage)
@@ -32,6 +30,7 @@
 
 	onMount(() => {
 		allPages = paginate(props.items)
+		indices = Array.from({ length: allPages.length }, (_, i) => i)
 	})
 
 	const goToDetail = (item: EmissionEvent) => {
@@ -63,7 +62,7 @@
 		<Button on:click={() => setPage(page - 1)} class="bg-primary-foreground"
 			><ArrowLeft size={10} class="text-primary"></ArrowLeft></Button
 		>
-		{#each allPages as pageRows, i}
+		{#each indices as i}
 			<Button on:click={() => setPage(i)} class="bg-primary-foreground text-primary">{i + 1}</Button
 			>
 		{/each}
