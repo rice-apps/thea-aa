@@ -1,17 +1,19 @@
 <script lang="ts">
 	import type { EmissionEvent } from '$lib/types'
 	import { onMount } from 'svelte'
-	import { goto } from '$app/navigation'
 	import ArrowLeft from 'lucide-svelte/icons/arrow-left'
 	import ArrowRight from 'lucide-svelte/icons/arrow-right'
-	import Button from '$lib/components/ui/button/button.svelte'
+	import { Button } from '$lib/components/ui/button'
+	import { goto } from '$app/navigation'
 
 	let props: { items: EmissionEvent[] } = $props()
 
 	let page = $state(0)
 	let allPages = $state<EmissionEvent[][]>([])
-	let indices = $state<number[]>([])
+	let startPage = $state(0)
+	let endPage = $state(0)
 	let itemsPerPage = 5
+	let numPageButtons = 5
 
 	const paginate = (items: EmissionEvent[]) => {
 		const pages = Math.ceil(items.length / itemsPerPage)
@@ -25,12 +27,19 @@
 	const setPage = (pageNumber: number) => {
 		if (pageNumber >= 0 && pageNumber < allPages.length) {
 			page = pageNumber
+			if (
+				pageNumber > Math.floor(numPageButtons / 2) &&
+				pageNumber < allPages.length - Math.floor(numPageButtons / 2)
+			) {
+				startPage = Math.max(1, page - Math.floor(numPageButtons / 2))
+			}
+			endPage = Math.min(startPage + numPageButtons, allPages.length - 1)
 		}
 	}
 
 	onMount(() => {
 		allPages = paginate(props.items)
-		indices = Array.from({ length: allPages.length }, (_, i) => i)
+		endPage = Math.min(allPages.length, numPageButtons)
 	})
 
 	const goToDetail = (item: EmissionEvent) => {
@@ -64,8 +73,10 @@
 		<Button on:click={() => setPage(page - 1)} class="bg-primary-foreground"
 			><ArrowLeft size={10} class="text-primary"></ArrowLeft></Button
 		>
-		{#each indices as i}
-			<Button on:click={() => setPage(i)} class="bg-primary-foreground text-primary">{i + 1}</Button
+		{#each Array.from({ length: endPage - startPage }, (_, i) => i + startPage) as i}
+			<Button
+				on:click={() => setPage(i)}
+				class={page === i ? '' : 'bg-primary-foreground text-primary'}>{i + 1}</Button
 			>
 		{/each}
 		<Button on:click={() => setPage(page + 1)} class="bg-primary-foreground"
