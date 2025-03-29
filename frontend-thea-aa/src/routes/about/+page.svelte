@@ -76,7 +76,7 @@
 			<li>
 				<span class="font-medium">Team Leads:</span>
 				<ul class="ml-4 list-disc">
-					<li>Aiden, Rice '25</li>
+					<li>Aidan, Rice '25</li>
 				</ul>
 			</li>
 
