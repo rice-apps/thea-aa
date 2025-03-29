@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { EmissionEvent } from '$lib/types'
 	import { onMount } from 'svelte'
-	import { ArrowLeft } from 'lucide-svelte'
-	import { ArrowRight } from 'lucide-svelte'
-	import { Button } from '$lib/components/ui/button'
 	import { goto } from '$app/navigation'
+	import ArrowLeft from 'lucide-svelte/icons/arrow-left'
+	import ArrowRight from 'lucide-svelte/icons/arrow-right'
+	import Button from '$lib/components/ui/button/button.svelte'
 
 	let props: { items: EmissionEvent[] } = $props()
 
