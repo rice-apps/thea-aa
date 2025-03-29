@@ -3,16 +3,32 @@ export interface LatLong {
 	long: number
 }
 
+export interface GeocodeResponse {
+	class: string
+	display_name: string
+	importance: number
+	lat: string
+	licence: string
+	lon: string
+	osm_id: number
+	osm_type: string
+	place_id: number
+	type: string
+}
+
+export interface ContaminantRow {
+	contaminantName: string
+	estQuantity: string
+	quantityUnit: string
+	emissionLimit: string
+	emissionLimitUnit: string
+	authorization: string
+}
+
 export interface AirQualitySite {
 	station: string
 	location: LatLong
 	airQuality: number
-}
-
-export interface EmissionEvent {
-	location: LatLong
-	number: number
-	site: string
 }
 
 export interface ContaminatedSite {
@@ -24,6 +40,8 @@ export interface ContaminatedSite {
 	county: string
 	state: string
 	street_address: string
+	lon: number
+	lat: number
 	zip_code: string
 	region: string
 	npl_status: string
@@ -83,4 +101,41 @@ export interface DetailedContaminatedSite {
 	partialDeletion: string
 	proposedDate: string
 	listingDate: string
+}
+
+export interface EmissionEvent {
+	re_name: string
+}
+
+export interface DetailedEmissionEvent {
+	registration: string
+	re_name: string
+	physical_location: string
+	lon: number
+	lat: number
+	region_id: string
+	event_type: string
+	emission_point_name: string
+	epn: string
+	start_date_time: string
+	end_date_time: string
+	authorization: string
+	hours_elapsed: string
+	emissions_rate: string
+	authorization_comment: string
+	cause: string
+	actions_taken: string
+	basis_used: string
+	initial_notice: string
+	flag: string
+	contaminants: Contaminant[]
+}
+
+export interface Contaminant {
+	name: string
+	est_quantity: string
+	quantity_unit: string
+	emission_limit: string
+	emission_limit_unit: string
+	authorization: string
 }

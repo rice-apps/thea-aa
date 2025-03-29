@@ -1,3 +1,6 @@
 venv
 node_modules
 .DS_Store
+.env
+backend-thea-aa/.env
+**/*/__pycache__

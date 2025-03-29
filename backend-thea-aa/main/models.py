@@ -7,17 +7,34 @@ from django.db import models
 class EmissionEvents(models.Model):
 
     # Initialize fields for the Django model storing emission events
+    registration = models.TextField()
     re_name = models.TextField()
     physical_location = models.TextField()
+    region_id = models.TextField()
+    event_type = models.TextField()
+    emission_point_name = models.TextField()
+    epn = models.TextField()
     start_date_time = models.TextField()
     end_date_time = models.TextField()
     contaminant = models.TextField()
-    estimated_quantity = models.TextField()
-    emissions_limit = models.TextField()
-    limit_units = models.TextField()
+    
+    # Fields for estimated contaminant table data
+    contaminant_est_quantity = models.TextField() 
+    contaminant_est_quantity_units = models.TextField(default="")
+    contaminant_emissions_limit = models.TextField()  
+    contaminant_emissions_limit_units = models.TextField()  
+    authorization = models.TextField(default="")
+    
     hours_elapsed = models.TextField()
     emissions_rate = models.TextField()
-    flag = models.IntegerField()
+    authorization_comment = models.TextField()
+    cause = models.TextField()
+    actions_taken = models.TextField()
+    basis_used = models.TextField()
+    initial_notice = models.TextField()
+    flag = models.CharField(max_length = 1)
+
+
 
 class SuperfundSite(models.Model):
 
@@ -52,5 +69,5 @@ class SuperfundSite(models.Model):
     non_npl_status_date = models.TextField()  
     superfund_site_profile_page_url = models.TextField()
     rcra_handler_id_name = models.TextField() 
-    latitude = models.FloatField(null=True, blank=True)
-    longitude = models.FloatField(null=True, blank=True)
+    lon = models.FloatField(null=True)
+    lat = models.FloatField(null=True)

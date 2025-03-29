@@ -10,9 +10,6 @@
 	import { Wind } from 'lucide-svelte'
 	import { ListFilter } from 'lucide-svelte'
 	import AirQualityRanking from '$lib/components/AirQualityRanking.svelte'
-	// import L from "@types/leaflet"
-	// import { types } from 'util'
-	// import * as L from 'leaflet'
 	import Toast from '$lib/components/Toast.svelte'
 	import { writable } from 'svelte/store'
 
@@ -110,12 +107,7 @@
 				),
 				emissionEvents: data.emissionEvents.filter(
 					(event) =>
-						calculateDistance(
-							addressCoords.lat,
-							addressCoords.long,
-							event.location.lat,
-							event.location.long
-						) <= radius
+						calculateDistance(addressCoords.lat, addressCoords.long, event.lat, event.lon) <= radius
 				),
 				airQualitySites: data.airQualitySites.filter(
 					() => calculateDistance(addressCoords.lat, addressCoords.long, 5, 5) <= radius // add back site later with lat, long
@@ -146,11 +138,12 @@
 
 <svelte:window bind:innerHeight={height} />
 
-<header class="flex items-center px-12 py-8">
+<header class="block items-center px-12 py-8">
 	<h1 class="text-3xl font-bold">Texas Environment Tracker</h1>
+	<h2 class="ml py-4">Last updated at</h2>
 </header>
 
-<main class="flex h-full space-x-9 p-10">
+<main class="ph-10 flex h-full space-x-9">
 	<Toast bind:message={$toastMessage} bind:visible={$toastVisible} duration={3000} />
 	<aside class="w-1/3 rounded-lg p-8 shadow-lg">
 		<div class="mb-4 flex items-center space-x-2">
@@ -165,23 +158,34 @@
 				placeholder="Range (miles)"
 				class="w-1/3 rounded border p-2"
 			/>
-			<Button on:click={applyFilter} disabled={isLoading}><ListFilter></ListFilter></Button>
+			<Button class="bg-primary-foreground" on:click={applyFilter} disabled={isLoading}
+				><ListFilter class="text-primary"></ListFilter></Button
+			>
 		</div>
 		{#if isLoading}
 			<div class="py-2 text-center text-sm">Loading...</div>
 		{/if}
 		<div class="flex space-x-2 overflow-x-auto whitespace-nowrap py-2">
-			<Button on:click={() => handleViewChange('superfund')} class="flex flex-col items-center">
-				<Building></Building>
-				<span class="text-xs">Superfund</span>
+			<Button
+				on:click={() => handleViewChange('superfund')}
+				class="grid h-full place-items-center bg-primary-foreground"
+			>
+				<Building size={20} class="text-primary"></Building>
+				<span class="text-xs text-primary">Superfund</span>
 			</Button>
-			<Button on:click={() => handleViewChange('emission')} class="flex flex-col items-center">
-				<Cloudy></Cloudy>
-				<span class="text-xs">Emission Events</span>
+			<Button
+				on:click={() => handleViewChange('emission')}
+				class="grid h-full place-items-center bg-primary-foreground"
+			>
+				<Cloudy size={20} class="text-primary"></Cloudy>
+				<span class="text-xs text-primary">Emission Events</span>
 			</Button>
-			<Button on:click={() => handleViewChange('air quality')} class="flex flex-col items-center">
-				<Wind></Wind>
-				<span class="text-xs">Air Quality</span>
+			<Button
+				on:click={() => handleViewChange('air quality')}
+				class="grid h-full place-items-center bg-primary-foreground"
+			>
+				<Wind size={20} class="text-primary"></Wind>
+				<span class="text-xs text-primary">Air Quality</span>
 			</Button>
 		</div>
 

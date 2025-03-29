@@ -7,7 +7,6 @@ import time
 from selenium.webdriver.support.ui import Select
 import pandas as pd
 from xls2xlsx import XLS2XLSX
-import pandas as pd
 import os  
 
 
@@ -70,6 +69,8 @@ def download_excel_file(driver):
         
 # removed the unnecessary 55 lines and renames the file
 def remove_lines_and_rename(download_path):
+    print(os.listdir(download_path))
+
     files = glob.glob(os.path.join(download_path, 'cqry*.xls')) # Downloaded file
     old_name = files[0]  # Assume there's only one matching file
     filename, ext = os.path.splitext(os.path.basename(old_name))
@@ -92,30 +93,31 @@ def convert_to_csv(downloaded_path):
     # relative paths to the stored .xls file
     xls_file_path = downloaded_path + "/cqry.xls"
     print("xls saved file path: ",xls_file_path)
-    xlsx_file_path = "backend-thea-aa/downloads/converted/converted.xlsx"
+    xlsx_file_path = "backend-thea-aa/main/data/superfund/superfund.xlsx"
 
     # convert to xlxs
     converter = XLS2XLSX(xls_file_path)
+    clean_download_folder(downloaded_path)
     converter.to_xlsx(xlsx_file_path)
     print("\nConverted the .xls to .xlxs file\n")
     
     # read the data
-    df = pd.read_excel(xlsx_file_path)
-    print("Read the .xlxs file as Pandas DataFrame\n")
+    # df = pd.read_excel(xlsx_file_path)
+    # print("Read the .xlxs file as Pandas DataFrame\n")
     
     # delete converted folder files
-    print("Clear the Downloads/Converted folder")
-    clean_download_folder(downloaded_path + "/converted")
+    # print("Clear the data/superfund folder")
+    # clean_download_folder(downloaded_path)
     
     # then save the csv file back to the converted
-    os.makedirs('backend-thea-aa/downloads/converted', exist_ok=True)  
-    df.to_csv('backend-thea-aa/downloads/converted/superfund_data.csv')  
-    print("Saved the Superfund data as csv successfully!")
+    # os.makedirs('backend-thea-aa/main/data/superfund/', exist_ok=True)  
+    # df.to_csv('backend-thea-aa/main/data/superfund/superfund.csv')  
+    # print("Saved the Superfund data as csv successfully!")
      
     
 def main():
      # Set the download path relative to the project directory
-    download_path = os.path.join(os.getcwd(), "backend-thea-aa/downloads")
+    download_path = os.path.join(os.getcwd(), "backend-thea-aa/main/data/superfund")
     os.makedirs(download_path, exist_ok=True)
 
     # Clean the download folder before downloading a new file

@@ -9,11 +9,11 @@
 <Table.Root>
 	<Table.Header>
 		<Table.Row>
-			<Table.Head>Contaminant Name</Table.Head>
-			<Table.Head>Est. Contaminant Quantity/Opacity</Table.Head>
-			<Table.Head>Contaminant Quantity Unit</Table.Head>
+			<Table.Head>Description</Table.Head>
+			<Table.Head>Est. Quantity/Opacity</Table.Head>
+			<Table.Head>Units</Table.Head>
 			<Table.Head>Emission Limit</Table.Head>
-			<Table.Head>Emission Limit Unit</Table.Head>
+			<Table.Head>Emission Limit Units</Table.Head>
 			<Table.Head>Authorization</Table.Head>
 		</Table.Row>
 	</Table.Header>

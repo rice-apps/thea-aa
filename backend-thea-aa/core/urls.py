@@ -23,13 +23,15 @@ from django.urls import path
 from main.models import EmissionEvents
 
 router = DefaultRouter()
-router.register(r'/emission', EmissionEventsViewSet)
-router.register(r'/superfund', SuperfundSiteViewSet)
+router.register(r'emission', EmissionEventsViewSet)
+router.register(r'superfund', SuperfundSiteViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
+    
     path("api/superfund/retrieve/", SuperfundSiteViewSet.as_view({'get': 'retrieve'})),  # Custom endpoint
+    path("api/emissions/retrieve/", EmissionEventsViewSet.as_view({'get': 'retrieve'}))   # Custom endpoint
 ]
 
 #http://127.0.0.1:8000/api/superfund/retrieve/?epa_id=TX0000605401

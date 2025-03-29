@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import type { AirQualitySite, ContaminatedSite, EmissionEvent } from '$lib/types'
+	import type { AirQualitySite, ContaminatedSite, DetailedEmissionEvent } from '$lib/types'
 
 	let mapElement: HTMLDivElement | null = null
 
@@ -14,7 +14,7 @@
 	let props: {
 		currentView: string
 		contaminatedSite: ContaminatedSite[] | null
-		emissionEvent: EmissionEvent[] | null
+		emissionEvent: DetailedEmissionEvent[] | null
 		airQualitySite: AirQualitySite[] | null
 	} = $props()
 
@@ -41,7 +41,7 @@
 		L = leaflet
 
 		if (mapElement && L) {
-			map = L.map(mapElement).setView([29.71929, -95.3906], 13)
+			map = L.map(mapElement).setView([31.71929, -99.3906], 13)
 			L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
 				attribution: `&copy;<a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>,
         &copy;<a href="https://carto.com/attributions" target="_blank">CARTO</a>`,
@@ -71,14 +71,14 @@
 
 		if (props.currentView === 'superfund' && props.contaminatedSite) {
 			props.contaminatedSite.forEach((site) => {
-				const marker = L!.marker([5, 5]).addTo(map!) // replace back later with site.location.lat, site.location.long
+				const marker = L!.marker([site.lat, site.lon]).addTo(map!) // replace back later with site.location.lat, site.location.long
 				marker.bindPopup(`Contaminated Site: ${site.name}`).openPopup()
 			})
 		} else if (props.currentView === 'emission' && props.emissionEvent) {
-			props.emissionEvent.forEach((event) => {
-				const marker = L!.marker([event.location.lat, event.location.long]).addTo(map!)
-				marker.bindPopup(`Emission Event: ${event.site}`).openPopup()
-			})
+			//  props.emissionEvent.forEach((event) => {
+			// 	const marker = L!.marker([event.lat, event.lon]).addTo(map!)
+			// 	marker.bindPopup(`Emission Event: ${event.re_name}`).openPopup()
+			// })
 		} else if (props.currentView === 'air quality' && props.airQualitySite) {
 			props.airQualitySite.forEach((site) => {
 				const marker = L!.marker([5, 5]).addTo(map!) // replace back later with site.location.lat, site.location.long
