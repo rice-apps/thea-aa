@@ -1,6 +1,6 @@
 import type { DetailedEmissionEvent } from '$lib/types'
 
-export async function load({ params }) {
+export async function load({ params }: { params: { re_name: string } }) {
 	let tableInfo: ContaminantRow[] = []
 	let emissionEventData: DetailedEmissionEvent
 	const { re_name } = params
