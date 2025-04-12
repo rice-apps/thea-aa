@@ -131,23 +131,6 @@ def update_csv_with_lat_long(download_path):
             else:
                 print(f"No data found for EPA ID {row['EPA ID']}")
 
-    # # Perform scraping for the first 2 sites only
-    # scraped_count = 0
-    # for index, row in df.iterrows():
-    #     if pd.isnull(row['Latitude']) or pd.isnull(row['Longitude']):
-    #         latitude, longitude = scrape_lat_long(driver, row['EPA ID'])
-    #         if latitude and longitude:
-    #             df.at[index, 'Latitude'] = latitude
-    #             df.at[index, 'Longitude'] = longitude
-    #             print(f"Updated EPA ID {row['EPA ID']} with Latitude: {latitude}, Longitude: {longitude}")
-    #         else:
-    #             print(f"No data found for EPA ID {row['EPA ID']}")
-
-    #         scraped_count += 1
-    #         if scraped_count >= 1:
-    #             print("Completed scraping for the first 2 sites.")
-    #             break
-
     driver.quit()
 
     # Save updated CSV
