@@ -81,6 +81,8 @@
 	}
 
 	async function applyFilter() {
+		console.log('applyFilter')
+
 		if (!searchAddress || !searchRadius) {
 			// Reset to original data if no filter criteria
 			filteredData = {
@@ -93,6 +95,8 @@
 
 		isLoading = true
 
+		console.log(data.contaminatedSites)
+
 		try {
 			const addressCoords = await geocodeAddress(searchAddress)
 			if (!addressCoords) {
@@ -103,14 +107,21 @@
 
 			filteredData = {
 				contaminatedSites: data.contaminatedSites.filter(
-					() => calculateDistance(addressCoords.lat, addressCoords.long, 5, 5) <= radius // add back site later site.location.lat
+					(site) =>
+						calculateDistance(addressCoords.lat, addressCoords.long, site.lat, site.lon) <= radius
 				),
 				emissionEvents: data.emissionEvents.filter(
 					(event) =>
 						calculateDistance(addressCoords.lat, addressCoords.long, event.lat, event.lon) <= radius
 				),
 				airQualitySites: data.airQualitySites.filter(
-					() => calculateDistance(addressCoords.lat, addressCoords.long, 5, 5) <= radius // add back site later with lat, long
+					(site) =>
+						calculateDistance(
+							addressCoords.lat,
+							addressCoords.long,
+							site.location.lat,
+							site.location.long
+						) <= radius
 				)
 			}
 
