@@ -37,7 +37,7 @@ def setup():
     global single_incident
 
     # Configure Chrome options for GitHub Actions environment
-    options = webdriver.ChromeOptions()
+    options = Options()
     # options.add_argument("--headless")  # Run Chrome in headless mode
     options.add_argument("--no-sandbox")  # Bypass OS security model
     options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource issues
@@ -45,7 +45,6 @@ def setup():
     options.add_argument("--remote-debugging-port=9222")  # Enable remote debugging
     options.add_argument("--user-data-dir=/tmp/chrome-user-data-dir-" + str(os.getpid()))
 
-    driver = webdriver.Chrome(options=options)
     service = Service()
     driver = webdriver.Chrome(service=service, options=options)
 
