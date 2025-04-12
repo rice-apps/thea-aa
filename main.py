@@ -43,8 +43,8 @@ def setup():
     options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource issues
     options.add_argument("--disable-gpu")  # Disable GPU hardware acceleration
     options.add_argument("--remote-debugging-port=9222")  # Enable remote debugging
-    options.binary_location = '/opt/hostedtoolcache/setup-chrome/chromium/135.0.7049.52/x64/chrome'
-    service = Service('/opt/hostedtoolcache/setup-chrome/chromedriver/135.0.7049.52/x64/chromedriver') 
+    options.binary_location = '/usr/bin/google-chrome'
+    service = Service('/usr/local/bin/chromedriver') 
     driver = webdriver.Chrome(service=service, options=options)
 
     # Go to Website.
