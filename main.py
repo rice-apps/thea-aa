@@ -43,7 +43,18 @@ def setup():
     options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource issues
     options.add_argument("--disable-gpu")  # Disable GPU hardware acceleration
     options.add_argument("--remote-debugging-port=9222")  # Enable remote debugging
-    options.add_argument("--user-data-dir=/tmp/chrome-user-data-dir-" + str(os.getpid()))
+    
+    import time
+    import uuid
+    unique_id = f"{os.getpid()}_{int(time.time())}_{uuid.uuid4().hex[:8]}"
+    user_data_dir = f"/tmp/chrome-user-data-{unique_id}" 
+    options.add_argument(f"--user-data-dir={user_data_dir}")
+    
+    # Make sure the directory exists and is empty
+    if os.path.exists(user_data_dir):
+        import shutil
+        shutil.rmtree(user_data_dir)
+    os.makedirs(user_data_dir, exist_ok=True)
 
     service = Service()
     driver = webdriver.Chrome(service=service, options=options)
