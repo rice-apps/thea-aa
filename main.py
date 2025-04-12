@@ -37,7 +37,7 @@ def setup():
     global single_incident
 
     # Configure Chrome options for GitHub Actions environment
-    options = Options()
+    options = webdriver.ChromeOptions()
     options.add_argument("--headless")  # Run Chrome in headless mode
     options.add_argument("--no-sandbox")  # Bypass OS security model
     options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource issues
@@ -47,7 +47,6 @@ def setup():
 
     driver = webdriver.Chrome(options=options)
     service = Service()
-    options = webdriver.ChromeOptions()
     driver = webdriver.Chrome(service=service, options=options)
 
     # Go to Website.
