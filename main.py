@@ -43,6 +43,7 @@ def setup():
     options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource issues
     options.add_argument("--disable-gpu")  # Disable GPU hardware acceleration
     options.add_argument("--remote-debugging-port=9222")  # Enable remote debugging
+    options.add_argument("--user-data-dir=/tmp/chrome-user-data-dir-" + str(os.getpid()))
 
     driver = webdriver.Chrome(options=options)
     service = Service()
