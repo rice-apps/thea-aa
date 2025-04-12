@@ -5,6 +5,7 @@ import xlsxwriter
 import os
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
 
 global switch
 global case_tracker
@@ -36,20 +37,14 @@ def setup():
     global single_incident
 
     # Configure Chrome options for GitHub Actions environment
-    options = webdriver.ChromeOptions()
+    options = Options()
     options.add_argument("--headless")  # Run Chrome in headless mode
     options.add_argument("--no-sandbox")  # Bypass OS security model
     options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource issues
     options.add_argument("--disable-gpu")  # Disable GPU hardware acceleration
     options.add_argument("--remote-debugging-port=9222")  # Enable remote debugging
 
-    chrome_path = os.environ.get("CHROME_BIN", "/usr/bin/google-chrome")
-    chromedriver_path = os.environ.get("CHROMEDRIVER_PATH", "/usr/local/bin/chromedriver")
-
-    options.binary_location = chrome_path
-    service = Service(executable_path=chromedriver_path)
-    
-    driver = webdriver.Chrome(service=service, options=options)
+    driver = webdriver.Chrome(options=options)
     service = Service()
     options = webdriver.ChromeOptions()
     driver = webdriver.Chrome(service=service, options=options)
