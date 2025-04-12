@@ -40,8 +40,8 @@ jobs:
           install-chromedriver: true
       - name: Run Scraper
         env:
-          CHROME_BIN: /opt/hostedtoolcache/setup-chrome/chromium/135.0.7049.52/x64/chrome
-          CHROMEDRIVER_PATH: /opt/hostedtoolcache/setup-chrome/chromedriver/135.0.7049.52/x64/chromedriver
+          CHROME_BIN: /opt/hostedtoolcache/setup-chrome/chromium/135.0.7049.84/x64/chrome
+          CHROMEDRIVER_PATH: /opt/hostedtoolcache/setup-chrome/chromedriver/135.0.7049.84/x64/chromedriver
         run: |
           python main.py
         
