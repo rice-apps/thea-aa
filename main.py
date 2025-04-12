@@ -38,7 +38,7 @@ def setup():
 
     # Configure Chrome options for GitHub Actions environment
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless")  # Run Chrome in headless mode
+    # options.add_argument("--headless")  # Run Chrome in headless mode
     options.add_argument("--no-sandbox")  # Bypass OS security model
     options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource issues
     options.add_argument("--disable-gpu")  # Disable GPU hardware acceleration
