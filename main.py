@@ -42,10 +42,13 @@ def setup():
     options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource issues
     options.add_argument("--disable-gpu")  # Disable GPU hardware acceleration
     options.add_argument("--remote-debugging-port=9222")  # Enable remote debugging
-    options.binary_location = "/usr/bin/google-chrome"  # Path to Chrome binary
+
+    chrome_path = os.environ.get("CHROME_BIN", "/usr/bin/google-chrome")
+    chromedriver_path = os.environ.get("CHROMEDRIVER_PATH", "/usr/local/bin/chromedriver")
+
+    options.binary_location = chrome_path
+    service = Service(executable_path=chromedriver_path)
     
-    # Specify the path to ChromeDriver
-    service = Service("/usr/local/bin/chromedriver")
     driver = webdriver.Chrome(service=service, options=options)
     service = Service()
     options = webdriver.ChromeOptions()
