@@ -1,18 +1,26 @@
 <script lang="ts">
-	// import AirQualityRanking from '$lib/components/AirQualityRanking.svelte'
+	/**
+	 * UI for the home page
+	 * Displays map + data panels (Contaminated Sites, Emission Events, Air Quality).
+	 */
+	// components
 	import EmissionEvents from '$lib/components/EmissionEvents.svelte'
 	import ContaminatedSites from '$lib/components/ContaminatedSites.svelte'
 	import Map from '$lib/components/Map.svelte'
 	import { Button } from '$lib/components/ui/button'
+	import AirQualityRanking from '$lib/components/AirQualityRanking.svelte'
+	import Toast from '$lib/components/Toast.svelte'
+
+	// Icons
 	import Building from 'lucide-svelte/icons/building'
 	import Search from 'lucide-svelte/icons/search'
 	import { Cloudy } from 'lucide-svelte'
 	import { Wind } from 'lucide-svelte'
 	import { ListFilter } from 'lucide-svelte'
-	import AirQualityRanking from '$lib/components/AirQualityRanking.svelte'
-	import Toast from '$lib/components/Toast.svelte'
+
 	import { writable } from 'svelte/store'
 
+	// Toast state and logic
 	let toastVisible = writable(false)
 	let toastMessage = writable('')
 
@@ -22,9 +30,12 @@
 		setTimeout(() => toastVisible.set(false), 3000)
 	}
 
+	// Props & Reactive State
 	let { data } = $props()
 	let currentView = $state('')
 	let height = $state(0)
+
+	// Reference to Map component for calling methods
 	let mapInstance: {
 		updateMarkers: () => void
 		updateViewCentering: (lat: number, long: number) => void
@@ -35,12 +46,15 @@
 	let searchAddress = $state('')
 	let searchRadius = $state('')
 	let isLoading = $state(false)
+
+	// Data defined by search
 	let filteredData = $state({
 		contaminatedSites: data.contaminatedSites,
 		emissionEvents: data.emissionEvents,
 		airQualitySites: data.airQualitySites
 	})
 
+	// Haversine distance between two lat/lon points
 	function calculateDistance(lat1: number, long1: number, lat2: number, long2: number): number {
 		const R = 3959 // Earth's radius in miles
 		const dLat = ((lat2 - lat1) * Math.PI) / 180
@@ -55,6 +69,7 @@
 		return R * c
 	}
 
+	// Geocode address → { lat, long }
 	async function geocodeAddress(address: string): Promise<{ lat: number; long: number } | null> {
 		try {
 			const response = await fetch(
@@ -80,6 +95,7 @@
 		}
 	}
 
+	// Filtering logic
 	async function applyFilter() {
 		if (!searchAddress || !searchRadius) {
 			// Reset to original data if no filter criteria
@@ -127,6 +143,7 @@
 		}
 	}
 
+	// View swtiching
 	function handleViewChange(view: string) {
 		currentView = view
 		// Call updateMarkers after view changes
@@ -136,21 +153,37 @@
 	}
 </script>
 
+<!-- 
+  Bind the window's innerHeight to a reactive variable `height` 
+  (can be used to make layout responsive)
+-->
 <svelte:window bind:innerHeight={height} />
 
+<!-- =====================
+      Page Header
+     ===================== -->
 <header class="block items-center px-12 py-8">
 	<h1 class="text-3xl font-bold">Texas Environment Tracker</h1>
 	<h2 class="ml py-4">Last updated at</h2>
 </header>
 
+<!-- =====================
+     Main Layout (Sidebar + Map)
+     ===================== -->
 <main class="ph-10 flex h-full space-x-9">
+	<!-- Toast popup for errors or feedback -->
 	<Toast bind:message={$toastMessage} bind:visible={$toastVisible} duration={3000} />
+
+	<!-- Sidebar Panel (1/3 width)-->
 	<aside class="w-1/3 rounded-lg p-8 shadow-lg">
+		<!--  Search + Filter Inputs -->
 		<div class="mb-4 flex items-center space-x-2">
+			<!-- Address input field with search icon -->
 			<div class="flex w-full items-center rounded border">
 				<Search class="ml-2" />
 				<input bind:value={searchAddress} placeholder="Search Address or Site" class="w-full p-2" />
 			</div>
+			<!-- Radius input (in miles) -->
 			<input
 				bind:value={searchRadius}
 				type="number"
@@ -158,14 +191,19 @@
 				placeholder="Range (miles)"
 				class="w-1/3 rounded border p-2"
 			/>
+			<!-- Filter button -->
 			<Button class="bg-primary-foreground" on:click={applyFilter} disabled={isLoading}
 				><ListFilter class="text-primary"></ListFilter></Button
 			>
 		</div>
+		<!--  Show loading state when filtering -->
 		{#if isLoading}
 			<div class="py-2 text-center text-sm">Loading...</div>
 		{/if}
+
+		<!-- View Switch Buttons: Superfund / Emission / Air Quality -->
 		<div class="flex space-x-2 overflow-x-auto whitespace-nowrap py-2">
+			<!-- Superfund view toggle -->
 			<Button
 				on:click={() => handleViewChange('superfund')}
 				class="grid h-full place-items-center bg-primary-foreground"
@@ -173,6 +211,8 @@
 				<Building size={20} class="text-primary"></Building>
 				<span class="text-xs text-primary">Superfund</span>
 			</Button>
+
+			<!-- Emission Events toggle -->
 			<Button
 				on:click={() => handleViewChange('emission')}
 				class="grid h-full place-items-center bg-primary-foreground"
@@ -180,6 +220,8 @@
 				<Cloudy size={20} class="text-primary"></Cloudy>
 				<span class="text-xs text-primary">Emission Events</span>
 			</Button>
+
+			<!-- Air Quality toggle -->
 			<Button
 				on:click={() => handleViewChange('air quality')}
 				class="grid h-full place-items-center bg-primary-foreground"
@@ -189,6 +231,7 @@
 			</Button>
 		</div>
 
+		<!--  Conditional Display of Data Panels -->
 		{#if currentView === 'superfund'}
 			<ContaminatedSites items={filteredData.contaminatedSites} />
 		{/if}
@@ -200,6 +243,9 @@
 		{/if}
 	</aside>
 
+	<!-- =====================
+	     Map Panel (2/3 width)
+	     ===================== -->
 	<div class="w-2/3">
 		<Map
 			bind:this={mapInstance}
