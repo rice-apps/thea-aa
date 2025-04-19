@@ -175,7 +175,6 @@
      ===================== -->
 <header class="block items-center px-12 py-8">
 	<h1 class="text-3xl font-bold">Texas Environment Tracker</h1>
-	<h2 class="ml py-4">Last updated at</h2>
 </header>
 
 <!-- =====================
@@ -217,28 +216,28 @@
 			<!-- Superfund view toggle -->
 			<Button
 				on:click={() => handleViewChange('superfund')}
-				class="grid h-full place-items-center bg-primary-foreground"
+				class="bg-primary-foreground grid h-full place-items-center"
 			>
 				<Building size={20} class="text-primary"></Building>
-				<span class="text-xs text-primary">Superfund</span>
+				<span class="text-primary text-xs">Superfund</span>
 			</Button>
 
 			<!-- Emission Events toggle -->
 			<Button
 				on:click={() => handleViewChange('emission')}
-				class="grid h-full place-items-center bg-primary-foreground"
+				class="bg-primary-foreground grid h-full place-items-center"
 			>
 				<Cloudy size={20} class="text-primary"></Cloudy>
-				<span class="text-xs text-primary">Emission Events</span>
+				<span class="text-primary text-xs">Emission Events</span>
 			</Button>
 
 			<!-- Air Quality toggle -->
 			<Button
 				on:click={() => handleViewChange('air quality')}
-				class="grid h-full place-items-center bg-primary-foreground"
+				class="bg-primary-foreground grid h-full place-items-center"
 			>
 				<Wind size={20} class="text-primary"></Wind>
-				<span class="text-xs text-primary">Air Quality</span>
+				<span class="text-primary text-xs">Air Quality</span>
 			</Button>
 		</div>
 
