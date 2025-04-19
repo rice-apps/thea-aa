@@ -32,6 +32,10 @@
 				pageNumber < allPages.length - Math.floor(numPageButtons / 2)
 			) {
 				startPage = Math.max(1, page - Math.floor(numPageButtons / 2))
+			} else if (pageNumber <= Math.floor(numPageButtons / 2)) {
+				startPage = 0
+			} else if (pageNumber >= allPages.length - Math.floor(numPageButtons / 2)) {
+				startPage = allPages.length - numPageButtons
 			}
 			endPage = Math.min(startPage + numPageButtons, allPages.length - 1)
 		}

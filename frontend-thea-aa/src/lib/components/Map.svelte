@@ -62,27 +62,56 @@
 	export function updateMarkers() {
 		if (!map || !L) return
 
-		// Fix: Ensure L is defined before using it
+		// Clear existing markers
 		map.eachLayer((layer: import('leaflet').Layer) => {
 			if (L && layer instanceof L.Marker) {
 				map!.removeLayer(layer)
 			}
 		})
 
+		// Add markers based on current view
 		if (props.currentView === 'superfund' && props.contaminatedSite) {
 			props.contaminatedSite.forEach((site) => {
-				const marker = L!.marker([site.lat, site.lon]).addTo(map!) // replace back later with site.location.lat, site.location.long
-				marker.bindPopup(`Contaminated Site: ${site.name}`).openPopup()
+				if (site.lat && site.lon) {
+					// Add null check
+					try {
+						if (!L) return
+						const marker = L.marker([site.lat, site.lon])
+						marker
+							.addTo(map!)
+							.bindPopup(
+								`${site.site_name}<br>Status: ${site.site_status}<br>Score: ${site.hrs_score}`
+							)
+					} catch (error) {
+						console.error('Error adding marker for site:', site.site_name, error)
+					}
+				}
 			})
 		} else if (props.currentView === 'emission' && props.emissionEvent) {
-			//  props.emissionEvent.forEach((event) => {
-			// 	const marker = L!.marker([event.lat, event.lon]).addTo(map!)
-			// 	marker.bindPopup(`Emission Event: ${event.re_name}`).openPopup()
-			// })
+			props.emissionEvent.forEach((event) => {
+				if (event.lat && event.lon) {
+					// Add null check
+					try {
+						if (!L) return
+						const marker = L.marker([event.lat, event.lon])
+						marker.addTo(map!).bindPopup(`${event.re_name}<br>Location: ${event.physical_location}`)
+					} catch (error) {
+						console.error('Error adding marker for event:', event.re_name, error)
+					}
+				}
+			})
 		} else if (props.currentView === 'air quality' && props.airQualitySite) {
 			props.airQualitySite.forEach((site) => {
-				const marker = L!.marker([5, 5]).addTo(map!) // replace back later with site.location.lat, site.location.long
-				marker.bindPopup(`Air Quality Site: ${site.station}`).openPopup()
+				if (site.location.lat && site.location.long) {
+					// Add null check
+					try {
+						if (!L) return
+						const marker = L.marker([site.location.lat, site.location.long])
+						marker.addTo(map!).bindPopup(`${site.station}<br>Air Quality: ${site.airQuality}`)
+					} catch (error) {
+						console.error('Error adding marker for site:', site.station, error)
+					}
+				}
 			})
 		}
 	}

@@ -5,7 +5,7 @@ from main.models import SuperfundSite, EmissionEvents
 
 def import_emission_events(file_path):
     df = pd.read_excel(file_path)
-
+    
     emission_events = [EmissionEvents(
                             registration = row['RN'],
                             re_name = row['RE NAME'],
@@ -37,8 +37,29 @@ def import_emission_events(file_path):
     
     EmissionEvents.objects.bulk_create(emission_events)
 
+def find_unique_columns(df):
+    print("Columns with unique values:")
+    for column in df.columns:
+        is_unique = df[column].nunique() == len(df)
+        print(f"{column}: {is_unique} (unique values: {df[column].nunique()})")
+
 def import_superfund_sites(file_path):
     df = pd.read_excel(file_path)
+    df_lat_lon = pd.read_csv('main/data/superfund/coord.csv')
+    
+    # Merge the dataframes on EPA ID to get lat and lon
+    df = df.merge(df_lat_lon[['EPA ID', 'Latitude', 'Longitude']], 
+                 on='EPA ID', 
+                 how='left')  # Using left merge to keep all records from main df
+
+    print("Main df shape:", df.shape)
+    print("Lat/lon df shape:", df_lat_lon.shape)
+    print("Merged df shape:", df.shape)
+    print("Sample of merged data:")
+    print(df[['EPA ID', 'Latitude', 'Longitude']].head())
+    
+    # Delete all existing records before importing
+    SuperfundSite.objects.all().delete()
 
     superfund_sites = [SuperfundSite(
             epa_id = row['EPA ID'],
@@ -71,7 +92,10 @@ def import_superfund_sites(file_path):
             alias_alternative_site_name = row['Alias/Alternative Site Name'],
             non_npl_status_date = row['Non-NPL Status Date'],
             superfund_site_profile_page_url = row['Superfund Site Profile Page URL'],
-            rcra_handler_id_name = row['RCRA Handler ID - RCRA Handler Name']) for _, row in df.iterrows()]
+            rcra_handler_id_name = row['RCRA Handler ID - RCRA Handler Name'],
+            lat = row['Latitude'],  # Add the latitude from merged data
+            lon = row['Longitude']   # Add the longitude from merged data
+            ) for _, row in df.iterrows()]
     
     SuperfundSite.objects.bulk_create(superfund_sites)
 

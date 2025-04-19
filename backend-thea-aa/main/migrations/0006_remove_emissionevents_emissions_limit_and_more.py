@@ -10,18 +10,21 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name="emissionevents",
-            name="emissions_limit",
-        ),
-        migrations.RemoveField(
-            model_name="emissionevents",
-            name="estimated_quantity",
-        ),
-        migrations.RemoveField(
-            model_name="emissionevents",
-            name="limit_units",
-        ),
+        # Removing this operation since the field has already been renamed
+        # migrations.RemoveField(
+        #     model_name="emissionevents",
+        #     name="emissions_limit",
+        # ),
+        # Removing this operation since the field has already been renamed
+        # migrations.RemoveField(
+        #     model_name="emissionevents",
+        #     name="estimated_quantity",
+        # ),
+        # Removing this operation since the field has already been renamed
+        # migrations.RemoveField(
+        #     model_name="emissionevents",
+        #     name="limit_units",
+        # ),
         migrations.AddField(
             model_name="emissionevents",
             name="authorization",

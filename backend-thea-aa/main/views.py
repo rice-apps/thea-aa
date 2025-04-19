@@ -147,11 +147,15 @@ class SuperfundSiteViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin,
         country = "US"
         geocode_url = f'https://geocode.maps.co/search?street={street_address}&city={city}&county={county}&state={state}&postalcode={zip_code}&country={country}&api_key={GEOCODE_API_KEY}'
         geocode_response = requests.get(geocode_url)
-        geocode_data = geocode_response.json()
-        if geocode_data:
-            site.lon =  float(geocode_data[0]['lon'])
-            site.lat = float(geocode_data[0]['lat'])
-            site.save()
-            site.refresh_from_db()
+        try:
+            geocode_data = geocode_response.json()
+            if geocode_data:
+                site.lon =  float(geocode_data[0]['lon'])
+                site.lat = float(geocode_data[0]['lat'])
+                site.save()
+                site.refresh_from_db()
+        except:
+            print("Address cannot be found")
+            
         serializer = self.get_serializer(site)
         return Response(serializer.data)
