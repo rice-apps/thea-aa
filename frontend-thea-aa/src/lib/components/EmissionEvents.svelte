@@ -57,16 +57,16 @@
 	<table class="min-w-full table-auto border-collapse">
 		<thead>
 			<tr class="bg-secondary">
-				<th class="px-4 py-2 text-left text-sm font-medium text-secondary-foreground">Number</th>
+				<th class="px-4 py-2 text-left text-sm font-medium text-secondary-foreground"
+					>Registration Number</th
+				>
 				<th class="px-4 py-2 text-left text-sm font-medium text-secondary-foreground">Site</th>
 			</tr>
 		</thead>
 		<tbody>
-			{#each props.items
-				.slice(page * itemsPerPage, (page + 1) * itemsPerPage)
-				.entries() as [rank, item]}
+			{#each props.items.slice(page * itemsPerPage, (page + 1) * itemsPerPage) as item}
 				<tr onclick={() => goToDetail(item)} class="hover cursor-pointer border-b">
-					<td class="px-4 py-2 text-sm">{rank}</td>
+					<td class="px-4 py-2 text-sm">{item.registration}</td>
 					<td class="px-4 py-2 text-sm">{item.re_name}</td>
 				</tr>
 			{/each}
