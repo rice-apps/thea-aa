@@ -216,28 +216,28 @@
 			<!-- Superfund view toggle -->
 			<Button
 				on:click={() => handleViewChange('superfund')}
-				class="bg-primary-foreground grid h-full place-items-center"
+				class="grid h-full place-items-center bg-primary-foreground"
 			>
 				<Building size={20} class="text-primary"></Building>
-				<span class="text-primary text-xs">Superfund</span>
+				<span class="text-xs text-primary">Superfund</span>
 			</Button>
 
 			<!-- Emission Events toggle -->
 			<Button
 				on:click={() => handleViewChange('emission')}
-				class="bg-primary-foreground grid h-full place-items-center"
+				class="grid h-full place-items-center bg-primary-foreground"
 			>
 				<Cloudy size={20} class="text-primary"></Cloudy>
-				<span class="text-primary text-xs">Emission Events</span>
+				<span class="text-xs text-primary">Emission Events</span>
 			</Button>
 
 			<!-- Air Quality toggle -->
 			<Button
 				on:click={() => handleViewChange('air quality')}
-				class="bg-primary-foreground grid h-full place-items-center"
+				class="grid h-full place-items-center bg-primary-foreground"
 			>
 				<Wind size={20} class="text-primary"></Wind>
-				<span class="text-primary text-xs">Air Quality</span>
+				<span class="text-xs text-primary">Air Quality</span>
 			</Button>
 		</div>
 
