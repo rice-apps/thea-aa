@@ -9,16 +9,5 @@
 	</div>
 	<div class="flex">
 		<a href="/about" class="px-4 py-2 text-sm font-medium hover:underline">About</a>
-
-		<DropdownMenu.Root>
-			<DropdownMenu.Trigger><Bell /></DropdownMenu.Trigger>
-			<DropdownMenu.Content>
-				<DropdownMenu.Group>
-					<DropdownMenu.Label>Placeholder Dropdown</DropdownMenu.Label>
-					<DropdownMenu.Separator />
-					<DropdownMenu.Item>Dropdown item below separator</DropdownMenu.Item>
-				</DropdownMenu.Group>
-			</DropdownMenu.Content>
-		</DropdownMenu.Root>
 	</div>
 </nav>
