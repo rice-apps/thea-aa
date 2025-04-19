@@ -5,7 +5,9 @@ export async function load({ params }: LoadEvent) {
 	let contaminatedApiData: ContaminatedSite
 	const { epa_id } = params
 	try {
-		const response = await fetch('http://127.0.0.1:8000/api/superfund/retrieve/?epa_id=' + epa_id)
+		const response = await fetch(
+			`${import.meta.env.VITE_BASE_URL}/api/superfund/retrieve/?epa_id=` + epa_id
+		)
 		contaminatedApiData = await response.json() // assuming the response is in the correct format
 	} catch (error) {
 		console.error('Error fetching contaminated sites:', error)

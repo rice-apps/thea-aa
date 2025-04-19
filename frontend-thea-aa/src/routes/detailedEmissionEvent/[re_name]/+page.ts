@@ -6,7 +6,9 @@ export async function load({ params }: { params: { re_name: string } }) {
 	const { re_name } = params
 
 	try {
-		const response = await fetch('http://127.0.0.1:8000/api/emission/retrieve/?re_name=' + re_name)
+		const response = await fetch(
+			`${import.meta.env.VITE_BASE_URL}/api/emission/retrieve/?re_name=` + re_name
+		)
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`)
 		}
