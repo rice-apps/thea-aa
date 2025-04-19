@@ -25,7 +25,9 @@ SECRET_KEY = "django-insecure-y8+^uqd%d9inv(hxgksg93vs9kdlb@txx__vs_g$84&vskzhd4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '.riceapps.org',
+]
 
 
 # Application definition
