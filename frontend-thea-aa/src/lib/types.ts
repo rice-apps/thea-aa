@@ -105,6 +105,7 @@ export interface DetailedContaminatedSite {
 
 export interface EmissionEvent {
 	re_name: string
+	registration: string
 }
 
 export interface DetailedEmissionEvent {
