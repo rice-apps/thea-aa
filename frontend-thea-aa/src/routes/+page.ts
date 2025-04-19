@@ -36,10 +36,14 @@ export async function load() {
 
 	try {
 		// 🌐 Fetch contaminated Superfund sites
-		const superfundResponse = await fetch('http://127.0.0.1:8000/api/superfund/retrieve/')
+		const superfundResponse = await fetch(
+			`${import.meta.env.VITE_BASE_URL}/api/superfund/retrieve/`
+		)
 
 		// 🌐 Fetch emission events
-		const emissionEventsResponse = await fetch('http://127.0.0.1:8000/api/emission/retrieve/')
+		const emissionEventsResponse = await fetch(
+			`${import.meta.env.VITE_BASE_URL}/api/emission/retrieve/`
+		)
 
 		// Parse responses as JSON
 		contaminatedApiData = await superfundResponse.json() // assuming the response is in the correct format
