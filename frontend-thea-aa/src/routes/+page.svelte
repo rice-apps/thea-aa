@@ -8,14 +8,12 @@
 	import ContaminatedSites from '$lib/components/ContaminatedSites.svelte'
 	import Map from '$lib/components/Map.svelte'
 	import { Button } from '$lib/components/ui/button'
-	import AirQualityRanking from '$lib/components/AirQualityRanking.svelte'
 	import Toast from '$lib/components/Toast.svelte'
 
 	// Icons
 	import Building from 'lucide-svelte/icons/building'
 	import Search from 'lucide-svelte/icons/search'
 	import { Cloudy } from 'lucide-svelte'
-	import { Wind } from 'lucide-svelte'
 	import { ListFilter } from 'lucide-svelte'
 
 	import { writable } from 'svelte/store'
@@ -230,15 +228,6 @@
 				<Cloudy size={20} class="text-primary"></Cloudy>
 				<span class="text-xs text-primary">Emission Events</span>
 			</Button>
-
-			<!-- Air Quality toggle -->
-			<Button
-				on:click={() => handleViewChange('air quality')}
-				class="grid h-full place-items-center bg-primary-foreground"
-			>
-				<Wind size={20} class="text-primary"></Wind>
-				<span class="text-xs text-primary">Air Quality</span>
-			</Button>
 		</div>
 
 		<!--  Conditional Display of Data Panels -->
@@ -247,9 +236,6 @@
 		{/if}
 		{#if currentView === 'emission'}
 			<EmissionEvents items={filteredData.emissionEvents} />
-		{/if}
-		{#if currentView === 'air quality'}
-			<AirQualityRanking items={filteredData.airQualitySites} />
 		{/if}
 	</aside>
 

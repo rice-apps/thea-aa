@@ -80,7 +80,7 @@
 						marker
 							.addTo(map!)
 							.bindPopup(
-								`${site.site_name}<br>Status: ${site.site_status}<br>Score: ${site.hrs_score}`
+								`<a href="/detailedContaminant/${site.epa_id}">${site.site_name}</a><br>Status: ${site.site_status}<br>Score: ${site.hrs_score}<br>`
 							)
 					} catch (error) {
 						console.error('Error adding marker for site:', site.site_name, error)
@@ -94,7 +94,11 @@
 					try {
 						if (!L) return
 						const marker = L.marker([event.lat, event.lon])
-						marker.addTo(map!).bindPopup(`${event.re_name}<br>Location: ${event.physical_location}`)
+						marker
+							.addTo(map!)
+							.bindPopup(
+								`<a href="/detailedContaminant/${event.re_name}">${event.re_name}</a><br>Location: ${event.physical_location}`
+							)
 					} catch (error) {
 						console.error('Error adding marker for event:', event.re_name, error)
 					}

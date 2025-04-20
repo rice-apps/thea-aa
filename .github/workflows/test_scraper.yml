@@ -9,8 +9,8 @@ name: Run Scraper Daily
 # Set the schedule to run every 5 minutes
 on:
   push:
-      branches:
-        - scraper-tecq
+    branches:
+      - scraper-tecq
   schedule:
     - cron: "0 8 * * 6" # runs every Saturday
     # - cron: "*/5 * * * *" # This runs every 5 minutes
@@ -19,7 +19,7 @@ on:
 jobs:
   run-scraper:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -27,7 +27,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.13'  # Use your required Python version
+          python-version: "3.13" # Use your required Python version
 
       - name: Install dependencies
         run: |
@@ -44,14 +44,14 @@ jobs:
           CHROMEDRIVER_PATH: /opt/hostedtoolcache/setup-chrome/chromedriver/135.0.7049.84/x64
         run: |
           python main.py
-        
+
       - name: Save Excel Output
         # Create a file name with the date and time
         run: |
           timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
           mv output.xlsx "output_$timestamp.xlsx"
           mv "output_$timestamp.xlsx" results/
-        
+
       - name: Commit and Push the Excel file
         run: |
           git config --local user.email "nn36@rice.edu"
@@ -62,5 +62,4 @@ jobs:
         env:
           # GitHub Token for permissions to push
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 # make sure to push to scraper-tecq branch
