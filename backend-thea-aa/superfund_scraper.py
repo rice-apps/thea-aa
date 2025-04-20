@@ -87,13 +87,63 @@ def remove_lines_and_rename(download_path):
 
     os.remove(old_name)
 
+# Scrape latitude and longitude
+def scrape_lat_long(driver, epa_id):
+    epa_url = f"https://cumulis.epa.gov/supercpad/Cursites/csitinfo.cfm?id={epa_id[-7:]}"
+    driver.get(epa_url)
+    time.sleep(3)
+
+    try:
+        latitude = driver.find_element(By.XPATH, "//td[normalize-space()='Latitude:']/following-sibling::td").text.strip()
+        longitude = driver.find_element(By.XPATH, "//td[normalize-space()='Longitude:']/following-sibling::td").text.strip()
+        print(f"EPA ID: {epa_id}, Latitude: {latitude}, Longitude: {longitude}")
+        return latitude, longitude
+    except Exception as e:
+        print(f"Could not extract latitude/longitude for EPA ID {epa_id}: {e}")
+        return None, None
+
+# Update CSV with Latitude and Longitude
+def update_csv_with_lat_long(download_path):
+    csv_file_path = os.path.join(download_path, "superfund.csv")
+    df = pd.read_csv(csv_file_path)
+
+    # Ensure EPA ID column exists
+    if 'EPA ID' not in df.columns:
+        print("EPA ID column not found.")
+        return
+    
+    # Add latitude and longitude columns if not exist
+    if 'Latitude' not in df.columns:
+        df['Latitude'] = None
+    if 'Longitude' not in df.columns:
+        df['Longitude'] = None
+
+    driver = setup_driver(download_path)
+
+    # Perform scraping for missing data
+    for index, row in df.iterrows():
+        if pd.isnull(row['Latitude']) or pd.isnull(row['Longitude']):
+            latitude, longitude = scrape_lat_long(driver, row['EPA ID'])
+            if latitude and longitude:
+                df.at[index, 'Latitude'] = latitude
+                df.at[index, 'Longitude'] = longitude
+                print(f"Updated EPA ID {row['EPA ID']} with Latitude: {latitude}, Longitude: {longitude}")
+            else:
+                print(f"No data found for EPA ID {row['EPA ID']}")
+
+    driver.quit()
+
+    # Save updated CSV
+    df.to_csv(csv_file_path, index=False)
+    print("Updated CSV with latitude and longitude data.")
+
 def convert_to_csv(downloaded_path):
     # downloaded_path will be: /thea-aa/backend-thea-aa/downloads
     
     # relative paths to the stored .xls file
     xls_file_path = downloaded_path + "/cqry.xls"
     print("xls saved file path: ",xls_file_path)
-    xlsx_file_path = "backend-thea-aa/main/data/superfund/superfund.xlsx"
+    xlsx_file_path = "main/data/superfund/superfund.xlsx"
 
     # convert to xlxs
     converter = XLS2XLSX(xls_file_path)
@@ -101,23 +151,31 @@ def convert_to_csv(downloaded_path):
     converter.to_xlsx(xlsx_file_path)
     print("\nConverted the .xls to .xlxs file\n")
     
+    # # Convert XLSX to CSV using pandas
+    # csv_file_path = os.path.join(downloaded_path, "superfund.csv")
+    # try:
+    #     df = pd.read_excel(xlsx_file_path)
+    #     df.to_csv(csv_file_path, index=False)
+    #     print("Saved CSV file successfully.")
+    # except Exception as e:
+    #     print(f"Error during CSV conversion: {e}")
     # read the data
-    # df = pd.read_excel(xlsx_file_path)
-    # print("Read the .xlxs file as Pandas DataFrame\n")
+    df = pd.read_excel(xlsx_file_path)
+    print("Read the .xlxs file as Pandas DataFrame\n")
     
     # delete converted folder files
-    # print("Clear the data/superfund folder")
-    # clean_download_folder(downloaded_path)
+    print("Clear the data/superfund folder")
+    clean_download_folder(downloaded_path)
     
     # then save the csv file back to the converted
-    # os.makedirs('backend-thea-aa/main/data/superfund/', exist_ok=True)  
-    # df.to_csv('backend-thea-aa/main/data/superfund/superfund.csv')  
-    # print("Saved the Superfund data as csv successfully!")
+    os.makedirs('main/data/superfund/', exist_ok=True)  
+    df.to_csv('main/data/superfund/superfund.csv')  
+    print("Saved the Superfund data as csv successfully!")
      
     
 def main():
      # Set the download path relative to the project directory
-    download_path = os.path.join(os.getcwd(), "backend-thea-aa/main/data/superfund")
+    download_path = os.path.join(os.getcwd(), "main/data/superfund")
     os.makedirs(download_path, exist_ok=True)
 
     # Clean the download folder before downloading a new file
@@ -136,6 +194,9 @@ def main():
     remove_lines_and_rename(download_path)
     
     convert_to_csv(download_path)
+
+    # Update with lat/long data
+    update_csv_with_lat_long(download_path)
 
 if __name__ == "__main__":
     main()
