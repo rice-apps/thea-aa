@@ -56,10 +56,12 @@
 
 	<table>
 		<thead>
-			<tr>
-				<th>Status</th>
-				<th>Site</th>
-				<th>Hazard Score</th>
+			<tr class="bg-secondary">
+				<th class="px-4 py-2 text-left text-sm font-medium text-secondary-foreground">Status</th>
+				<th class="px-4 py-2 text-left text-sm font-medium text-secondary-foreground">Site</th>
+				<th class="px-4 py-2 text-left text-sm font-medium text-secondary-foreground"
+					>Hazard Score</th
+				>
 			</tr>
 		</thead>
 		<tbody>
