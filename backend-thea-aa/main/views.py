@@ -37,7 +37,7 @@ class EmissionEventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin
         serialized_data = EmissionEventSerializer(events, many=True).data
 
 
-        GEOCODE_API_KEY = os.getenv('GEOCODE_API_KEY')
+        GEOCODE_API_KEY = "680c68aa18a56001133487nch95365f"
         geocode_url = f'https://geocode.maps.co/search?q={serialized_data[0]["physical_location"]}&api_key={GEOCODE_API_KEY}'
         geocode_response = requests.get(geocode_url)
         default_lat = None
